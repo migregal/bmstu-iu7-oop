@@ -132,38 +132,16 @@ public:
 
         gridLayout->addWidget(movement_label, 0, 0, 1, 2);
 
-        movement_y_l = new QLabel(movement_frame);
-        movement_y_l->setObjectName(QString::fromUtf8("movement_y_l"));
+        movement_x_l = new QLabel(movement_frame);
+        movement_x_l->setObjectName(QString::fromUtf8("movement_x_l"));
         QSizePolicy sizePolicy3(QSizePolicy::Ignored, QSizePolicy::Fixed);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(movement_y_l->sizePolicy().hasHeightForWidth());
-        movement_y_l->setSizePolicy(sizePolicy3);
-        movement_y_l->setFont(font);
-
-        gridLayout->addWidget(movement_y_l, 3, 0, 1, 1);
-
-        movement_x_l = new QLabel(movement_frame);
-        movement_x_l->setObjectName(QString::fromUtf8("movement_x_l"));
         sizePolicy3.setHeightForWidth(movement_x_l->sizePolicy().hasHeightForWidth());
         movement_x_l->setSizePolicy(sizePolicy3);
         movement_x_l->setFont(font);
 
         gridLayout->addWidget(movement_x_l, 1, 0, 1, 1);
-
-        movevemt_apply = new QPushButton(movement_frame);
-        movevemt_apply->setObjectName(QString::fromUtf8("movevemt_apply"));
-        movevemt_apply->setFont(font);
-
-        gridLayout->addWidget(movevemt_apply, 5, 0, 1, 2);
-
-        movement_y = new QDoubleSpinBox(movement_frame);
-        movement_y->setObjectName(QString::fromUtf8("movement_y"));
-        movement_y->setFont(font);
-        movement_y->setMinimum(-10000.000000000000000);
-        movement_y->setMaximum(10000.000000000000000);
-
-        gridLayout->addWidget(movement_y, 3, 1, 1, 1);
 
         movement_x = new QDoubleSpinBox(movement_frame);
         movement_x->setObjectName(QString::fromUtf8("movement_x"));
@@ -172,6 +150,22 @@ public:
         movement_x->setMaximum(10000.000000000000000);
 
         gridLayout->addWidget(movement_x, 1, 1, 1, 1);
+
+        movement_y_l = new QLabel(movement_frame);
+        movement_y_l->setObjectName(QString::fromUtf8("movement_y_l"));
+        sizePolicy3.setHeightForWidth(movement_y_l->sizePolicy().hasHeightForWidth());
+        movement_y_l->setSizePolicy(sizePolicy3);
+        movement_y_l->setFont(font);
+
+        gridLayout->addWidget(movement_y_l, 3, 0, 1, 1);
+
+        movement_y = new QDoubleSpinBox(movement_frame);
+        movement_y->setObjectName(QString::fromUtf8("movement_y"));
+        movement_y->setFont(font);
+        movement_y->setMinimum(-10000.000000000000000);
+        movement_y->setMaximum(10000.000000000000000);
+
+        gridLayout->addWidget(movement_y, 3, 1, 1, 1);
 
         movement_z_l = new QLabel(movement_frame);
         movement_z_l->setObjectName(QString::fromUtf8("movement_z_l"));
@@ -187,6 +181,11 @@ public:
 
         gridLayout->addWidget(movement_z, 4, 1, 1, 1);
 
+        movevemt_apply = new QPushButton(movement_frame);
+        movevemt_apply->setObjectName(QString::fromUtf8("movevemt_apply"));
+        movevemt_apply->setFont(font);
+
+        gridLayout->addWidget(movevemt_apply, 5, 0, 1, 2);
 
         verticalLayout->addWidget(movement_frame);
 
@@ -197,31 +196,12 @@ public:
         rotation_frame->setFrameShadow(QFrame::Raised);
         gridLayout_2 = new QGridLayout(rotation_frame);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        rotation_z = new QDoubleSpinBox(rotation_frame);
-        rotation_z->setObjectName(QString::fromUtf8("rotation_z"));
-        rotation_z->setFont(font);
-
-        gridLayout_2->addWidget(rotation_z, 3, 1, 1, 1);
-
-        rotation_apply = new QPushButton(rotation_frame);
-        rotation_apply->setObjectName(QString::fromUtf8("rotation_apply"));
-        rotation_apply->setFont(font);
-
-        gridLayout_2->addWidget(rotation_apply, 4, 0, 1, 2);
-
-        rotation_y_l = new QLabel(rotation_frame);
-        rotation_y_l->setObjectName(QString::fromUtf8("rotation_y_l"));
-        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(rotation_y_l->sizePolicy().hasHeightForWidth());
-        rotation_y_l->setSizePolicy(sizePolicy4);
-        rotation_y_l->setFont(font);
-
-        gridLayout_2->addWidget(rotation_y_l, 2, 0, 1, 1);
 
         rotation_x_l = new QLabel(rotation_frame);
         rotation_x_l->setObjectName(QString::fromUtf8("rotation_x_l"));
+        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(rotation_x_l->sizePolicy().hasHeightForWidth());
         rotation_x_l->setSizePolicy(sizePolicy4);
         rotation_x_l->setFont(font);
@@ -236,13 +216,13 @@ public:
 
         gridLayout_2->addWidget(rotation_x, 1, 1, 1, 1);
 
-        rotation_label = new QLabel(rotation_frame);
-        rotation_label->setObjectName(QString::fromUtf8("rotation_label"));
-        sizePolicy2.setHeightForWidth(rotation_label->sizePolicy().hasHeightForWidth());
-        rotation_label->setSizePolicy(sizePolicy2);
-        rotation_label->setFont(font);
+        rotation_y_l = new QLabel(rotation_frame);
+        rotation_y_l->setObjectName(QString::fromUtf8("rotation_y_l"));
+        sizePolicy4.setHeightForWidth(rotation_y_l->sizePolicy().hasHeightForWidth());
+        rotation_y_l->setSizePolicy(sizePolicy4);
+        rotation_y_l->setFont(font);
 
-        gridLayout_2->addWidget(rotation_label, 0, 0, 1, 2);
+        gridLayout_2->addWidget(rotation_y_l, 2, 0, 1, 1);
 
         rotation_y = new QDoubleSpinBox(rotation_frame);
         rotation_y->setObjectName(QString::fromUtf8("rotation_y"));
@@ -258,6 +238,25 @@ public:
 
         gridLayout_2->addWidget(rotation_z_l, 3, 0, 1, 1);
 
+        rotation_z = new QDoubleSpinBox(rotation_frame);
+        rotation_z->setObjectName(QString::fromUtf8("rotation_z"));
+        rotation_z->setFont(font);
+
+        gridLayout_2->addWidget(rotation_z, 3, 1, 1, 1);
+
+        rotation_apply = new QPushButton(rotation_frame);
+        rotation_apply->setObjectName(QString::fromUtf8("rotation_apply"));
+        rotation_apply->setFont(font);
+
+        gridLayout_2->addWidget(rotation_apply, 4, 0, 1, 2);
+
+        rotation_label = new QLabel(rotation_frame);
+        rotation_label->setObjectName(QString::fromUtf8("rotation_label"));
+        sizePolicy2.setHeightForWidth(rotation_label->sizePolicy().hasHeightForWidth());
+        rotation_label->setSizePolicy(sizePolicy2);
+        rotation_label->setFont(font);
+
+        gridLayout_2->addWidget(rotation_label, 0, 0, 1, 2);
 
         verticalLayout->addWidget(rotation_frame);
 
@@ -268,29 +267,6 @@ public:
         resizing_frame->setFrameShadow(QFrame::Raised);
         gridLayout_3 = new QGridLayout(resizing_frame);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        resizing_kz_l = new QLabel(resizing_frame);
-        resizing_kz_l->setObjectName(QString::fromUtf8("resizing_kz_l"));
-        sizePolicy1.setHeightForWidth(resizing_kz_l->sizePolicy().hasHeightForWidth());
-        resizing_kz_l->setSizePolicy(sizePolicy1);
-        resizing_kz_l->setFont(font);
-
-        gridLayout_3->addWidget(resizing_kz_l, 3, 0, 1, 1);
-
-        resizing_ky_l = new QLabel(resizing_frame);
-        resizing_ky_l->setObjectName(QString::fromUtf8("resizing_ky_l"));
-        sizePolicy1.setHeightForWidth(resizing_ky_l->sizePolicy().hasHeightForWidth());
-        resizing_ky_l->setSizePolicy(sizePolicy1);
-        resizing_ky_l->setFont(font);
-
-        gridLayout_3->addWidget(resizing_ky_l, 2, 0, 1, 1);
-
-        resizing_ky = new QDoubleSpinBox(resizing_frame);
-        resizing_ky->setObjectName(QString::fromUtf8("resizing_ky"));
-        resizing_ky->setFont(font);
-        resizing_ky->setMinimum(-10000.000000000000000);
-        resizing_ky->setMaximum(10000.000000000000000);
-
-        gridLayout_3->addWidget(resizing_ky, 2, 1, 1, 1);
 
         resizing_kx_l = new QLabel(resizing_frame);
         resizing_kx_l->setObjectName(QString::fromUtf8("resizing_kx_l"));
@@ -305,14 +281,41 @@ public:
         resizing_kx->setFont(font);
         resizing_kx->setMinimum(-10000.000000000000000);
         resizing_kx->setMaximum(10000.000000000000000);
+        resizing_kx->setValue(1.0);
 
         gridLayout_3->addWidget(resizing_kx, 1, 1, 1, 1);
+
+        resizing_ky_l = new QLabel(resizing_frame);
+        resizing_ky_l->setObjectName(QString::fromUtf8("resizing_ky_l"));
+        sizePolicy1.setHeightForWidth(resizing_ky_l->sizePolicy().hasHeightForWidth());
+        resizing_ky_l->setSizePolicy(sizePolicy1);
+        resizing_ky_l->setFont(font);
+
+        gridLayout_3->addWidget(resizing_ky_l, 2, 0, 1, 1);
+
+        resizing_ky = new QDoubleSpinBox(resizing_frame);
+        resizing_ky->setObjectName(QString::fromUtf8("resizing_ky"));
+        resizing_ky->setFont(font);
+        resizing_ky->setMinimum(-10000.000000000000000);
+        resizing_ky->setMaximum(10000.000000000000000);
+        resizing_ky->setValue(1.0);
+
+        gridLayout_3->addWidget(resizing_ky, 2, 1, 1, 1);
+
+        resizing_kz_l = new QLabel(resizing_frame);
+        resizing_kz_l->setObjectName(QString::fromUtf8("resizing_kz_l"));
+        sizePolicy1.setHeightForWidth(resizing_kz_l->sizePolicy().hasHeightForWidth());
+        resizing_kz_l->setSizePolicy(sizePolicy1);
+        resizing_kz_l->setFont(font);
+
+        gridLayout_3->addWidget(resizing_kz_l, 3, 0, 1, 1);
 
         resizing_kz = new QDoubleSpinBox(resizing_frame);
         resizing_kz->setObjectName(QString::fromUtf8("resizing_kz"));
         resizing_kz->setFont(font);
         resizing_kz->setMinimum(-10000.000000000000000);
         resizing_kz->setMaximum(10000.000000000000000);
+        resizing_kz->setValue(1.0);
 
         gridLayout_3->addWidget(resizing_kz, 3, 1, 1, 1);
 
