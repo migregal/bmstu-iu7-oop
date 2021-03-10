@@ -17,14 +17,9 @@ static err_t read_amount(vertices_t &points, FILE *f) {
 static err_t read_vertices(vertice_t *const arr, const int size, FILE *f) {
     err_t error_code = OK;
 
-    for (int i = 0; i < size; i++) {
-        auto rc = fscanf(f, "%lf %lf %lf", &arr[i].x, &arr[i].y, &arr[i].z);
-
-        if (3 != rc) {
+    for (int i = 0; error_code == OK && i < size; i++)
+        if(fscanf(f, "%lf %lf %lf", &arr[i].x, &arr[i].y, &arr[i].z) != 3)
             error_code = READ_ERR;
-            i = size;
-        }
-    }
 
     return error_code;
 }
@@ -44,9 +39,9 @@ err_t save_vertices(vertices_t &vertices, FILE *f) {
     if (0 > fprintf(f, "%zd\n", vertices.size))
         return WRITE_ERR;
 
-    auto rc = 0;
+    auto error_code = OK;
     for (size_t i = 0; i < vertices.size; ++i) {
-        rc = fprintf(
+        auto rc = fprintf(
                 f,
                 "%lf %lf %lf\n",
                 vertices.vec[i].x,
@@ -54,14 +49,13 @@ err_t save_vertices(vertices_t &vertices, FILE *f) {
                 vertices.vec[i].z
         );
 
-        if (0 > rc)
+        if (0 > rc) {
             i = vertices.size;
+            error_code = WRITE_ERR;
+        }
     }
 
-    if (0 > rc)
-        return WRITE_ERR;
-
-    return OK;
+    return error_code;
 }
 
 err_t load_vertices(vertices_t &vertices, FILE *f) {

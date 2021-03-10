@@ -45,20 +45,13 @@ err_t save_edges(edges_t &edges, FILE *f) {
     if (0 > fprintf(f, "%zd\n", edges.size))
         return WRITE_ERR;
 
+    auto error_code = OK;
+    const edge_t * const data = edges.vec;
+    for (size_t i = 0; error_code == OK && i < edges.size; ++i)
+        if (fprintf(f, "%zd %zd\n", data[i].point_1, data[i].point_2) != 2)
+            error_code = WRITE_ERR;
 
-    for (size_t i = 0; i < edges.size; ++i) {
-        auto rc = fprintf(
-                f,
-                "%zd %zd\n",
-                edges.vec[i].point_1,
-                edges.vec[i].point_2
-        );
-
-        if (0 > rc)
-            return WRITE_ERR;
-    }
-
-    return OK;
+    return error_code;
 }
 
 err_t load_edges(edges_t &edges, FILE *f) {
