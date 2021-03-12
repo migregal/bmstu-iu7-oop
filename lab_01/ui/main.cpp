@@ -2,7 +2,6 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QStyle>
-#include <QPushButton>
 
 #include <MainWindow.h>
 
