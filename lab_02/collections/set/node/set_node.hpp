@@ -9,7 +9,6 @@
 
 template<typename T>
 class set_node {
-private:
     T data;
     std::shared_ptr<set_node<T>> next;
 

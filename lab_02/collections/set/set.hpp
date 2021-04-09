@@ -8,14 +8,21 @@
 
 #include <memory>
 
+#include <base_collection.hpp>
 #include <set_node.hpp>
 
 template<typename T>
-class set {
-private:
-    size_t size;
+class set : public base_collection {
+    size_t size = 0;
     std::shared_ptr<set_node<T>> head;
     std::shared_ptr<set_node<T>> tail;
+
+public:
+    bool is_empty() const override;
+
+    void clear() override;
+
+    ~set() override = default;
 };
 
 
