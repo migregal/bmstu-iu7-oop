@@ -27,3 +27,14 @@ template<typename T>
 bool set_node<T>::operator!=(const std::shared_ptr<set_node<T>> &node) const {
     return this != node;
 }
+
+template<typename T>
+void set_node<T>::set(const T &value) {
+    data = value;
+}
+
+template<typename T>
+const T &set_node<T>::get() const {
+    return this->data;
+}
+
