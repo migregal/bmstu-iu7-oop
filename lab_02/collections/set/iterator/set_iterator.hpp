@@ -5,6 +5,7 @@
 #ifndef LAB_02_SET_ITERATOR_HPP
 #define LAB_02_SET_ITERATOR_HPP
 
+
 template<typename T>
 set_iterator<T>::set_iterator() {
     this->cur.lock() = nullptr;
@@ -26,13 +27,18 @@ void set_iterator<T>::next() {
 }
 
 template<typename T>
-set_node<T> *set_iterator<T>::operator->() {
+set_node<T> &set_iterator<T>::get_cur() {
+    return *this->cur.lock();
+}
+
+template<typename T>
+T *set_iterator<T>::operator->() {
     return this->cur.lock().get();
 }
 
 template<typename T>
-set_node<T> &set_iterator<T>::operator*() {
-    return *this->cur.lock();
+T &set_iterator<T>::operator*() {
+    return this->cur.lock()->value();
 }
 
 template<typename T>

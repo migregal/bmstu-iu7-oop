@@ -20,9 +20,10 @@ public:
     ~set_iterator() = default;
 
     virtual void next();
+    virtual set_node<T> &get_cur();
 
-    set_node<T> *operator->();
-    set_node<T> &operator*();
+    T *operator->();
+    T &operator*();
     set_iterator<T> &operator++();
 
     bool operator!=(const set_iterator<T> &iterator) const;
