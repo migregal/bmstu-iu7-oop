@@ -26,7 +26,7 @@ void set_node<T>::set(const T &value) {
 
 template<typename T>
 void set_node<T>::set_next(const set_node<T> &node) {
-    this->next = std::shared_ptr<set_node<T>>(node);
+    this->next = std::make_shared<set_node<T>>(node);
 }
 
 template<typename T>

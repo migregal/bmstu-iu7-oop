@@ -1,13 +1,66 @@
+#include <iostream>
 #include <set.h>
 
-int main() {
-    auto a = set<int>{1, 2, 3, 4, 5};
+void print_set(set<int> &set) {
+    std::cout << set << std::endl;
+}
 
+void test_constructors() {
+    std::cout << "Constructors test: " << std::endl;
+
+    std::cout << "Constructor 1 test: " << std::endl;
+    set<int> a;
+    print_set(a);
+
+    std::cout << "Constructor 2 test: " << std::endl;
     auto b = set<int>(a);
+    print_set(b);
 
-    auto c = b;
+    std::cout << "Constructor 3 test: " << std::endl;
+    auto c = set<int>{1, 2, 3, 4, 5};
+    print_set(c);
 
-    c.insert(10);
+    std::cout << "Constructor 4 test: " << std::endl;
+    auto d = set<int>{5, 4, 3, 2, 1};
+    print_set(d);
+
+    std::cout << "Constructor 5 test: " << std::endl;
+    auto e = set<int>{5, 10, 1, 12, 4};
+    print_set(e);
+
+    std::cout << "Constructor 6 test: " << std::endl;
+    auto f = set<int>{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5};
+    print_set(f);
+}
+
+void test_insert() {
+    std::cout << "Insert tests: " << std::endl;
+    auto a = set<int>{1, 2, 3, 4, 5};
+    print_set(a);
+
+    std::cout << "Insert 1 test: " << std::endl;
+    a.insert(6);
+    print_set(a);
+
+    std::cout << "Insert 2 test: " << std::endl;
+    a.insert(7);
+    print_set(a);
+
+    std::cout << "Insert 3 test: " << std::endl;
+    a.insert({8, 9, 10});
+    print_set(a);
+
+    std::cout << "Insert 4 test: " << std::endl;
+    a.insert({3, 3, 3, 4, 4, 4, 4, 1, 2, 3, 9, 12, 21});
+    print_set(a);
+}
+
+int main() {
+    test_constructors();
+
+    std::cout << std::endl;
+
+    test_insert();
 
     return 0;
 }

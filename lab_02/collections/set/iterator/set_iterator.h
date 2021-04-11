@@ -27,6 +27,7 @@ public:
 
     bool operator!=(const set_iterator<T> &iterator) const;
     bool operator==(const set_iterator<T> &iterator) const;
+    explicit operator bool() const;
 };
 
 #include <set_iterator.hpp>

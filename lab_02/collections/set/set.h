@@ -14,9 +14,7 @@
 
 template<typename T>
 class set : public base_collection {
-    size_t length = 0;
     std::shared_ptr<set_node<T>> head;
-    std::shared_ptr<set_node<T>> tail;
 
 protected:
     std::pair<set_iterator<T>, bool> insert(const std::shared_ptr<set_node<T>> &node);
@@ -30,14 +28,14 @@ public:
     ~set() override = default;
 
     // Modifiers
-    std::pair<set_iterator<T>, bool> insert(const T &data);
+    std::pair<set_iterator<T>, bool> insert(const T &value);
     std::pair<set_iterator<T>, bool> insert(T &&value);
     void insert(std::initializer_list<T> ilist);
 
     void clear() override;
 
     // Capacity
-    size_t size();
+    size_t get_size();
 
     bool empty() const override;
 
