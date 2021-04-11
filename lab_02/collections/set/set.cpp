@@ -85,3 +85,23 @@ template<typename T>
 set_iterator<T> set<T>::end() {
     return set_iterator<T>();
 }
+
+template<typename T>
+set<T> &set<T>::operator+=(const set<T> &set) {
+    return this;
+}
+
+template<typename T>
+set<T> &set<T>::operator+=(const T &data) {
+    return this;
+}
+
+template<typename T>
+set<T> &set<T>::operator+(const set<T> &set) {
+    return this;
+}
+
+template<typename T>
+set<T> &set<T>::operator+(const T &data) {
+    return this;
+}
