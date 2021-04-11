@@ -5,8 +5,6 @@
 #ifndef LAB_02_SET_NODE_HPP
 #define LAB_02_SET_NODE_HPP
 
-#include "set_node.h"
-
 template<typename T>
 set_node<T>::set_node(const T &data) {
     set_node<T>();

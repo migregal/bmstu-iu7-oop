@@ -5,11 +5,9 @@
 #ifndef LAB_02_SET_ITERATOR_HPP
 #define LAB_02_SET_ITERATOR_HPP
 
-#include "set_iterator.h"
-
 template<typename T>
 set_node<T> &set_iterator<T>::operator*() {
-    return *this->cur.lock();;
+    return *this->cur.lock();
 }
 
 template<typename T>
