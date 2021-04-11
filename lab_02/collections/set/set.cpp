@@ -24,6 +24,21 @@ set<T>::set(std::initializer_list<T> elems) {
 }
 
 template<typename T>
+std::pair<set_iterator<T>, bool> set<T>::insert(const T &data) {
+    return std::pair<set_iterator<T>, bool>();
+}
+
+template<typename T>
+std::pair<set_iterator<T>, bool> set<T>::insert(T &&value) {
+    return std::pair<set_iterator<T>, bool>();
+}
+
+template<typename T>
+void set<T>::insert(std::initializer_list<T> ilist) {
+}
+
+
+template<typename T>
 bool set<T>::is_empty() const {
     return false;
 }

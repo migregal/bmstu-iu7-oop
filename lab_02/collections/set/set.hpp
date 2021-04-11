@@ -9,6 +9,7 @@
 #include <memory>
 
 #include <base_collection.hpp>
+#include <set_iterator.hpp>
 #include <set_node.hpp>
 
 template<typename T>
@@ -24,6 +25,11 @@ public:
     set(std::initializer_list<T> elems);
 
     ~set() override = default;
+
+
+    std::pair<set_iterator<T>, bool> insert(const T &data);
+    std::pair<set_iterator<T>, bool> insert(T &&value);
+    void insert(std::initializer_list<T> ilist);
 
     bool is_empty() const override;
 
