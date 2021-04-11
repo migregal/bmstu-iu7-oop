@@ -6,6 +6,8 @@
 #define LAB_02_SET_HPP
 
 #include <chrono>
+#include "set.h"
+
 
 template<typename T>
 set<T>::set(set<T> &list) {
@@ -187,17 +189,6 @@ bool set<T>::operator!=(const set<T> &list) const {
     return false;
 }
 
-// Iterators
-template<typename T>
-set_iterator<T> set<T>::begin() {
-    return set_iterator<T>(this->head);
-}
-
-template<typename T>
-set_iterator<T> set<T>::end() {
-    return set_iterator<T>(nullptr);
-}
-
 template<typename T>
 set<T> &set<T>::operator+=(set<T> &set) {
     for(auto &el : set)
@@ -230,10 +221,31 @@ set<T> &set<T>::operator+(const T &data) {
 
 template<typename T>
 std::ostream &operator<<(std::ostream &os, set<T> &list) {
-    for (auto el: list)
+    for (const auto &el: list)
         os << el << " ";
 
     return os;
+}
+
+// Iterators
+template<typename T>
+set_iterator<T> set<T>::begin() {
+    return set_iterator<T>(this->head);
+}
+
+template<typename T>
+set_iterator<T> set<T>::end() {
+    return set_iterator<T>(nullptr);
+}
+
+template<typename T>
+const_set_iterator<T> set<T>::cbegin() {
+    return const_set_iterator<T>(this->head);
+}
+
+template<typename T>
+const_set_iterator<T> set<T>::cend() {
+    return const_set_iterator<T>(nullptr);
 }
 
 #endif//LAB_02_SET_HPP

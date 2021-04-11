@@ -21,15 +21,22 @@ set(SET_ITERATOR_SRC
         ${SET_ITERATOR_DOMEN}/set_iterator.hpp
         ${SET_ITERATOR_DOMEN}/set_iterator.h)
 
+set(SET_CONST_ITERATOR_DOMEN ${SET_DOMEN}/const_iterator)
+set(SET_CONST_ITERATOR_SRC
+        ${SET_CONST_ITERATOR_DOMEN}/const_set_iterator.hpp
+        ${SET_CONST_ITERATOR_DOMEN}/const_set_iterator.h)
+
 include_directories(
         ${COLLECTIONS_DOMAIN}
         ${SET_DOMEN}
         ${SET_NODE_DOMEN}
-        ${SET_ITERATOR_DOMEN})
+        ${SET_ITERATOR_DOMEN}
+        ${SET_CONST_ITERATOR_DOMEN})
 
 add_executable(lab_02
         main.cpp
         ${BASE_SRC}
         ${SET_SRC}
         ${SET_ITERATOR_SRC}
+        ${SET_CONST_ITERATOR_SRC}
         ${SET_NODE_SRC})

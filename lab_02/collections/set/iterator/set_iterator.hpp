@@ -42,6 +42,17 @@ T &set_iterator<T>::operator*() {
 }
 
 template<typename T>
+set_iterator<T>::operator bool() const {
+    return nullptr == this->cur.lock();
+}
+
+template<typename T>
+set_iterator<T> &set_iterator<T>::operator=(const set_iterator<T> &iterator) {
+    this->cur = iterator.cur.lock();
+    return *this;
+}
+
+template<typename T>
 set_iterator<T> &set_iterator<T>::operator++() {
     this->next();
     return *this;
@@ -55,11 +66,6 @@ bool set_iterator<T>::operator!=(const set_iterator<T> &iterator) const {
 template<typename T>
 bool set_iterator<T>::operator==(const set_iterator<T> &iterator) const {
     return this->cur.lock() == iterator.cur.lock();
-}
-
-template<typename T>
-set_iterator<T>::operator bool() const {
-    return nullptr == this->cur.lock();
 }
 
 #endif//LAB_02_SET_ITERATOR_HPP

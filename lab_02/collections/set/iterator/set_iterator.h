@@ -24,11 +24,14 @@ public:
 
     T *operator->();
     T &operator*();
+
+    explicit operator bool() const;
+
+    set_iterator<T> &operator=(const set_iterator<T> &iterator);
     set_iterator<T> &operator++();
 
     bool operator!=(const set_iterator<T> &iterator) const;
     bool operator==(const set_iterator<T> &iterator) const;
-    explicit operator bool() const;
 };
 
 #include <set_iterator.hpp>

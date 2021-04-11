@@ -9,6 +9,7 @@
 #include <memory>
 
 #include <base_collection.hpp>
+#include <const_set_iterator.h>
 #include <set_iterator.h>
 #include <set_node.h>
 
@@ -57,8 +58,10 @@ public:
 
     // Iterators
     set_iterator<T> begin();
+    const_set_iterator<T> cbegin();
 
     set_iterator<T> end();
+    const_set_iterator<T> cend();
 };
 
 #include <set.hpp>
