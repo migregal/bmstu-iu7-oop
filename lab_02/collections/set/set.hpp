@@ -175,18 +175,33 @@ size_t set<T>::count(const T &key) const {
 
 template<typename T>
 set_iterator<T> set<T>::find(const T &key) {
-    return set_iterator<T>();
+    for (const auto &el : this) {
+        if (key == el)
+            return set_iterator<T>(el);
+    }
+
+    return set_iterator<T>(nullptr);
 }
 
 // Non-member
 template<typename T>
 bool set<T>::operator==(const set<T> &list) const {
-    return false;
+    if (this->size != list.size)
+        return false;
+
+    auto fst = this->cbegin();
+    auto snd = list.cbegin();
+
+    for (; fst != this->cend() && snd != list.cend(); ++fst, ++snd)
+        if (*fst != *snd)
+            return false;
+
+    return true;
 }
 
 template<typename T>
 bool set<T>::operator!=(const set<T> &list) const {
-    return false;
+    return !(*this == list);
 }
 
 template<typename T>
@@ -250,12 +265,12 @@ set_iterator<T> set<T>::end() {
 }
 
 template<typename T>
-const_set_iterator<T> set<T>::cbegin() {
+const_set_iterator<T> set<T>::cbegin() const {
     return const_set_iterator<T>(this->head);
 }
 
 template<typename T>
-const_set_iterator<T> set<T>::cend() {
+const_set_iterator<T> set<T>::cend() const {
     return const_set_iterator<T>(nullptr);
 }
 

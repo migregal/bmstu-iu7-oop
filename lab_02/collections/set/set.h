@@ -43,7 +43,7 @@ public:
     //Lookup
     size_t count(const T &key) const;
 
-    set_iterator<T> find(const T &key);
+    set_iterator<T> find(const T &key) ;
 
     // Non-member
     bool operator==(const set<T> &list) const;
@@ -59,10 +59,10 @@ public:
 
     // Iterators
     set_iterator<T> begin();
-    const_set_iterator<T> cbegin();
+    const_set_iterator<T> cbegin() const;
 
     set_iterator<T> end();
-    const_set_iterator<T> cend();
+    const_set_iterator<T> cend() const;
 };
 
 #include <set.hpp>
