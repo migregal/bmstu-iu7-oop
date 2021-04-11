@@ -8,18 +8,18 @@ set(BASE_SRC ${COLLECTIONS_DOMAIN}/base_collection.hpp)
 
 set(SET_DOMEN collections/set)
 set(SET_SRC
-        ${SET_DOMEN}/set.cpp
-        ${SET_DOMEN}/set.hpp)
+        ${SET_DOMEN}/set.hpp
+        ${SET_DOMEN}/set.h)
 
 set(SET_NODE_DOMEN ${SET_DOMEN}/node)
 set(SET_NODE_SRC
-        ${SET_NODE_DOMEN}/set_node.cpp
-        ${SET_NODE_DOMEN}/set_node.hpp)
+        ${SET_NODE_DOMEN}/set_node.hpp
+        ${SET_NODE_DOMEN}/set_node.h)
 
 set(SET_ITERATOR_DOMEN ${SET_DOMEN}/iterator)
 set(SET_ITERATOR_SRC
-        ${SET_ITERATOR_DOMEN}/set_iterator.cpp
-        ${SET_ITERATOR_DOMEN}/set_iterator.hpp)
+        ${SET_ITERATOR_DOMEN}/set_iterator.hpp
+        ${SET_ITERATOR_DOMEN}/set_iterator.h)
 
 include_directories(
         ${COLLECTIONS_DOMAIN}

@@ -5,17 +5,26 @@
 #ifndef LAB_02_SET_ITERATOR_HPP
 #define LAB_02_SET_ITERATOR_HPP
 
-#include <iterator>
-
-#include <set_node.hpp>
+#include "set_iterator.h"
 
 template<typename T>
-class set_iterator : public std::iterator<std::input_iterator_tag, T> {
-    std::weak_ptr<set_node<T>> cur;
+set_node<T> &set_iterator<T>::operator*() {
+    return *this->cur.lock();;
+}
 
-public:
-    ~set_iterator() = default;
-};
+template<typename T>
+set_iterator<T> &set_iterator<T>::operator++() {
+    return *this;
+}
 
+template<typename T>
+bool set_iterator<T>::operator!=(const set_iterator<T> &iterator) const {
+    return false;
+}
+
+template<typename T>
+bool set_iterator<T>::operator==(const set_iterator<T> &iterator) const {
+    return false;
+}
 
 #endif//LAB_02_SET_ITERATOR_HPP
