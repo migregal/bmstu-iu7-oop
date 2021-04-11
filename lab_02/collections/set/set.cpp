@@ -3,13 +3,26 @@
 //
 
 #include "set.hpp"
+#include <chrono>
 
 
 template<typename T>
-set<T>::set(set<T> &list) {
+set<T>::set(set<T> &set) {
     set();
 
-    // add copy here
+    for (auto node : set) {
+        std::shared_ptr<set_node<T>> temp_node = nullptr;
+
+        try {
+            temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
+        } catch (std::bad_alloc &error) {
+            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            throw std::bad_alloc();
+        }
+
+        temp_node->set(node.get());
+        this->insert(temp_node);
+    }
 }
 
 template<typename T>
@@ -21,6 +34,22 @@ set<T>::set(set<T> &&list) noexcept {
 
 template<typename T>
 set<T>::set(std::initializer_list<T> elems) {
+    set();
+
+    for (auto &node : elems) {
+
+        std::shared_ptr<set_node<T>> temp_node = nullptr;
+
+        try {
+            temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
+        } catch (std::bad_alloc &error) {
+            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            throw std::bad_alloc();
+        }
+
+        temp_node->set(node.get());
+        this->insert(temp_node);
+    }
 }
 
 // Modifiers
