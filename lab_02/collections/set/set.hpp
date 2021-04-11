@@ -26,16 +26,31 @@ public:
 
     ~set() override = default;
 
-
+    // Modifiers
     std::pair<set_iterator<T>, bool> insert(const T &data);
     std::pair<set_iterator<T>, bool> insert(T &&value);
     void insert(std::initializer_list<T> ilist);
 
+    void clear() override;
+
+    // Capacity
     size_t size();
 
     bool empty() const override;
 
-    void clear() override;
+    //Lookup
+    size_t count(const T &key) const;
+
+    set_iterator<T> find(const T &key);
+
+    // Non-member
+    bool operator==(const set<T> &list) const;
+    bool operator!=(const set<T> &list) const;
+
+    // Iterators
+    set_iterator<T> begin();
+
+    set_iterator<T> end();
 };
 
 
