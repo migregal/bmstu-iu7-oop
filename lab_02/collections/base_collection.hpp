@@ -5,6 +5,8 @@
 #ifndef LAB_02_BASE_COLLECTION_HPP
 #define LAB_02_BASE_COLLECTION_HPP
 
+#include <cstddef>
+
 class base_collection {
 protected:
     size_t size = 0;
