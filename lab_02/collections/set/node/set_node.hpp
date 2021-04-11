@@ -22,16 +22,6 @@ set_node<T>::set_node(std::shared_ptr<set_node<T>> &node) {
 }
 
 template<typename T>
-bool set_node<T>::operator==(const std::shared_ptr<set_node<T>> &node) const {
-    return this == node;
-}
-
-template<typename T>
-bool set_node<T>::operator!=(const std::shared_ptr<set_node<T>> &node) const {
-    return this != node;
-}
-
-template<typename T>
 void set_node<T>::set(const T &value) {
     data = value;
 }
@@ -64,6 +54,21 @@ const T &set_node<T>::get() const {
 template<typename T>
 std::shared_ptr<set_node<T>> set_node<T>::get_next() const {
     return next;
+}
+
+template<typename T>
+bool set_node<T>::operator==(const std::shared_ptr<set_node<T>> &node) const {
+    return this == node;
+}
+
+template<typename T>
+bool set_node<T>::operator!=(const std::shared_ptr<set_node<T>> &node) const {
+    return this != node;
+}
+
+template<typename T>
+bool set_node<T>::operator<(const std::shared_ptr<set_node<T>> &node) const {
+    return this->data < node.lock().get()->data;
 }
 
 #endif//LAB_02_SET_NODE_HPP

@@ -29,6 +29,7 @@ public:
 
     bool operator==(const std::shared_ptr<set_node<T>> &node) const;
     bool operator!=(const std::shared_ptr<set_node<T>> &node) const;
+    bool operator<(const std::shared_ptr<set_node<T>> &node) const;
 
     ~set_node() = default;
 };
