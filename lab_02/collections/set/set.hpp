@@ -18,11 +18,16 @@ class set : public base_collection {
     std::shared_ptr<set_node<T>> tail;
 
 public:
+    set() = default;
+    set(set<T> &list);
+    set(set<T> &&list) noexcept;
+    set(std::initializer_list<T> elems);
+
+    ~set() override = default;
+
     bool is_empty() const override;
 
     void clear() override;
-
-    ~set() override = default;
 };
 
 
