@@ -102,6 +102,8 @@ int main() {
 
     clear_test();
 
+    std::cout << std::endl;
+
     operators_test();
 
     return 0;

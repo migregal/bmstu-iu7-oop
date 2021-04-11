@@ -30,7 +30,6 @@ template<typename T>
 set<T>::set(set<T> &&list) noexcept {
     this->size = list.size;
     this->head = list.head;
-    //    this->tail = list.tail;
 }
 
 template<typename T>
