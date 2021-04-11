@@ -151,6 +151,8 @@ void set<T>::insert(std::initializer_list<T> ilist) {
 
 template<typename T>
 void set<T>::clear() {
+    while (this->size--)
+        this->head = this->head->get_next();
 }
 
 // Capacity

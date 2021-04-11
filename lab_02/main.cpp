@@ -55,12 +55,26 @@ void test_insert() {
     print_set(a);
 }
 
+void clear_test() {
+    std::cout << "Clear tests: " << std::endl;
+    auto a = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
+    print_set(a);
+
+    std::cout << "Clear 1 test: " << std::endl;
+    a.clear();
+    print_set(a);
+}
+
 int main() {
     test_constructors();
 
     std::cout << std::endl;
 
     test_insert();
+
+    std::cout << std::endl;
+
+    clear_test();
 
     return 0;
 }
