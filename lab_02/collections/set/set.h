@@ -48,8 +48,9 @@ public:
     bool operator==(const set<T> &list) const;
     bool operator!=(const set<T> &list) const;
 
-    set<T> &operator+=(const set<T> &set);
+    set<T> &operator+=(set<T> &set);
     set<T> &operator+=(const T &data);
+    set<T> &operator+=(T &&data);
 
     set<T> &operator+(const set<T> &set);
     set<T> &operator+(const T &data);

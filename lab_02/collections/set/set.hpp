@@ -200,13 +200,23 @@ set_iterator<T> set<T>::end() {
 }
 
 template<typename T>
-set<T> &set<T>::operator+=(const set<T> &set) {
-    return this;
+set<T> &set<T>::operator+=(set<T> &set) {
+    for(auto &node: set)
+        this->insert(node.get());
+
+    return *this;
 }
 
 template<typename T>
 set<T> &set<T>::operator+=(const T &data) {
-    return this;
+    this->insert(data);
+    return *this;
+}
+
+template<typename T>
+set<T> &set<T>::operator+=(T &&data) {
+    this->insert(data);
+    return *this;
 }
 
 template<typename T>
@@ -219,10 +229,10 @@ set<T> &set<T>::operator+(const T &data) {
     return this;
 }
 
-template<typename T_>
-std::ostream &operator<<(std::ostream &os, set<T_> &list) {
-    for (auto iterator = list.begin(); iterator != list.end(); ++iterator)
-        os << (*iterator).get() << " ";
+template<typename T>
+std::ostream &operator<<(std::ostream &os, set<T> &list) {
+    for (auto el: list)
+        os << el.get() << " ";
 
     return os;
 }

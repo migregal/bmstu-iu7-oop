@@ -65,6 +65,32 @@ void clear_test() {
     print_set(a);
 }
 
+void operators_test() {
+    std::cout << "Operators tests: " << std::endl;
+    auto a = set<int>{1, 2, 3, 4};
+    print_set(a);
+
+    std::cout << "Operators 1 tests: " << std::endl;
+    a += 10;
+    a += 5;
+
+    print_set(a);
+
+    auto val = 21;
+
+    std::cout << "Operators 2 tests: " << std::endl;
+    a += val;
+    a += ++val;
+
+    print_set(a);
+
+    std::cout << "Operators 3 tests: " << std::endl;
+    auto b = set<int>{11, 12, 13, 14};
+    a += b;
+
+    print_set(a);
+}
+
 int main() {
     test_constructors();
 
@@ -75,6 +101,8 @@ int main() {
     std::cout << std::endl;
 
     clear_test();
+
+    operators_test();
 
     return 0;
 }
