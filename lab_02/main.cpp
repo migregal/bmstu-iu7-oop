@@ -7,5 +7,7 @@ int main() {
 
     auto c = b;
 
+    c.insert(10);
+
     return 0;
 }

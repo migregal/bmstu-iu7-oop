@@ -56,7 +56,28 @@ set<T>::set(std::initializer_list<T> elems) {
 // Modifiers
 template<typename T>
 std::pair<set_iterator<T>, bool> set<T>::insert(const T &data) {
-    return std::pair<set_iterator<T>, bool>();
+    std::shared_ptr<set_node<T>> temp_node = nullptr;
+
+    try {
+        temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
+    } catch (std::bad_alloc &error) {
+        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw std::bad_alloc();
+    }
+
+    temp_node->set(data);
+
+    set_iterator<T> iterator;
+    for (iterator = this->begin(); temp_node < iterator->get(); iterator++);
+
+    if (iterator.get() == temp_node)
+        return std::pair<set_iterator<T>, bool>({}, false);
+
+    temp_node->set_next(iterator->get_next());
+    iterator->value()->set_next(temp_node);
+    this->size++;
+
+    return std::pair<set_iterator<T>, bool>({temp_node}, true);
 }
 
 template<typename T>
@@ -91,7 +112,7 @@ bool set<T>::empty() const {
 // Lookup
 template<typename T>
 size_t set<T>::count(const T &key) const {
-    return 0;
+    return length;
 }
 
 template<typename T>
