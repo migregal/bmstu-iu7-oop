@@ -13,6 +13,13 @@ class set_node {
     std::shared_ptr<set_node<T>> next;
 
 public:
+    set_node() = default;
+    explicit set_node(const T &data);
+    explicit set_node(std::shared_ptr<set_node<T>> &node);
+
+    bool operator==(const std::shared_ptr<set_node<T>> &node) const;
+    bool operator!=(const std::shared_ptr<set_node<T>> &node) const;
+
     ~set_node() = default;
 };
 
