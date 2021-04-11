@@ -53,7 +53,8 @@ public:
     set<T> &operator+=(const T &data);
     set<T> &operator+=(T &&data);
 
-    set<T> &operator+(const set<T> &set);
+    set<T> &operator+(set<T> &set);
+    set<T> &operator+(T &data);
     set<T> &operator+(const T &data);
 
     // Iterators

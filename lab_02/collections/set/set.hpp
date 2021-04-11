@@ -5,8 +5,8 @@
 #ifndef LAB_02_SET_HPP
 #define LAB_02_SET_HPP
 
-#include <chrono>
 #include "set.h"
+#include <chrono>
 
 
 template<typename T>
@@ -191,7 +191,7 @@ bool set<T>::operator!=(const set<T> &list) const {
 
 template<typename T>
 set<T> &set<T>::operator+=(set<T> &set) {
-    for(auto &el : set)
+    for (auto &el : set)
         this->insert(el);
 
     return *this;
@@ -210,18 +210,29 @@ set<T> &set<T>::operator+=(T &&data) {
 }
 
 template<typename T>
-set<T> &set<T>::operator+(const set<T> &set) {
-    return this;
+set<T> &set<T>::operator+(set<T> &ds) {
+    auto s = this;
+    *s += ds;
+    return *s;
+}
+
+template<typename T>
+set<T> &set<T>::operator+(T &data) {
+    auto s = this;
+    s += data;
+    return s;
 }
 
 template<typename T>
 set<T> &set<T>::operator+(const T &data) {
-    return this;
+    auto s = this;
+    *s += data;
+    return *s;
 }
 
 template<typename T>
 std::ostream &operator<<(std::ostream &os, set<T> &list) {
-    for (const auto &el: list)
+    for (const auto &el : list)
         os << el << " ";
 
     return os;

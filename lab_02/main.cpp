@@ -73,22 +73,26 @@ void operators_test() {
     std::cout << "Operators 1 tests: " << std::endl;
     a += 10;
     a += 5;
-
     print_set(a);
 
     auto val = 21;
-
     std::cout << "Operators 2 tests: " << std::endl;
     a += val;
     a += ++val;
-
     print_set(a);
 
     std::cout << "Operators 3 tests: " << std::endl;
     auto b = set<int>{11, 12, 13, 14};
     a += b;
-
     print_set(a);
+
+    std::cout << "Operators 4 tests: " << std::endl;
+    auto c = set<int>{1, 2, 3, 4};
+    auto d = set<int>{5, 6, 7, 8};
+    print_set(c + d);
+
+    std::cout << "Operators 5 tests: " << std::endl;
+    print_set(c + 10 + 23);
 }
 
 int main() {
