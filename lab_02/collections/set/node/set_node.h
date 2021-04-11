@@ -17,11 +17,18 @@ public:
     explicit set_node(const T &data);
     explicit set_node(std::shared_ptr<set_node<T>> &node);
 
+    void set(const T &value);
+    void set_next(const set_node<T> &node);
+    void set_next(const std::shared_ptr<set_node<T>> &node);
+    void set_null();
+
+    const T &get() const;
+    T &value();
+
+    std::shared_ptr<set_node<T>> get_next() const;
+
     bool operator==(const std::shared_ptr<set_node<T>> &node) const;
     bool operator!=(const std::shared_ptr<set_node<T>> &node) const;
-
-    void set(const T &value);
-    const T &get() const;
 
     ~set_node() = default;
 };
