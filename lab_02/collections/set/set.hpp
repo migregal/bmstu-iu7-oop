@@ -14,7 +14,7 @@
 
 template<typename T>
 class set : public base_collection {
-    size_t size = 0;
+    size_t length = 0;
     std::shared_ptr<set_node<T>> head;
     std::shared_ptr<set_node<T>> tail;
 
@@ -31,7 +31,9 @@ public:
     std::pair<set_iterator<T>, bool> insert(T &&value);
     void insert(std::initializer_list<T> ilist);
 
-    bool is_empty() const override;
+    size_t size();
+
+    bool empty() const override;
 
     void clear() override;
 };

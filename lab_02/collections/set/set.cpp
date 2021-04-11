@@ -14,7 +14,7 @@ set<T>::set(set<T> &list) {
 
 template<typename T>
 set<T>::set(set<T> &&list) noexcept {
-    this->size = list.size;
+    this->length = list.length;
     this->head = list.head;
     this->tail = list.tail;
 }
@@ -37,10 +37,14 @@ template<typename T>
 void set<T>::insert(std::initializer_list<T> ilist) {
 }
 
+template<typename T>
+size_t set<T>::size() {
+    return length;
+}
 
 template<typename T>
-bool set<T>::is_empty() const {
-    return false;
+bool set<T>::empty() const {
+    return size();
 }
 
 template<typename T>
