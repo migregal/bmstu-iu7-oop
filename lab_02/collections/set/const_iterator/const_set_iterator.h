@@ -7,7 +7,6 @@
 
 #include <iterator>
 
-#include <set_iterator.h>
 #include <set_node.h>
 
 template<typename T>
@@ -26,9 +25,10 @@ public:
 
     const T *operator->() const;
     const T &operator*() const;
+
     explicit operator bool() const;
 
-    const_set_iterator<T> &operator=(const set_iterator<T> &iterator);
+    const_set_iterator<T> &operator=(const const_set_iterator<T> &iterator);
     const_set_iterator<T> &operator++();
 
     bool operator!=(const const_set_iterator<T> &iterator) const;

@@ -20,6 +20,7 @@ public:
     set_iterator();
     explicit set_iterator(const std::shared_ptr<set_node<T>> &node);
     set_iterator(const set_iterator<T> &iterator);
+
     ~set_iterator() = default;
 
     virtual void next();

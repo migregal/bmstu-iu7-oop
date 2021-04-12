@@ -41,7 +41,7 @@ const_set_iterator<T>::operator bool() const {
 }
 
 template<typename T>
-const_set_iterator<T> &const_set_iterator<T>::operator=(const set_iterator<T> &iterator) {
+const_set_iterator<T> &const_set_iterator<T>::operator=(const const_set_iterator<T> &iterator) {
     this->cur = iterator.cur.lock();
     return *this;
 }
