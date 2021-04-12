@@ -5,9 +5,8 @@
 #ifndef LAB_02_SET_HPP
 #define LAB_02_SET_HPP
 
-#include "set.h"
-#include <chrono>
 
+#include <chrono>
 
 template<typename T>
 set<T>::set(set<T> &list) {
