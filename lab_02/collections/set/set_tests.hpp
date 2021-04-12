@@ -34,11 +34,11 @@ TEST(ConstructorTest, Default) {
 }
 
 TEST(ConstructorTest, Copy) {
-    set<int> a;
-    EXPECT_EQ(a.empty(), true);
+    set<int> a{1, 2, 3, 4, 5};
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5}));
 
     auto b = a;
-    EXPECT_EQ(b.empty(), true);
+    EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 5}));
 }
 
 TEST(ConstructorTest, SortedInitList) {
