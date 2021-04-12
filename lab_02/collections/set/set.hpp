@@ -234,25 +234,24 @@ set<T> &set<T>::operator+=(T &&data) {
 }
 
 template<typename T>
-set<T> &set<T>::operator+(set<T> &ds) {
-    auto s = new set<T>();
-    *s += *this;
-    *s += ds;
-    return *s;
+set<T> set<T>::operator+(set<T> &ds) {
+    set<T> s{*this};
+    s += ds;
+    return s;
 }
 
 template<typename T>
-set<T> &set<T>::operator+(T &data) {
-    auto s = this;
+set<T> set<T>::operator+(T &data) {
+    set<T> s{*this};
     s += data;
     return s;
 }
 
 template<typename T>
-set<T> &set<T>::operator+(const T &data) {
-    auto s = this;
-    *s += data;
-    return *s;
+set<T> set<T>::operator+(const T &data) {
+    set<T> s{*this};
+    s += data;
+    return s;
 }
 
 template<typename T>
