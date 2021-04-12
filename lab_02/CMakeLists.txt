@@ -12,7 +12,8 @@ set(BASE_SRC ${COLLECTIONS_DOMAIN}/base_collection.hpp)
 set(SET_DOMEN collections/set)
 set(SET_SRC
         ${SET_DOMEN}/set.hpp
-        ${SET_DOMEN}/set.h)
+        ${SET_DOMEN}/set.h
+        ${SET_DOMEN}/set_tests.hpp)
 
 set(SET_NODE_DOMEN ${SET_DOMEN}/node)
 set(SET_NODE_SRC
