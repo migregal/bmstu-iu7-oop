@@ -7,11 +7,14 @@
 
 #include <iterator>
 
+#include <set.h>
 #include <set_node.h>
 
 template<typename T>
 class set_iterator : public std::iterator<std::input_iterator_tag, T> {
     std::weak_ptr<set_node<T>> cur;
+
+    virtual set_node<T> &get_cur();
 
 public:
     set_iterator();
@@ -20,7 +23,6 @@ public:
     ~set_iterator() = default;
 
     virtual void next();
-    virtual set_node<T> &get_cur();
 
     T *operator->();
     T &operator*();
@@ -32,6 +34,9 @@ public:
 
     bool operator!=(const set_iterator<T> &iterator) const;
     bool operator==(const set_iterator<T> &iterator) const;
+
+    template<typename U>
+    friend class set;
 };
 
 #include <set_iterator.hpp>
