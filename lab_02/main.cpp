@@ -1,114 +1,95 @@
 #include <iostream>
 #include <set.h>
 
-void print_set(set<int> &set) {
-    std::cout << set << std::endl;
-}
+#include <gtest/gtest.h>
 
-void test_constructors() {
-    std::cout << "Constructors test: " << std::endl;
 
-    std::cout << "Constructor 1 test: " << std::endl;
+TEST(EqualTest, Positive) {
     set<int> a;
-    print_set(a);
+    EXPECT_EQ(a, set<int>());
 
-    std::cout << "Constructor 2 test: " << std::endl;
-    auto b = set<int>(a);
-    print_set(b);
+    auto b = set<int>{1, 2, 3, 4};
+    EXPECT_EQ(b, (set<int>{1, 2, 3, 4}));
+}
 
-    std::cout << "Constructor 3 test: " << std::endl;
+TEST(EqualTest, Negative) {
+    set<int> a;
+    EXPECT_NE(a, (set<int>{1}));
+
+    auto b = set<int>{1, 2, 3, 4};
+    EXPECT_NE(b, set<int>());
+}
+
+TEST(ConstructorTest, Positive) {
+    set<int> a;
+    EXPECT_EQ(a.empty(), true);
+
+    auto b = a;
+    EXPECT_EQ(b.empty(), true);
+
     auto c = set<int>{1, 2, 3, 4, 5};
-    print_set(c);
+    EXPECT_EQ(c, (set<int>{1, 2, 3, 4, 5}));
 
-    std::cout << "Constructor 4 test: " << std::endl;
     auto d = set<int>{5, 4, 3, 2, 1};
-    print_set(d);
+    EXPECT_EQ(d, (set<int>{1, 2, 3, 4, 5}));
 
-    std::cout << "Constructor 5 test: " << std::endl;
     auto e = set<int>{5, 10, 1, 12, 4};
-    print_set(e);
+    EXPECT_EQ(e, (set<int>{1, 4, 5, 10, 12}));
 
-    std::cout << "Constructor 6 test: " << std::endl;
     auto f = set<int>{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5};
-    print_set(f);
+    EXPECT_EQ(f, (set<int>{1, 2, 3, 4, 5}));
 }
 
-void test_insert() {
-    std::cout << "Insert tests: " << std::endl;
+TEST(InsertTest, Positive) {
     auto a = set<int>{1, 2, 3, 4, 5};
-    print_set(a);
-
-    std::cout << "Insert 1 test: " << std::endl;
     a.insert(6);
-    print_set(a);
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 6}));
 
-    std::cout << "Insert 2 test: " << std::endl;
+
     a.insert(7);
-    print_set(a);
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 6, 7}));
 
-    std::cout << "Insert 3 test: " << std::endl;
     a.insert({8, 9, 10});
-    print_set(a);
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
 
-    std::cout << "Insert 4 test: " << std::endl;
     a.insert({3, 3, 3, 4, 4, 4, 4, 1, 2, 3, 9, 12, 21});
-    print_set(a);
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 21}));
 }
 
-void clear_test() {
-    std::cout << "Clear tests: " << std::endl;
-    auto a = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
-    print_set(a);
-
-    std::cout << "Clear 1 test: " << std::endl;
+TEST(ClearTest, Positive) {
+    auto a = set<int>();
     a.clear();
-    print_set(a);
+    EXPECT_EQ(a.empty(), true);
+
+    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
+    b.clear();
+    EXPECT_EQ(b.empty(), true);
 }
 
-void operators_test() {
-    std::cout << "Operators tests: " << std::endl;
+TEST(OperatorsTest, Positive) {
     auto a = set<int>{1, 2, 3, 4};
-    print_set(a);
-
-    std::cout << "Operators 1 tests: " << std::endl;
     a += 10;
     a += 5;
-    print_set(a);
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 10}));
 
     auto val = 21;
-    std::cout << "Operators 2 tests: " << std::endl;
     a += val;
     a += ++val;
-    print_set(a);
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 10, 21, 22}));
 
-    std::cout << "Operators 3 tests: " << std::endl;
     auto b = set<int>{11, 12, 13, 14};
     a += b;
-    print_set(a);
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 10, 11, 12, 13, 14, 21, 22}));
 
-    std::cout << "Operators 4 tests: " << std::endl;
+
     auto c = set<int>{1, 2, 3, 4};
     auto d = set<int>{5, 6, 7, 8};
-    print_set(c + d);
+    EXPECT_EQ(c + d, (set<int>{1, 2, 3, 4, 5, 6, 7, 8}));
 
-    std::cout << "Operators 5 tests: " << std::endl;
-    print_set(c + 10 + 23);
+    EXPECT_EQ(c + 10 + 23, (set<int>{1, 2, 3, 4, 10, 23}));
 }
 
-int main() {
-    test_constructors();
-
-    std::cout << std::endl;
-
-    test_insert();
-
-    std::cout << std::endl;
-
-    clear_test();
-
-    std::cout << std::endl;
-
-    operators_test();
-
-    return 0;
+int main(int argc, char **argv) {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

@@ -152,7 +152,7 @@ void set<T>::insert(std::initializer_list<T> ilist) {
 
 template<typename T>
 void set<T>::clear() {
-    while (this->size--)
+    while (this->size > 0 && this->size--)
         this->head = this->head->get_next();
 }
 
@@ -164,7 +164,7 @@ size_t set<T>::get_size() {
 
 template<typename T>
 bool set<T>::empty() const {
-    return 0 != size;
+    return 0 == size;
 }
 
 // Lookup
@@ -226,7 +226,8 @@ set<T> &set<T>::operator+=(T &&data) {
 
 template<typename T>
 set<T> &set<T>::operator+(set<T> &ds) {
-    auto s = this;
+    auto s = new set<T>();
+    *s += *this;
     *s += ds;
     return *s;
 }
