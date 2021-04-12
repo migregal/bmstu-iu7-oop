@@ -33,7 +33,7 @@ set_node<T> &set_iterator<T>::get_cur() {
 
 template<typename T>
 T *set_iterator<T>::operator->() {
-    return this->cur.lock().get();
+    return &(this->cur.lock()->value());
 }
 
 template<typename T>

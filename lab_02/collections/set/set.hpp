@@ -7,6 +7,8 @@
 
 
 #include <chrono>
+#include "set.h"
+
 
 template<typename T>
 set<T>::set(set<T> &list) {
@@ -173,13 +175,21 @@ size_t set<T>::count(const T &key) const {
 }
 
 template<typename T>
-set_iterator<T> set<T>::find(const T &key) {
-    for (const auto &el : this) {
-        if (key == el)
+set_iterator<T> set<T>::find(const T &val) {
+    for (auto el = begin(); el != end(); ++el)
+        if (val == *el)
             return set_iterator<T>(el);
-    }
 
-    return set_iterator<T>(nullptr);
+    return this->end();
+}
+
+template<typename T>
+const_set_iterator<T> set<T>::find(const T &val) const {
+    for (auto el = cbegin(); el != cend(); ++el)
+        if (val == *el)
+            return const_set_iterator<T>(el);
+
+    return this->cend();
 }
 
 // Non-member

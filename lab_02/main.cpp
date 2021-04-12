@@ -89,6 +89,13 @@ TEST(OperatorsTest, Positive) {
     EXPECT_EQ(c + 10 + 23, (set<int>{1, 2, 3, 4, 10, 23}));
 }
 
+TEST(SearchTest, Positive) {
+    auto a = set<int>{1, 2, 3, 4};
+
+    EXPECT_EQ(a.find(5), a.end());
+    EXPECT_NE(a.find(4), a.end());
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

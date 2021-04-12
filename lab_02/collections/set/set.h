@@ -43,7 +43,8 @@ public:
     //Lookup
     size_t count(const T &key) const;
 
-    set_iterator<T> find(const T &key) ;
+    set_iterator<T> find(const T &val) ;
+    const_set_iterator<T> find (const T& val) const;
 
     // Non-member
     bool operator==(const set<T> &list) const;
