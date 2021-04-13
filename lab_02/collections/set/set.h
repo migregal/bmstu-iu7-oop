@@ -19,20 +19,20 @@ class set : public base_collection {
     std::shared_ptr<set_node<T>> tail;
 
 protected:
-    std::pair<set_iterator<T>, bool> insert(const std::shared_ptr<set_node<T>> &node);
+    std::pair<set_iterator<T>, bool> insert(const std::shared_ptr<set_node<T>> &node) noexcept(false);
 
 public:
     set() = default;
-    set(set<T> &list);
+    set(set<T> &list) noexcept(false);
     set(set<T> &&list) noexcept;
     set(std::initializer_list<T> elems);
 
     ~set() override;
 
     // Modifiers
-    std::pair<set_iterator<T>, bool> insert(const T &value);
-    std::pair<set_iterator<T>, bool> insert(T &&value);
-    void insert(std::initializer_list<T> ilist);
+    std::pair<set_iterator<T>, bool> insert(const T &value) noexcept(false);
+    std::pair<set_iterator<T>, bool> insert(T &&value) noexcept(false);
+    void insert(std::initializer_list<T> ilist) noexcept(false);
 
     set_iterator<T> erase(const_set_iterator<T> pos);
     set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);

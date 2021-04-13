@@ -7,7 +7,9 @@ find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
 set(COLLECTIONS_DOMAIN collections)
-set(BASE_SRC ${COLLECTIONS_DOMAIN}/base_collection.hpp)
+set(BASE_SRC
+        ${COLLECTIONS_DOMAIN}/base_collection.hpp
+        ${COLLECTIONS_DOMAIN}/errors.h)
 
 set(SET_DOMEN collections/set)
 set(SET_SRC

@@ -6,8 +6,9 @@
 #define LAB_02_SET_HPP
 
 
-#include "set.h"
 #include <chrono>
+
+#include <errors.h>
 
 
 template<typename T>
@@ -20,7 +21,7 @@ set<T>::set(set<T> &list) : set() {
             temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
         } catch (std::bad_alloc &error) {
             auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            throw std::bad_alloc();
+            throw bad_alloc_err(ctime(&t), __FILE__, typeid(list).name(), __FUNCTION__);
         }
 
         temp_node->set(el);
@@ -43,7 +44,7 @@ set<T>::set(std::initializer_list<T> elems) : set() {
             temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
         } catch (std::bad_alloc &error) {
             auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            throw std::bad_alloc();
+            throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
         }
 
         temp_node->set(el);
@@ -53,7 +54,7 @@ set<T>::set(std::initializer_list<T> elems) : set() {
 
 template<typename T>
 set<T>::~set() {
-    clear();
+    this->clear();
 }
 
 // Modifiers
@@ -65,7 +66,7 @@ std::pair<set_iterator<T>, bool> set<T>::insert(const T &value) {
         temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
     } catch (std::bad_alloc &error) {
         auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw std::bad_alloc();
+        throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
     }
 
     temp_node->set(value);
@@ -81,7 +82,7 @@ std::pair<set_iterator<T>, bool> set<T>::insert(T &&value) {
         temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
     } catch (std::bad_alloc &error) {
         auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw std::bad_alloc();
+        throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
     }
 
     temp_node->set(value);
@@ -96,8 +97,8 @@ std::pair<set_iterator<T>, bool> set<T>::insert(const std::shared_ptr<set_node<T
     try {
         temp = std::shared_ptr<set_node<T>>(new set_node<T>);
     } catch (std::bad_alloc &error) {
-        auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw std::bad_alloc();
+        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
     }
 
     temp->set(node->get());
@@ -162,7 +163,7 @@ void set<T>::insert(std::initializer_list<T> ilist) {
             temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
         } catch (std::bad_alloc &error) {
             auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            throw std::bad_alloc();
+            throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
         }
 
         temp_node->set(el);
@@ -172,11 +173,15 @@ void set<T>::insert(std::initializer_list<T> ilist) {
 
 template<typename T>
 set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
-    if (!size)
-        return set_iterator<T>(nullptr);
+    if (!size) {
+        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+    }
 
-    if (cend() == pos)
-        return set_iterator<T>(nullptr);
+    if (cend() == pos) {
+        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+    }
 
     auto t = pos.cur.lock();
 
@@ -192,11 +197,15 @@ set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
 
 template<typename T>
 set_iterator<T> set<T>::erase(const_set_iterator<T> first, const_set_iterator<T> last) {
-    if (!size)
-        return set_iterator<T>(nullptr);
+    if (!size) {
+        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+    }
 
-    if (cend() == first || cend() == last)
-        return set_iterator<T>(nullptr);
+    if (cend() == first || cend() == last) {
+        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+    }
 
     const_set_iterator<T> i;
     for (i = first; i && i != last; i = erase(i)) {}

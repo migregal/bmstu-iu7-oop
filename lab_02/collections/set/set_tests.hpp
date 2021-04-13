@@ -5,8 +5,8 @@
 #ifndef LAB_02_SET_TESTS_HPP
 #define LAB_02_SET_TESTS_HPP
 
-#include <set.h>
 #include <gtest/gtest.h>
+#include <set.h>
 
 TEST(EqualTest, EmptyEqual) {
     set<int> a;
@@ -87,14 +87,13 @@ TEST(InsertTest, MultipleRepeatedToNonEmpty) {
 
 TEST(EraseTest, Empty) {
     auto b = set<int>{};
-    auto s = b.find(5);
-    EXPECT_EQ(b.erase(s), set_iterator<int>(nullptr));
+    EXPECT_THROW(b.erase(b.find(5)), size_error);
 }
 
 TEST(EraseTest, NonEmptyIncorrect) {
     auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
-    auto s = b.find(10);
-    EXPECT_EQ(b.erase(s), set_iterator<int>(nullptr));
+
+    EXPECT_THROW(b.erase(b.find(10)), iterator_error);
 }
 
 TEST(EraseTest, NonEmptyCorrect) {
@@ -105,14 +104,12 @@ TEST(EraseTest, NonEmptyCorrect) {
 
 TEST(EraseTest, NonEmptyIncorrectList) {
     auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
-    b.erase(b.find(0), b.find(13));
-    EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 5, 9, 12, 21}));
+    EXPECT_THROW(b.erase(b.find(0), b.find(13)), iterator_error);
 }
 
 TEST(EraseTest, NonEmptyPartialList) {
     auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
-    b.erase(b.find(4), b.find(13));
-    EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 5, 9, 12, 21}));
+    EXPECT_THROW(b.erase(b.find(4), b.find(13)), iterator_error);
 }
 
 TEST(EraseTest, NonEmptyCorrectList) {
