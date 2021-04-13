@@ -219,10 +219,8 @@ namespace collections {
             auto t = head;
             head = head->get_next();
             t.get()->set_next(nullptr);
-        }
 
-        while (tail) {
-            auto t = tail;
+            t = tail;
             tail = tail->get_prev();
             t.get()->set_prev(nullptr);
         }
