@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <set_tests.hpp>
+#include <set/test/set_tests.hpp>
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
