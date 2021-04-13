@@ -34,6 +34,8 @@ public:
     std::pair<set_iterator<T>, bool> insert(T &&value);
     void insert(std::initializer_list<T> ilist);
 
+    set_iterator<T> erase(const_set_iterator<T> pos);
+
     void clear() override;
 
     // Capacity

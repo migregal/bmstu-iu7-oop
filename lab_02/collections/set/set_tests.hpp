@@ -85,6 +85,24 @@ TEST(InsertTest, MultipleRepeatedToNonEmpty) {
     EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 9, 12, 21}));
 }
 
+TEST(EraseTest, Empty) {
+    auto b = set<int>{};
+    auto s = b.find(5);
+    EXPECT_EQ(b.erase(const_set_iterator<int>(s)), set_iterator<int>(nullptr));
+}
+
+TEST(EraseTest, NonEmptyIncorrect) {
+    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
+    auto s = b.find(10);
+    EXPECT_EQ(b.erase(const_set_iterator<int>(s)), set_iterator<int>(nullptr));
+}
+
+TEST(EraseTest, NonEmptyCorrect) {
+    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
+    b.erase(const_set_iterator<int>(b.find(5)));
+    EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 9, 12, 21}));
+}
+
 TEST(ClearTest, Empty) {
     auto a = set<int>();
     a.clear();

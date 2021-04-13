@@ -7,6 +7,8 @@
 
 
 #include <chrono>
+#include "set.h"
+
 
 
 template<typename T>
@@ -170,6 +172,26 @@ void set<T>::insert(std::initializer_list<T> ilist) {
 }
 
 template<typename T>
+set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
+    if (!size)
+        return set_iterator<T>(nullptr);
+
+    if (cend() == pos)
+        return set_iterator<T>(nullptr);
+
+    auto t = pos.cur.lock();
+
+    t->get_prev()->set_next(t->get_next());
+    t->get_next()->set_prev(t->get_prev());
+
+    auto r = t->get_next();
+    t->set_null();
+
+    --size;
+    return set_iterator<T>(r);
+}
+
+template<typename T>
 void set<T>::clear() {
     while (head) {
         auto t = head;
@@ -209,7 +231,7 @@ set_iterator<T> set<T>::find(const T &val) {
         if (val == *el)
             return set_iterator<T>(el);
 
-    return this->end();
+    return end();
 }
 
 template<typename T>

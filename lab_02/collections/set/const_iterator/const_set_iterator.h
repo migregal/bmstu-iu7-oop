@@ -8,6 +8,7 @@
 #include <iterator>
 
 #include <set_node.h>
+#include <set.h>
 
 template<typename T>
 class const_set_iterator : std::iterator<std::input_iterator_tag, T> {
@@ -30,11 +31,14 @@ public:
     explicit operator bool() const;
 
     const_set_iterator<T> &operator=(const const_set_iterator<T> &iterator);
-    const_set_iterator<T> &operator++();
-    const_set_iterator<T> &operator--();
+    virtual const_set_iterator<T> &operator++();
+    virtual const_set_iterator<T> &operator--();
 
     bool operator!=(const const_set_iterator<T> &iterator) const;
     bool operator==(const const_set_iterator<T> &iterator) const;
+
+    template<typename U>
+    friend class set;
 };
 
 #include <const_set_iterator.hpp>

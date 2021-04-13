@@ -11,9 +11,7 @@
 #include <set_node.h>
 
 template<typename T>
-class set_iterator : public std::iterator<std::input_iterator_tag, T> {
-    std::weak_ptr<set_node<T>> cur;
-
+class set_iterator : public const_set_iterator<T> {
     virtual set_node<T> &get_cur();
 
 public:
@@ -23,17 +21,12 @@ public:
 
     ~set_iterator() = default;
 
-    virtual void next();
-    virtual void prev();
-
     T *operator->();
     T &operator*();
 
-    explicit operator bool() const;
-
     set_iterator<T> &operator=(const set_iterator<T> &iterator);
-    set_iterator<T> &operator++();
-    set_iterator<T> &operator--();
+    set_iterator<T> &operator++() override;
+    set_iterator<T> &operator--() override;
 
     bool operator!=(const set_iterator<T> &iterator) const;
     bool operator==(const set_iterator<T> &iterator) const;
