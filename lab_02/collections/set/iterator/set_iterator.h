@@ -10,28 +10,30 @@
 #include <set.h>
 #include <set_node.h>
 
-template<typename T>
-class set_iterator : public const_set_iterator<T> {
-public:
-    set_iterator();
-    explicit set_iterator(const std::shared_ptr<set_node<T>> &node);
-    set_iterator(const set_iterator<T> &iterator);
+namespace collections {
+    template<typename T>
+    class set_iterator : public const_set_iterator<T> {
+    public:
+        set_iterator();
+        explicit set_iterator(const std::shared_ptr<set_node<T>> &node);
+        set_iterator(const set_iterator<T> &iterator);
 
-    ~set_iterator() = default;
+        ~set_iterator() = default;
 
-    T *operator->();
-    T &operator*();
+        T *operator->();
+        T &operator*();
 
-    set_iterator<T> &operator=(const set_iterator<T> &iterator);
-    set_iterator<T> &operator++() override;
-    set_iterator<T> &operator--() override;
+        set_iterator<T> &operator=(const set_iterator<T> &iterator);
+        set_iterator<T> &operator++() override;
+        set_iterator<T> &operator--() override;
 
-    bool operator!=(const set_iterator<T> &iterator) const;
-    bool operator==(const set_iterator<T> &iterator) const;
+        bool operator!=(const set_iterator<T> &iterator) const;
+        bool operator==(const set_iterator<T> &iterator) const;
 
-    template<typename U>
-    friend class set;
-};
+        template<typename U>
+        friend class set;
+    };
+}// namespace collections
 
 #include <set_iterator.hpp>
 

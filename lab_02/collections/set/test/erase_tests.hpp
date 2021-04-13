@@ -9,6 +9,8 @@
 #include <gtest/gtest.h>
 #include <set.h>
 
+using namespace collections;
+
 TEST(EraseTest, Empty) {
     auto b = set<int>{};
     EXPECT_THROW(b.erase(b.find(5)), size_error);

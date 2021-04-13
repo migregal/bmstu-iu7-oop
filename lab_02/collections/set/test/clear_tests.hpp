@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 #include <set.h>
 
+using namespace collections;
 
 TEST(ClearTest, Empty) {
     auto a = set<int>();

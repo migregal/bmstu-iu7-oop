@@ -8,6 +8,8 @@
 #include <gtest/gtest.h>
 #include <set.h>
 
+using namespace collections;
+
 TEST(ConstructorTest, Default) {
     set<int> a;
     EXPECT_EQ(a.empty(), true);

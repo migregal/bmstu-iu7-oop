@@ -10,154 +10,57 @@
 
 #include <errors.h>
 
+namespace collections {
+    template<typename T>
+    set<T>::set(set<T> &list) : set() {
 
-template<typename T>
-set<T>::set(set<T> &list) : set() {
+        for (auto el : list) {
+            std::shared_ptr<set_node<T>> temp_node = nullptr;
 
-    for (auto el : list) {
-        std::shared_ptr<set_node<T>> temp_node = nullptr;
+            try {
+                temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
+            } catch (std::bad_alloc &error) {
+                auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+                throw bad_alloc_err(ctime(&t), __FILE__, typeid(list).name(), __FUNCTION__);
+            }
 
-        try {
-            temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
-        } catch (std::bad_alloc &error) {
-            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            throw bad_alloc_err(ctime(&t), __FILE__, typeid(list).name(), __FUNCTION__);
+            temp_node->set(el);
+            insert(temp_node);
         }
-
-        temp_node->set(el);
-        insert(temp_node);
     }
-}
 
-template<typename T>
-set<T>::set(set<T> &&list) noexcept {
-    size = list.size;
-    head = list.head;
-}
+    template<typename T>
+    set<T>::set(set<T> &&list) noexcept {
+        size = list.size;
+        head = list.head;
+    }
 
-template<typename T>
-set<T>::set(std::initializer_list<T> elems) : set() {
-    for (auto &el : elems) {
-        std::shared_ptr<set_node<T>> temp_node = nullptr;
+    template<typename T>
+    set<T>::set(std::initializer_list<T> elems) : set() {
+        for (auto &el : elems) {
+            std::shared_ptr<set_node<T>> temp_node = nullptr;
 
-        try {
-            temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
-        } catch (std::bad_alloc &error) {
-            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+            try {
+                temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
+            } catch (std::bad_alloc &error) {
+                auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+                throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+            }
+
+            temp_node->set(el);
+            insert(temp_node);
         }
-
-        temp_node->set(el);
-        insert(temp_node);
-    }
-}
-
-template<typename T>
-set<T>::~set() {
-    this->clear();
-}
-
-// Modifiers
-template<typename T>
-std::pair<set_iterator<T>, bool> set<T>::insert(const T &value) {
-    std::shared_ptr<set_node<T>> temp_node;
-
-    try {
-        temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
-    } catch (std::bad_alloc &error) {
-        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
     }
 
-    temp_node->set(value);
-
-    return insert(temp_node);
-}
-
-template<typename T>
-std::pair<set_iterator<T>, bool> set<T>::insert(T &&value) {
-    std::shared_ptr<set_node<T>> temp_node;
-
-    try {
-        temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
-    } catch (std::bad_alloc &error) {
-        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+    template<typename T>
+    set<T>::~set() {
+        this->clear();
     }
 
-    temp_node->set(value);
-
-    return insert(temp_node);
-}
-
-template<typename T>
-std::pair<set_iterator<T>, bool> set<T>::insert(const std::shared_ptr<set_node<T>> &node) {
-    std::shared_ptr<set_node<T>> temp;
-
-    try {
-        temp = std::shared_ptr<set_node<T>>(new set_node<T>);
-    } catch (std::bad_alloc &error) {
-        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
-    }
-
-    temp->set(node->get());
-
-    if (!size) {
-        head = temp;
-        tail = temp;
-        size++;
-
-        return {set_iterator<T>(temp), true};
-    }
-
-    if (temp.get()->get() == head.get()->get())
-        return {set_iterator<T>(head), true};
-
-    if (temp.get()->get() < head.get()->get()) {
-        head.get()->set_prev(temp);
-        temp.get()->set_next(head);
-        head = temp;
-        size++;
-
-        return {set_iterator<T>(temp), true};
-    }
-
-    if (temp.get()->get() == tail.get()->get())
-        return {set_iterator<T>(tail), true};
-
-    if (temp.get()->get() > tail.get()->get()) {
-        temp.get()->set_prev(tail);
-        tail.get()->set_next(temp);
-        tail = temp;
-        size++;
-
-        return {set_iterator<T>(temp), true};
-    }
-
-    set_iterator<T> iter = ++(begin());
-    while (*iter < temp.get()->get())
-        ++iter;
-
-    if (*iter == temp.get()->get())
-        return {iter, false};
-
-    auto t = iter;
-
-    --t;
-    temp.get()->set_prev(t.get_cur());
-    temp.get()->set_next(iter.get_cur());
-    t.get_cur().set_next(*temp.get());
-    iter.get_cur().set_prev(*temp.get());
-    size++;
-
-    return {set_iterator<T>(temp), false};
-}
-
-template<typename T>
-void set<T>::insert(std::initializer_list<T> ilist) {
-    for (auto &el : ilist) {
-        std::shared_ptr<set_node<T>> temp_node = nullptr;
+    // Modifiers
+    template<typename T>
+    std::pair<set_iterator<T>, bool> set<T>::insert(const T &value) {
+        std::shared_ptr<set_node<T>> temp_node;
 
         try {
             temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
@@ -166,194 +69,292 @@ void set<T>::insert(std::initializer_list<T> ilist) {
             throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
         }
 
-        temp_node->set(el);
-        insert(temp_node);
-    }
-}
+        temp_node->set(value);
 
-template<typename T>
-set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
-    if (!size) {
-        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+        return insert(temp_node);
     }
 
-    if (cend() == pos) {
-        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+    template<typename T>
+    std::pair<set_iterator<T>, bool> set<T>::insert(T &&value) {
+        std::shared_ptr<set_node<T>> temp_node;
+
+        try {
+            temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
+        } catch (std::bad_alloc &error) {
+            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+        }
+
+        temp_node->set(value);
+
+        return insert(temp_node);
     }
 
-    auto t = pos.cur.lock();
+    template<typename T>
+    std::pair<set_iterator<T>, bool> set<T>::insert(const std::shared_ptr<set_node<T>> &node) {
+        std::shared_ptr<set_node<T>> temp;
 
-    t->get_prev()->set_next(t->get_next());
-    t->get_next()->set_prev(t->get_prev());
+        try {
+            temp = std::shared_ptr<set_node<T>>(new set_node<T>);
+        } catch (std::bad_alloc &error) {
+            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+        }
 
-    auto r = t->get_next();
-    t->set_null();
+        temp->set(node->get());
 
-    --size;
-    return set_iterator<T>(r);
-}
+        if (!size) {
+            head = temp;
+            tail = temp;
+            size++;
 
-template<typename T>
-set_iterator<T> set<T>::erase(const_set_iterator<T> first, const_set_iterator<T> last) {
-    if (!size) {
-        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+            return {set_iterator<T>(temp), true};
+        }
+
+        if (temp.get()->get() == head.get()->get())
+            return {set_iterator<T>(head), true};
+
+        if (temp.get()->get() < head.get()->get()) {
+            head.get()->set_prev(temp);
+            temp.get()->set_next(head);
+            head = temp;
+            size++;
+
+            return {set_iterator<T>(temp), true};
+        }
+
+        if (temp.get()->get() == tail.get()->get())
+            return {set_iterator<T>(tail), true};
+
+        if (temp.get()->get() > tail.get()->get()) {
+            temp.get()->set_prev(tail);
+            tail.get()->set_next(temp);
+            tail = temp;
+            size++;
+
+            return {set_iterator<T>(temp), true};
+        }
+
+        set_iterator<T> iter = ++(begin());
+        while (*iter < temp.get()->get())
+            ++iter;
+
+        if (*iter == temp.get()->get())
+            return {iter, false};
+
+        auto t = iter;
+
+        --t;
+        temp.get()->set_prev(t.get_cur());
+        temp.get()->set_next(iter.get_cur());
+        t.get_cur().set_next(*temp.get());
+        iter.get_cur().set_prev(*temp.get());
+        size++;
+
+        return {set_iterator<T>(temp), false};
     }
 
-    if (cend() == first || cend() == last) {
-        auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+    template<typename T>
+    void set<T>::insert(std::initializer_list<T> ilist) {
+        for (auto &el : ilist) {
+            std::shared_ptr<set_node<T>> temp_node = nullptr;
+
+            try {
+                temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
+            } catch (std::bad_alloc &error) {
+                auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+                throw bad_alloc_err(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+            }
+
+            temp_node->set(el);
+            insert(temp_node);
+        }
     }
 
-    const_set_iterator<T> i;
-    for (i = first; i && i != last; i = erase(i)) {}
+    template<typename T>
+    set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
+        if (!size) {
+            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+        }
 
-    return set_iterator<T>(i.cur.lock());
-}
+        if (cend() == pos) {
+            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+        }
 
-template<typename T>
-void set<T>::clear() {
-    while (head) {
-        auto t = head;
-        head = head->get_next();
-        t.get()->set_next(nullptr);
+        auto t = pos.cur.lock();
+
+        t->get_prev()->set_next(t->get_next());
+        t->get_next()->set_prev(t->get_prev());
+
+        auto r = t->get_next();
+        t->set_null();
+
+        --size;
+        return set_iterator<T>(r);
     }
 
-    while (tail) {
-        auto t = tail;
-        tail = tail->get_prev();
-        t.get()->set_prev(nullptr);
+    template<typename T>
+    set_iterator<T> set<T>::erase(const_set_iterator<T> first, const_set_iterator<T> last) {
+        if (!size) {
+            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+        }
+
+        if (cend() == first || cend() == last) {
+            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
+        }
+
+        const_set_iterator<T> i;
+        for (i = first; i && i != last; i = erase(i)) {}
+
+        return set_iterator<T>(i.cur.lock());
     }
 
-    size = 0;
-}
+    template<typename T>
+    void set<T>::clear() {
+        while (head) {
+            auto t = head;
+            head = head->get_next();
+            t.get()->set_next(nullptr);
+        }
 
-// Capacity
-template<typename T>
-size_t set<T>::get_size() {
-    return size;
-}
+        while (tail) {
+            auto t = tail;
+            tail = tail->get_prev();
+            t.get()->set_prev(nullptr);
+        }
 
-template<typename T>
-bool set<T>::empty() const {
-    return 0 == size;
-}
+        size = 0;
+    }
 
-// Lookup
-template<typename T>
-size_t set<T>::count(const T &key) const {
-    return size;
-}
+    // Capacity
+    template<typename T>
+    size_t set<T>::get_size() {
+        return size;
+    }
 
-template<typename T>
-set_iterator<T> set<T>::find(const T &val) {
-    for (auto el = begin(); el != end(); ++el)
-        if (val == *el)
-            return set_iterator<T>(el);
+    template<typename T>
+    bool set<T>::empty() const {
+        return 0 == size;
+    }
 
-    return end();
-}
+    // Lookup
+    template<typename T>
+    size_t set<T>::count(const T &key) const {
+        return size;
+    }
 
-template<typename T>
-const_set_iterator<T> set<T>::find(const T &val) const {
-    for (auto el = cbegin(); el != cend(); ++el)
-        if (val == *el)
-            return const_set_iterator<T>(el);
+    template<typename T>
+    set_iterator<T> set<T>::find(const T &val) {
+        for (auto el = begin(); el != end(); ++el)
+            if (val == *el)
+                return set_iterator<T>(el);
 
-    return cend();
-}
+        return end();
+    }
 
-// Non-member
-template<typename T>
-bool set<T>::operator==(const set<T> &list) const {
-    if (size != list.size)
-        return false;
+    template<typename T>
+    const_set_iterator<T> set<T>::find(const T &val) const {
+        for (auto el = cbegin(); el != cend(); ++el)
+            if (val == *el)
+                return const_set_iterator<T>(el);
 
-    auto fst = cbegin();
-    auto snd = list.cbegin();
+        return cend();
+    }
 
-    for (; fst != cend() && snd != list.cend(); ++fst, ++snd)
-        if (*fst != *snd)
+    // Non-member
+    template<typename T>
+    bool set<T>::operator==(const set<T> &list) const {
+        if (size != list.size)
             return false;
 
-    return true;
-}
+        auto fst = cbegin();
+        auto snd = list.cbegin();
 
-template<typename T>
-bool set<T>::operator!=(const set<T> &list) const {
-    return !(*this == list);
-}
+        for (; fst != cend() && snd != list.cend(); ++fst, ++snd)
+            if (*fst != *snd)
+                return false;
 
-template<typename T>
-set<T> &set<T>::operator+=(set<T> &set) {
-    for (auto &el : set)
-        insert(el);
+        return true;
+    }
 
-    return *this;
-}
+    template<typename T>
+    bool set<T>::operator!=(const set<T> &list) const {
+        return !(*this == list);
+    }
 
-template<typename T>
-set<T> &set<T>::operator+=(const T &data) {
-    insert(data);
-    return *this;
-}
+    template<typename T>
+    set<T> &set<T>::operator+=(set<T> &set) {
+        for (auto &el : set)
+            insert(el);
 
-template<typename T>
-set<T> &set<T>::operator+=(T &&data) {
-    insert(data);
-    return *this;
-}
+        return *this;
+    }
 
-template<typename T>
-set<T> set<T>::operator+(set<T> &ds) {
-    set<T> s{*this};
-    s += ds;
-    return s;
-}
+    template<typename T>
+    set<T> &set<T>::operator+=(const T &data) {
+        insert(data);
+        return *this;
+    }
 
-template<typename T>
-set<T> set<T>::operator+(T &data) {
-    set<T> s{*this};
-    s += data;
-    return s;
-}
+    template<typename T>
+    set<T> &set<T>::operator+=(T &&data) {
+        insert(data);
+        return *this;
+    }
 
-template<typename T>
-set<T> set<T>::operator+(const T &data) {
-    set<T> s{*this};
-    s += data;
-    return s;
-}
+    template<typename T>
+    set<T> set<T>::operator+(set<T> &ds) {
+        set<T> s{*this};
+        s += ds;
+        return s;
+    }
 
-template<typename T>
-std::ostream &operator<<(std::ostream &os, set<T> &list) {
-    for (const auto &el : list)
-        os << el << " ";
+    template<typename T>
+    set<T> set<T>::operator+(T &data) {
+        set<T> s{*this};
+        s += data;
+        return s;
+    }
 
-    return os;
-}
+    template<typename T>
+    set<T> set<T>::operator+(const T &data) {
+        set<T> s{*this};
+        s += data;
+        return s;
+    }
 
-// Iterators
-template<typename T>
-set_iterator<T> set<T>::begin() {
-    return set_iterator<T>(head);
-}
+    template<typename T>
+    std::ostream &operator<<(std::ostream &os, set<T> &list) {
+        for (const auto &el : list)
+            os << el << " ";
 
-template<typename T>
-set_iterator<T> set<T>::end() {
-    return set_iterator<T>(tail ? tail.get()->get_next() : nullptr);
-}
+        return os;
+    }
 
-template<typename T>
-const_set_iterator<T> set<T>::cbegin() const {
-    return const_set_iterator<T>(head);
-}
+    // Iterators
+    template<typename T>
+    set_iterator<T> set<T>::begin() {
+        return set_iterator<T>(head);
+    }
 
-template<typename T>
-const_set_iterator<T> set<T>::cend() const {
-    return const_set_iterator<T>(tail ? tail.get()->get_next() : nullptr);
-}
+    template<typename T>
+    set_iterator<T> set<T>::end() {
+        return set_iterator<T>(tail ? tail.get()->get_next() : nullptr);
+    }
+
+    template<typename T>
+    const_set_iterator<T> set<T>::cbegin() const {
+        return const_set_iterator<T>(head);
+    }
+
+    template<typename T>
+    const_set_iterator<T> set<T>::cend() const {
+        return const_set_iterator<T>(tail ? tail.get()->get_next() : nullptr);
+    }
+}// namespace collections
 
 #endif//LAB_02_SET_HPP

@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 #include <set.h>
 
+using namespace collections;
 
 TEST(OperatorsTest, AddConst) {
     auto a = set<int>{1, 2, 3, 4};

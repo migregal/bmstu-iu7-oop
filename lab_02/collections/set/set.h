@@ -13,62 +13,64 @@
 #include <set_iterator.h>
 #include <set_node.h>
 
-template<typename T>
-class set : public base_collection {
-    std::shared_ptr<set_node<T>> head;
-    std::shared_ptr<set_node<T>> tail;
+namespace collections {
+    template<typename T>
+    class set : public base_collection {
+        std::shared_ptr<set_node<T>> head;
+        std::shared_ptr<set_node<T>> tail;
 
-protected:
-    std::pair<set_iterator<T>, bool> insert(const std::shared_ptr<set_node<T>> &node) noexcept(false);
+    protected:
+        std::pair<set_iterator<T>, bool> insert(const std::shared_ptr<set_node<T>> &node) noexcept(false);
 
-public:
-    set() = default;
-    set(set<T> &list) noexcept(false);
-    set(set<T> &&list) noexcept;
-    set(std::initializer_list<T> elems);
+    public:
+        set() = default;
+        set(set<T> &list) noexcept(false);
+        set(set<T> &&list) noexcept;
+        set(std::initializer_list<T> elems);
 
-    ~set() override;
+        ~set() override;
 
-    // Modifiers
-    std::pair<set_iterator<T>, bool> insert(const T &value) noexcept(false);
-    std::pair<set_iterator<T>, bool> insert(T &&value) noexcept(false);
-    void insert(std::initializer_list<T> ilist) noexcept(false);
+        // Modifiers
+        std::pair<set_iterator<T>, bool> insert(const T &value) noexcept(false);
+        std::pair<set_iterator<T>, bool> insert(T &&value) noexcept(false);
+        void insert(std::initializer_list<T> ilist) noexcept(false);
 
-    set_iterator<T> erase(const_set_iterator<T> pos);
-    set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
+        set_iterator<T> erase(const_set_iterator<T> pos);
+        set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
 
-    void clear() override;
+        void clear() override;
 
-    // Capacity
-    size_t get_size();
+        // Capacity
+        size_t get_size();
 
-    bool empty() const override;
+        bool empty() const override;
 
-    //Lookup
-    size_t count(const T &key) const;
+        //Lookup
+        size_t count(const T &key) const;
 
-    set_iterator<T> find(const T &val);
-    const_set_iterator<T> find(const T &val) const;
+        set_iterator<T> find(const T &val);
+        const_set_iterator<T> find(const T &val) const;
 
-    // Non-member
-    bool operator==(const set<T> &list) const;
-    bool operator!=(const set<T> &list) const;
+        // Non-member
+        bool operator==(const set<T> &list) const;
+        bool operator!=(const set<T> &list) const;
 
-    set<T> &operator+=(set<T> &set);
-    set<T> &operator+=(const T &data);
-    set<T> &operator+=(T &&data);
+        set<T> &operator+=(set<T> &set);
+        set<T> &operator+=(const T &data);
+        set<T> &operator+=(T &&data);
 
-    set<T> operator+(set<T> &set);
-    set<T> operator+(T &data);
-    set<T> operator+(const T &data);
+        set<T> operator+(set<T> &set);
+        set<T> operator+(T &data);
+        set<T> operator+(const T &data);
 
-    // Iterators
-    set_iterator<T> begin();
-    const_set_iterator<T> cbegin() const;
+        // Iterators
+        set_iterator<T> begin();
+        const_set_iterator<T> cbegin() const;
 
-    set_iterator<T> end();
-    const_set_iterator<T> cend() const;
-};
+        set_iterator<T> end();
+        const_set_iterator<T> cend() const;
+    };
+}// namespace collections
 
 #include <set.hpp>
 
