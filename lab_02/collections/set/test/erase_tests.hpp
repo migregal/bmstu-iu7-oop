@@ -28,6 +28,11 @@ TEST(EraseTest, NonEmptyCorrect) {
     EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 9, 12, 21}));
 }
 
+TEST(EraseTest, EmptyIncorrectList) {
+    set<int> b;
+    EXPECT_THROW(b.erase(b.find(0), b.find(13)), size_error);
+}
+
 TEST(EraseTest, NonEmptyIncorrectList) {
     auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
     EXPECT_THROW(b.erase(b.find(0), b.find(13)), iterator_error);
