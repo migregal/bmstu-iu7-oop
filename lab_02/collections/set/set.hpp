@@ -25,14 +25,14 @@ set<T>::set(set<T> &list) : set() {
         }
 
         temp_node->set(el);
-        this->insert(temp_node);
+        insert(temp_node);
     }
 }
 
 template<typename T>
 set<T>::set(set<T> &&list) noexcept {
-    this->size = list.size;
-    this->head = list.head;
+    size = list.size;
+    head = list.head;
 }
 
 template<typename T>
@@ -48,13 +48,13 @@ set<T>::set(std::initializer_list<T> elems) : set() {
         }
 
         temp_node->set(el);
-        this->insert(temp_node);
+        insert(temp_node);
     }
 }
 
 template<typename T>
 set<T>::~set() {
-    this->clear();
+    clear();
 }
 
 // Modifiers
@@ -71,7 +71,7 @@ std::pair<set_iterator<T>, bool> set<T>::insert(const T &value) {
 
     temp_node->set(value);
 
-    return this->insert(temp_node);
+    return insert(temp_node);
 }
 
 template<typename T>
@@ -87,7 +87,7 @@ std::pair<set_iterator<T>, bool> set<T>::insert(T &&value) {
 
     temp_node->set(value);
 
-    return this->insert(temp_node);
+    return insert(temp_node);
 }
 
 template<typename T>
@@ -103,10 +103,10 @@ std::pair<set_iterator<T>, bool> set<T>::insert(const std::shared_ptr<set_node<T
 
     temp->set(node->get());
 
-    if (!this->size) {
-        this->head = temp;
-        this->tail = temp;
-        this->size++;
+    if (!size) {
+        head = temp;
+        tail = temp;
+        size++;
 
         return {set_iterator<T>(temp), true};
     }
@@ -118,7 +118,7 @@ std::pair<set_iterator<T>, bool> set<T>::insert(const std::shared_ptr<set_node<T
         head.get()->set_prev(temp);
         temp.get()->set_next(head);
         head = temp;
-        this->size++;
+        size++;
 
         return {set_iterator<T>(temp), true};
     }
@@ -130,12 +130,12 @@ std::pair<set_iterator<T>, bool> set<T>::insert(const std::shared_ptr<set_node<T
         temp.get()->set_prev(tail);
         tail.get()->set_next(temp);
         tail = temp;
-        this->size++;
+        size++;
 
         return {set_iterator<T>(temp), true};
     }
 
-    set_iterator<T> iter = ++(this->begin());
+    set_iterator<T> iter = ++(begin());
     while (*iter < temp.get()->get())
         ++iter;
 
@@ -167,7 +167,7 @@ void set<T>::insert(std::initializer_list<T> ilist) {
         }
 
         temp_node->set(el);
-        this->insert(temp_node);
+        insert(temp_node);
     }
 }
 
@@ -205,7 +205,7 @@ void set<T>::clear() {
         t.get()->set_prev(nullptr);
     }
 
-    this->size = 0;
+    size = 0;
 }
 
 // Capacity
@@ -240,19 +240,19 @@ const_set_iterator<T> set<T>::find(const T &val) const {
         if (val == *el)
             return const_set_iterator<T>(el);
 
-    return this->cend();
+    return cend();
 }
 
 // Non-member
 template<typename T>
 bool set<T>::operator==(const set<T> &list) const {
-    if (this->size != list.size)
+    if (size != list.size)
         return false;
 
-    auto fst = this->cbegin();
+    auto fst = cbegin();
     auto snd = list.cbegin();
 
-    for (; fst != this->cend() && snd != list.cend(); ++fst, ++snd)
+    for (; fst != cend() && snd != list.cend(); ++fst, ++snd)
         if (*fst != *snd)
             return false;
 
@@ -267,20 +267,20 @@ bool set<T>::operator!=(const set<T> &list) const {
 template<typename T>
 set<T> &set<T>::operator+=(set<T> &set) {
     for (auto &el : set)
-        this->insert(el);
+        insert(el);
 
     return *this;
 }
 
 template<typename T>
 set<T> &set<T>::operator+=(const T &data) {
-    this->insert(data);
+    insert(data);
     return *this;
 }
 
 template<typename T>
 set<T> &set<T>::operator+=(T &&data) {
-    this->insert(data);
+    insert(data);
     return *this;
 }
 
