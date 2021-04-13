@@ -22,11 +22,6 @@ set_iterator<T>::set_iterator(const set_iterator<T> &iterator) {
 }
 
 template<typename T>
-set_node<T> &set_iterator<T>::get_cur() {
-    return *this->cur.lock();
-}
-
-template<typename T>
 T *set_iterator<T>::operator->() {
     return &(this->cur.lock()->value());
 }

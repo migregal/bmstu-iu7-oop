@@ -88,19 +88,37 @@ TEST(InsertTest, MultipleRepeatedToNonEmpty) {
 TEST(EraseTest, Empty) {
     auto b = set<int>{};
     auto s = b.find(5);
-    EXPECT_EQ(b.erase(const_set_iterator<int>(s)), set_iterator<int>(nullptr));
+    EXPECT_EQ(b.erase(s), set_iterator<int>(nullptr));
 }
 
 TEST(EraseTest, NonEmptyIncorrect) {
     auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
     auto s = b.find(10);
-    EXPECT_EQ(b.erase(const_set_iterator<int>(s)), set_iterator<int>(nullptr));
+    EXPECT_EQ(b.erase(s), set_iterator<int>(nullptr));
 }
 
 TEST(EraseTest, NonEmptyCorrect) {
     auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
-    b.erase(const_set_iterator<int>(b.find(5)));
+    b.erase(b.find(5));
     EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 9, 12, 21}));
+}
+
+TEST(EraseTest, NonEmptyIncorrectList) {
+    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
+    b.erase(b.find(0), b.find(13));
+    EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 5, 9, 12, 21}));
+}
+
+TEST(EraseTest, NonEmptyPartialList) {
+    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
+    b.erase(b.find(4), b.find(13));
+    EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 5, 9, 12, 21}));
+}
+
+TEST(EraseTest, NonEmptyCorrectList) {
+    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
+    b.erase(b.find(5), b.find(12));
+    EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 12, 21}));
 }
 
 TEST(ClearTest, Empty) {

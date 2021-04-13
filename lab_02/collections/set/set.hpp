@@ -6,9 +6,8 @@
 #define LAB_02_SET_HPP
 
 
-#include <chrono>
 #include "set.h"
-
+#include <chrono>
 
 
 template<typename T>
@@ -189,6 +188,20 @@ set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
 
     --size;
     return set_iterator<T>(r);
+}
+
+template<typename T>
+set_iterator<T> set<T>::erase(const_set_iterator<T> first, const_set_iterator<T> last) {
+    if (!size)
+        return set_iterator<T>(nullptr);
+
+    if (cend() == first || cend() == last)
+        return set_iterator<T>(nullptr);
+
+    const_set_iterator<T> i;
+    for (i = first; i && i != last; i = erase(i)) {}
+
+    return set_iterator<T>(i.cur.lock());
 }
 
 template<typename T>

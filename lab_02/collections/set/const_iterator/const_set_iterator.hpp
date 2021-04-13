@@ -5,6 +5,8 @@
 #ifndef LAB_02_CONST_SET_ITERATOR_HPP
 #define LAB_02_CONST_SET_ITERATOR_HPP
 
+#include "const_set_iterator.h"
+
 template<typename T>
 const_set_iterator<T>::const_set_iterator() {
     this->cur.lock() = nullptr;
@@ -18,6 +20,11 @@ const_set_iterator<T>::const_set_iterator(const std::shared_ptr<set_node<T>> &no
 template<typename T>
 const_set_iterator<T>::const_set_iterator(const const_set_iterator<T> &iterator) {
     this->cur = iterator.cur.lock();
+}
+
+template<typename T>
+set_node<T> &const_set_iterator<T>::get_cur() {
+    return *this->cur.lock();
 }
 
 template<typename T>
@@ -42,7 +49,7 @@ const T &const_set_iterator<T>::operator*() const {
 
 template<typename T>
 const_set_iterator<T>::operator bool() const {
-    return nullptr == this->cur.lock();
+    return nullptr != this->cur.lock();
 }
 
 template<typename T>

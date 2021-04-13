@@ -12,8 +12,6 @@
 
 template<typename T>
 class set_iterator : public const_set_iterator<T> {
-    virtual set_node<T> &get_cur();
-
 public:
     set_iterator();
     explicit set_iterator(const std::shared_ptr<set_node<T>> &node);

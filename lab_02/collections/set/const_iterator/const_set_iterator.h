@@ -15,6 +15,8 @@ class const_set_iterator : std::iterator<std::input_iterator_tag, T> {
 protected:
     std::weak_ptr<set_node<T>> cur;
 
+    virtual set_node<T> &get_cur();
+
 public:
     const_set_iterator();
     explicit const_set_iterator(const std::shared_ptr<set_node<T>> &node);

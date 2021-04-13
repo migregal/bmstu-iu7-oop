@@ -35,6 +35,7 @@ public:
     void insert(std::initializer_list<T> ilist);
 
     set_iterator<T> erase(const_set_iterator<T> pos);
+    set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
 
     void clear() override;
 
