@@ -7,12 +7,10 @@
 
 
 #include <chrono>
-#include "set.h"
 
 
 template<typename T>
-set<T>::set(set<T> &list) {
-    set();
+set<T>::set(set<T> &list) : set() {
 
     for (auto el : list) {
         std::shared_ptr<set_node<T>> temp_node = nullptr;
@@ -36,9 +34,7 @@ set<T>::set(set<T> &&list) noexcept {
 }
 
 template<typename T>
-set<T>::set(std::initializer_list<T> elems) {
-    set();
-
+set<T>::set(std::initializer_list<T> elems) : set() {
     for (auto &el : elems) {
         std::shared_ptr<set_node<T>> temp_node = nullptr;
 
@@ -52,6 +48,11 @@ set<T>::set(std::initializer_list<T> elems) {
         temp_node->set(el);
         this->insert(temp_node);
     }
+}
+
+template<typename T>
+set<T>::~set() {
+    this->clear();
 }
 
 // Modifiers
@@ -101,37 +102,54 @@ std::pair<set_iterator<T>, bool> set<T>::insert(const std::shared_ptr<set_node<T
     temp->set(node->get());
 
     if (!this->size) {
-        temp.get()->set_next(nullptr);
         this->head = temp;
+        this->tail = temp;
         this->size++;
 
         return {set_iterator<T>(temp), true};
     }
 
-    set_iterator<T> iter = this->begin();
+    if (temp.get()->get() == head.get()->get())
+        return {set_iterator<T>(head), true};
 
-    if (*iter > temp.get()->get()) {
-        temp.get()->set_next(iter.get_cur());
-        this->head = temp;
+    if (temp.get()->get() < head.get()->get()) {
+        head.get()->set_prev(temp);
+        temp.get()->set_next(head);
+        head = temp;
         this->size++;
 
         return {set_iterator<T>(temp), true};
     }
 
-    set_iterator<T> prev = iter;
-    while (iter != this->end() && *iter < temp.get()->get()) {
-        prev = iter;
+    if (temp.get()->get() == tail.get()->get())
+        return {set_iterator<T>(tail), true};
+
+    if (temp.get()->get() > tail.get()->get()) {
+        temp.get()->set_prev(tail);
+        tail.get()->set_next(temp);
+        tail = temp;
+        this->size++;
+
+        return {set_iterator<T>(temp), true};
+    }
+
+    set_iterator<T> iter = ++(this->begin());
+    while (*iter < temp.get()->get())
         ++iter;
-    }
 
-    if (iter != this->end() && *iter == temp.get()->get())
-        return {{}, false};
+    if (*iter == temp.get()->get())
+        return {iter, false};
 
-    temp.get()->set_next(prev.get_cur().get_next());
-    prev.get_cur().set_next(temp);
-    this->size++;
+    auto t = iter;
 
-    return {set_iterator<T>(temp), true};
+    --t;
+    temp.get()->set_prev(t.get_cur());
+    temp.get()->set_next(iter.get_cur());
+    t.get_cur().set_next(*temp.get());
+    iter.get_cur().set_prev(*temp.get());
+    size++;
+
+    return {set_iterator<T>(temp), false};
 }
 
 template<typename T>
@@ -153,8 +171,19 @@ void set<T>::insert(std::initializer_list<T> ilist) {
 
 template<typename T>
 void set<T>::clear() {
-    while (this->size > 0 && this->size--)
-        this->head = this->head->get_next();
+    while (head) {
+        auto t = head;
+        head = head->get_next();
+        t.get()->set_next(nullptr);
+    }
+
+    while (tail) {
+        auto t = tail;
+        tail = tail->get_prev();
+        t.get()->set_prev(nullptr);
+    }
+
+    this->size = 0;
 }
 
 // Capacity
@@ -265,22 +294,22 @@ std::ostream &operator<<(std::ostream &os, set<T> &list) {
 // Iterators
 template<typename T>
 set_iterator<T> set<T>::begin() {
-    return set_iterator<T>(this->head);
+    return set_iterator<T>(head);
 }
 
 template<typename T>
 set_iterator<T> set<T>::end() {
-    return set_iterator<T>(nullptr);
+    return set_iterator<T>(tail ? tail.get()->get_next() : nullptr);
 }
 
 template<typename T>
 const_set_iterator<T> set<T>::cbegin() const {
-    return const_set_iterator<T>(this->head);
+    return const_set_iterator<T>(head);
 }
 
 template<typename T>
 const_set_iterator<T> set<T>::cend() const {
-    return const_set_iterator<T>(nullptr);
+    return const_set_iterator<T>(tail ? tail.get()->get_next() : nullptr);
 }
 
 #endif//LAB_02_SET_HPP

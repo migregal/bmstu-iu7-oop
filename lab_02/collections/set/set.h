@@ -16,6 +16,7 @@
 template<typename T>
 class set : public base_collection {
     std::shared_ptr<set_node<T>> head;
+    std::shared_ptr<set_node<T>> tail;
 
 protected:
     std::pair<set_iterator<T>, bool> insert(const std::shared_ptr<set_node<T>> &node);
@@ -26,7 +27,7 @@ public:
     set(set<T> &&list) noexcept;
     set(std::initializer_list<T> elems);
 
-    ~set() override = default;
+    ~set() override;
 
     // Modifiers
     std::pair<set_iterator<T>, bool> insert(const T &value);

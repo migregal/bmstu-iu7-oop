@@ -6,6 +6,8 @@
 #define LAB_02_SET_ITERATOR_HPP
 
 
+#include "set_iterator.h"
+
 template<typename T>
 set_iterator<T>::set_iterator() {
     this->cur.lock() = nullptr;
@@ -24,6 +26,11 @@ set_iterator<T>::set_iterator(const set_iterator<T> &iterator) {
 template<typename T>
 void set_iterator<T>::next() {
     this->cur = this->cur.lock()->get_next();
+}
+
+template<typename T>
+void set_iterator<T>::prev() {
+    this->cur = this->cur.lock()->get_prev();
 }
 
 template<typename T>
@@ -55,6 +62,12 @@ set_iterator<T> &set_iterator<T>::operator=(const set_iterator<T> &iterator) {
 template<typename T>
 set_iterator<T> &set_iterator<T>::operator++() {
     this->next();
+    return *this;
+}
+
+template<typename T>
+set_iterator<T> &set_iterator<T>::operator--() {
+    this->prev();
     return *this;
 }
 

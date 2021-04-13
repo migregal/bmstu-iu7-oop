@@ -26,6 +26,11 @@ void const_set_iterator<T>::next() {
 }
 
 template<typename T>
+void const_set_iterator<T>::prev() {
+    this->cur = this->cur.lock()->get_prev();
+}
+
+template<typename T>
 const T *const_set_iterator<T>::operator->() const {
     return this->cur.lock().get();
 }
@@ -49,6 +54,12 @@ const_set_iterator<T> &const_set_iterator<T>::operator=(const const_set_iterator
 template<typename T>
 const_set_iterator<T> &const_set_iterator<T>::operator++() {
     this->next();
+    return *this;
+}
+
+template<typename T>
+const_set_iterator<T> &const_set_iterator<T>::operator--() {
+    this->prev();
     return *this;
 }
 

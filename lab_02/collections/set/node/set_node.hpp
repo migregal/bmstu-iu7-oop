@@ -5,17 +5,15 @@
 #ifndef LAB_02_SET_NODE_HPP
 #define LAB_02_SET_NODE_HPP
 
-template<typename T>
-set_node<T>::set_node(const T &data) {
-    set_node<T>();
+#include "set_node.h"
 
+template<typename T>
+set_node<T>::set_node(const T &data) : set_node<T>() {
     this->data = data;
 }
 
 template<typename T>
-set_node<T>::set_node(std::shared_ptr<set_node<T>> &node) {
-    set_node<T>(node.data);
-
+set_node<T>::set_node(std::shared_ptr<set_node<T>> &node) : set_node<T>(node.data) {
     this->next = node.next;
 }
 
@@ -35,8 +33,19 @@ void set_node<T>::set_next(const std::shared_ptr<set_node<T>> &node) {
 }
 
 template<typename T>
+void set_node<T>::set_prev(const set_node<T> &node) {
+    this->prev = std::make_shared<set_node<T>>(node);
+}
+
+template<typename T>
+void set_node<T>::set_prev(const std::shared_ptr<set_node<T>> &node) {
+    this->prev = node;
+}
+
+template<typename T>
 void set_node<T>::set_null() {
     this->next = nullptr;
+    this->prev = nullptr;
 }
 
 template<typename T>
@@ -52,6 +61,11 @@ const T &set_node<T>::get() const {
 template<typename T>
 std::shared_ptr<set_node<T>> set_node<T>::get_next() const {
     return next;
+}
+
+template<typename T>
+std::shared_ptr<set_node<T>> set_node<T>::get_prev() const {
+    return prev;
 }
 
 template<typename T>

@@ -24,6 +24,7 @@ public:
     ~set_iterator() = default;
 
     virtual void next();
+    virtual void prev();
 
     T *operator->();
     T &operator*();
@@ -32,6 +33,7 @@ public:
 
     set_iterator<T> &operator=(const set_iterator<T> &iterator);
     set_iterator<T> &operator++();
+    set_iterator<T> &operator--();
 
     bool operator!=(const set_iterator<T> &iterator) const;
     bool operator==(const set_iterator<T> &iterator) const;
