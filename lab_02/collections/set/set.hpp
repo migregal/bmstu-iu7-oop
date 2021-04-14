@@ -251,10 +251,6 @@ namespace collections {
     }
 
     // Lookup
-    template<typename T>
-    size_t set<T>::count(const T &key) const {
-        return size;
-    }
 
     template<typename T>
     set_iterator<T> set<T>::find(const T &val) {

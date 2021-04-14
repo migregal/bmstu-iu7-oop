@@ -47,8 +47,6 @@ namespace collections {
         bool empty() const override;
 
         //Lookup
-        size_t count(const T &key) const;
-
         set_iterator<T> find(const T &val);
         const_set_iterator<T> find(const T &val) const;
 
