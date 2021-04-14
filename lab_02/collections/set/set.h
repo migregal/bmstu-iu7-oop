@@ -35,6 +35,7 @@ namespace collections {
         std::pair<set_iterator<T>, bool> insert(T &&value) noexcept(false);
         void insert(std::initializer_list<T> ilist) noexcept(false);
 
+        size_t erase(const T &value);
         set_iterator<T> erase(const_set_iterator<T> pos);
         set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
 

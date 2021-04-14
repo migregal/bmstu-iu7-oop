@@ -172,6 +172,17 @@ namespace collections {
     }
 
     template<typename T>
+    size_t set<T>::erase(const T &value) {
+        auto t = find(value);
+
+        if (!t)
+            return 0;
+
+        erase(t);
+        return 1;
+    }
+
+    template<typename T>
     set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
         if (!size) {
             auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
