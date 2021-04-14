@@ -23,7 +23,7 @@ namespace collections {
 
     template<typename T>
     void const_set_iterator<T>::set_cur(set_node<T> &node) {
-        this->cur = std::make_shared<set_node<T>>(node);
+        this->set_cur(node);
     }
 
     template<typename T>
@@ -48,12 +48,12 @@ namespace collections {
 
     template<typename T>
     const T *const_set_iterator<T>::operator->() const {
-        return this->cur.lock().get();
+        return get_cur().get();
     }
 
     template<typename T>
     const T &const_set_iterator<T>::operator*() const {
-        return this->cur.lock()->value();
+        return get_cur().value();
     }
 
     template<typename T>
