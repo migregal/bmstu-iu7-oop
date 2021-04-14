@@ -245,13 +245,7 @@ namespace collections {
         return size;
     }
 
-    template<typename T>
-    bool set<T>::empty() const {
-        return 0 == size;
-    }
-
     // Lookup
-
     template<typename T>
     const_set_iterator<T> set<T>::find(const T &val) const {
         for (auto el = cbegin(); el != cend(); ++el)

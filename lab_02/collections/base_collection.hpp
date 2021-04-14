@@ -12,9 +12,15 @@ protected:
     size_t size = 0;
 
 public:
-    virtual bool empty() const = 0;
+    virtual bool empty() const;
     virtual void clear() = 0;
-    virtual ~base_collection() = default;
+    virtual ~base_collection() = 0;
 };
+
+base_collection::~base_collection() = default;
+
+bool base_collection::empty() const {
+    return 0 == size;
+}
 
 #endif//LAB_02_BASE_COLLECTION_HPP

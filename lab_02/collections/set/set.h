@@ -44,8 +44,6 @@ namespace collections {
         // Capacity
         size_t get_size();
 
-        bool empty() const override;
-
         //Lookup
         const_set_iterator<T> find(const T &val) const;
 
