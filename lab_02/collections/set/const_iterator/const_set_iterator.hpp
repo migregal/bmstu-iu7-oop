@@ -22,18 +22,28 @@ namespace collections {
     }
 
     template<typename T>
+    void const_set_iterator<T>::set_cur(set_node<T> &node) {
+        this->cur = std::make_shared<set_node<T>>(node);
+    }
+
+    template<typename T>
     set_node<T> &const_set_iterator<T>::get_cur() {
         return *this->cur.lock();
     }
 
     template<typename T>
+    set_node<T> &const_set_iterator<T>::get_cur() const {
+        return *this->cur.lock();
+    }
+
+    template<typename T>
     void const_set_iterator<T>::next() {
-        this->cur = this->cur.lock()->get_next();
+        this->cur = get_cur().get_next();
     }
 
     template<typename T>
     void const_set_iterator<T>::prev() {
-        this->cur = this->cur.lock()->get_prev();
+        this->cur = get_cur().get_prev();
     }
 
     template<typename T>

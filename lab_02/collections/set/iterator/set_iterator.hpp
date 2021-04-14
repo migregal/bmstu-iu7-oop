@@ -23,12 +23,12 @@ namespace collections {
 
     template<typename T>
     T *set_iterator<T>::operator->() {
-        return &(this->cur.lock()->value());
+        return &(this->get_cur().get());
     }
 
     template<typename T>
     T &set_iterator<T>::operator*() {
-        return this->cur.lock()->value();
+        return this->get_cur().value();
     }
 
     template<typename T>

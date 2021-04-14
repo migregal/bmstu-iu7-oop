@@ -16,7 +16,9 @@ namespace collections {
     protected:
         std::weak_ptr<set_node<T>> cur;
 
+        virtual void set_cur(set_node<T> & node);
         virtual set_node<T> &get_cur();
+        virtual set_node<T> &get_cur() const;
 
     public:
         const_set_iterator();

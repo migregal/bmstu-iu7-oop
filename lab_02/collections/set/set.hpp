@@ -194,7 +194,7 @@ namespace collections {
             throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
         }
 
-        auto t = pos.cur.lock();
+        auto t = std::make_shared<set_node<T>>(pos.get_cur());
 
         t->get_prev()->set_next(t->get_next());
         t->get_next()->set_prev(t->get_prev());
@@ -221,7 +221,7 @@ namespace collections {
         const_set_iterator<T> i;
         for (i = first; i && i != last; i = erase(i)) {}
 
-        return set_iterator<T>(i.cur.lock());
+        return set_iterator<T>(std::make_shared<set_node<T>>(i.get_cur()));
     }
 
     template<typename T>
