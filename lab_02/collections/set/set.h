@@ -20,19 +20,19 @@ namespace collections {
         std::shared_ptr<set_node<T>> tail;
 
     protected:
-        std::pair<set_iterator<T>, bool> insert(const std::shared_ptr<set_node<T>> &node) noexcept(false);
+        bool insert(const std::shared_ptr<set_node<T>> &node) noexcept(false);
 
     public:
         set() = default;
-        set(set<T> &list) noexcept(false);
+        set(const set<T> &list) noexcept(false);
         set(set<T> &&list) noexcept;
         set(std::initializer_list<T> elems);
 
         ~set() override;
 
         // Modifiers
-        std::pair<set_iterator<T>, bool> insert(const T &value) noexcept(false);
-        std::pair<set_iterator<T>, bool> insert(T &&value) noexcept(false);
+        bool insert(const T &value) noexcept(false);
+        bool insert(T &&value) noexcept(false);
         void insert(std::initializer_list<T> ilist) noexcept(false);
 
         size_t erase(const T &value);
@@ -47,7 +47,6 @@ namespace collections {
         bool empty() const override;
 
         //Lookup
-        set_iterator<T> find(const T &val);
         const_set_iterator<T> find(const T &val) const;
 
         // Non-member
@@ -63,10 +62,8 @@ namespace collections {
         set<T> operator+(const T &data);
 
         // Iterators
-        set_iterator<T> begin();
         const_set_iterator<T> cbegin() const;
 
-        set_iterator<T> end();
         const_set_iterator<T> cend() const;
     };
 }// namespace collections
