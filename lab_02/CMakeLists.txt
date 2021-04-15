@@ -25,11 +25,6 @@ set(SET_NODE_SRC
         ${SET_NODE_DOMAIN}/set_node.hpp
         ${SET_NODE_DOMAIN}/set_node.h)
 
-set(SET_ITERATOR_DOMAIN ${SET_DOMAIN}/iterator)
-set(SET_ITERATOR_SRC
-        ${SET_ITERATOR_DOMAIN}/set_iterator.hpp
-        ${SET_ITERATOR_DOMAIN}/set_iterator.h)
-
 set(SET_CONST_ITERATOR_DOMAIN ${SET_DOMAIN}/const_iterator)
 set(SET_CONST_ITERATOR_SRC
         ${SET_CONST_ITERATOR_DOMAIN}/const_set_iterator.hpp
@@ -60,7 +55,6 @@ include_directories(
         ${COLLECTIONS_DOMAIN}
         ${SET_DOMAIN}
         ${SET_NODE_DOMAIN}
-        ${SET_ITERATOR_DOMAIN}
         ${SET_CONST_ITERATOR_DOMAIN}
         ${SET_TESTS_DOMAIN})
 

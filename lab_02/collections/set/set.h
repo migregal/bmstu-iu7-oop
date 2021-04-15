@@ -10,7 +10,6 @@
 
 #include <base_collection.hpp>
 #include <const_set_iterator.h>
-#include <set_iterator.h>
 #include <set_node.h>
 
 namespace collections {
@@ -36,8 +35,8 @@ namespace collections {
         void insert(std::initializer_list<T> ilist) noexcept(false);
 
         size_t erase(const T &value);
-        set_iterator<T> erase(const_set_iterator<T> pos);
-        set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
+        const_set_iterator<T> erase(const_set_iterator<T> pos);
+        const_set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
 
         void clear() override;
 

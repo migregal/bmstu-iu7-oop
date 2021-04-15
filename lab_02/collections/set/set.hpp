@@ -183,7 +183,7 @@ namespace collections {
     }
 
     template<typename T>
-    set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
+    const_set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
         if (!size) {
             auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
             throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
@@ -203,11 +203,11 @@ namespace collections {
         t->set_null();
 
         --size;
-        return set_iterator<T>(r);
+        return const_set_iterator<T>(r);
     }
 
     template<typename T>
-    set_iterator<T> set<T>::erase(const_set_iterator<T> first, const_set_iterator<T> last) {
+    const_set_iterator<T> set<T>::erase(const_set_iterator<T> first, const_set_iterator<T> last) {
         if (!size) {
             auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
             throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
@@ -221,7 +221,7 @@ namespace collections {
         const_set_iterator<T> i;
         for (i = first; i && i != last; i = erase(i)) {}
 
-        return set_iterator<T>(std::make_shared<set_node<T>>(i.get_cur()));
+        return i;
     }
 
     template<typename T>
