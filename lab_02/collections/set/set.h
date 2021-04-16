@@ -34,6 +34,10 @@ namespace collections {
         bool insert(T &&value) noexcept(false);
         void insert(std::initializer_list<T> ilist) noexcept(false);
 
+        set<T> intersect(set<T> &set);
+        set<T> intersect(T &data);
+        set<T> intersect(const T &data);
+
         set<T> combine(set<T> &set);
         set<T> combine(T &data);
         set<T> combine(const T &data);
@@ -63,6 +67,10 @@ namespace collections {
         set<T> operator+(set<T> &set);
         set<T> operator+(T &data);
         set<T> operator+(const T &data);
+
+        set<T> operator&(set<T> &set);
+        set<T> operator&(T &data);
+        set<T> operator&(const T &data);
 
         set<T> operator|(set<T> &set);
         set<T> operator|(T &data);

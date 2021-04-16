@@ -9,6 +9,8 @@
 #include <chrono>
 
 #include <errors.h>
+#include "set.h"
+
 
 
 namespace collections {
@@ -170,6 +172,21 @@ namespace collections {
             temp_node->set(el);
             insert(temp_node);
         }
+    }
+
+    template<typename T>
+    set<T> set<T>::intersect(set<T> &set) {
+        return *this & set;
+    }
+
+    template<typename T>
+    set<T> set<T>::intersect(T &data) {
+        return *this & data;
+    }
+
+    template<typename T>
+    set<T> set<T>::intersect(const T &data) {
+        return *this & data;
     }
 
     template<typename T>
@@ -359,6 +376,42 @@ namespace collections {
         set<T> s{*this};
         s += data;
         return s;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator&(collections::set<T> &data) {
+        set<T> res;
+
+        auto iter1 = this->cbegin(), iter2 = data.cbegin();
+        while (iter1 and iter2) {
+            if (*iter1 == *iter2) {
+                res.insert(*iter1);
+                ++iter1;
+                ++iter2;
+            } else if (*iter1 < *iter2) {
+                ++iter1;
+            } else {
+                ++iter2;
+            }
+        }
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator&(T &data) {
+        if (this->find(data))
+            return set<T>{data};
+
+        return set<T>();
+    }
+
+    template<typename T>
+    set<T> set<T>::operator&(const T &data) {
+        if (this->find(data))
+            return set<T>{data};
+
+        return set<T>();
     }
 
     template<typename T>

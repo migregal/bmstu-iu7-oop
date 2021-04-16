@@ -45,7 +45,8 @@ set(TESTS_SRC
         ${SET_TESTS_DOMAIN}/operators_tests.hpp
         ${SET_TESTS_DOMAIN}/search_tests.hpp
         ${SET_TESTS_DOMAIN}/lookup_tests.h
-        ${SET_TESTS_DOMAIN}/combining_tests.hpp)
+        ${SET_TESTS_DOMAIN}/combining_tests.hpp
+        ${SET_TESTS_DOMAIN}/intersection_tests.h)
 
 ##############
 #  Dir conf  #

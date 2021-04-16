@@ -12,6 +12,8 @@
 
 #include <insertion_tests.hpp>
 
+#include <intersection_tests.h>
+
 #include <combining_tests.hpp>
 
 #include <erase_tests.hpp>
