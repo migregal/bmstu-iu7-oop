@@ -16,6 +16,10 @@
 
 #include <combining_tests.hpp>
 
+#include <difference_tests.hpp>
+
+#include <symmetric_difference_tests.hpp>
+
 #include <erase_tests.hpp>
 
 #include <clear_tests.hpp>

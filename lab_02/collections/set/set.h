@@ -42,6 +42,14 @@ namespace collections {
         set<T> combine(T &data);
         set<T> combine(const T &data);
 
+        set<T> difference(set<T> &set);
+        set<T> difference(T &data);
+        set<T> difference(const T &data);
+
+        set<T> symmetric_difference(set<T> &set);
+        set<T> symmetric_difference(T &data);
+        set<T> symmetric_difference(const T &data);
+
         size_t erase(const T &value);
         const_set_iterator<T> erase(const_set_iterator<T> pos);
         const_set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
@@ -75,6 +83,14 @@ namespace collections {
         set<T> operator|(set<T> &set);
         set<T> operator|(T &data);
         set<T> operator|(const T &data);
+
+        set<T> operator-(set<T> &set);
+        set<T> operator-(T &data);
+        set<T> operator-(const T &data);
+
+        set<T> operator^(set<T> &set);
+        set<T> operator^(T &data);
+        set<T> operator^(const T &data);
 
         // Iterators
         const_set_iterator<T> cbegin() const;

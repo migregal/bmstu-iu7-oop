@@ -8,9 +8,8 @@
 
 #include <chrono>
 
-#include <errors.h>
 #include "set.h"
-
+#include <errors.h>
 
 
 namespace collections {
@@ -202,6 +201,35 @@ namespace collections {
     template<typename T>
     set<T> set<T>::combine(const T &data) {
         return *this | data;
+    }
+
+    template<typename T>
+    set<T> set<T>::difference(set<T> &set) {
+        return *this - set;
+    }
+
+    template<typename T>
+    set<T> set<T>::difference(T &data) {
+        return *this - data;
+    }
+    template<typename T>
+    set<T> set<T>::difference(const T &data) {
+        return *this - data;
+    }
+
+    template<typename T>
+    set<T> set<T>::symmetric_difference(set<T> &data) {
+        return *this ^ data;
+    }
+
+    template<typename T>
+    set<T> set<T>::symmetric_difference(T &data) {
+        return *this ^ data;
+    }
+
+    template<typename T>
+    set<T> set<T>::symmetric_difference(const T &data) {
+        return *this ^ data;
     }
 
     template<typename T>
@@ -427,6 +455,106 @@ namespace collections {
     template<typename T>
     set<T> set<T>::operator|(const T &data) {
         return *this + data;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator-(set<T> &data) {
+        set<T> res;
+
+        auto iter1 = this->cbegin(), iter2 = data.cbegin();
+        while (iter1 and iter2) {
+            if (*iter1 < *iter2) {
+                res.insert(*iter1);
+                ++iter1;
+                continue;
+            }
+
+            if (*iter2 < *iter1) {
+                ++iter2;
+                continue;
+            }
+
+            ++iter1;
+            ++iter2;
+        }
+
+        while (iter1) {
+            res.insert(*iter1);
+            ++iter1;
+        }
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator-(T &data) {
+        set<T> res;
+        res = *this;
+        res.erase(data);
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator-(const T &data) {
+        set<T> res;
+        res = *this;
+        res.erase(data);
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator^(collections::set<T> &data) {
+        set<T> res;
+
+        auto iter1 = this->cbegin(), iter2 = data.cbegin();
+        while (iter1 and iter2) {
+            if (*iter1 < *iter2) {
+                res.insert(*iter1);
+                ++iter1;
+                continue;
+            }
+
+            if (*iter2 < *iter1) {
+                res.insert(*iter2);
+                ++iter2;
+                continue;
+            }
+
+            ++iter1;
+            ++iter2;
+        }
+
+        while (iter1) {
+            res.insert(*iter1);
+            ++iter1;
+        }
+
+        while (iter2) {
+            res.insert(*iter2);
+            ++iter2;
+        }
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator^(T &data) {
+        set<T> res;
+        res = *this;
+        res.erase(data);
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator^(const T &data) {
+        set<T> res;
+        res = *this;
+        res.erase(data);
+
+        return res;
     }
 
     template<typename T>
