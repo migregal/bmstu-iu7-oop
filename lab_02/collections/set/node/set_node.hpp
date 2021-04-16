@@ -81,7 +81,7 @@ namespace collections {
 
     template<typename T>
     bool set_node<T>::operator<(const std::shared_ptr<set_node<T>> &node) const {
-        return this->data < node.lock().get()->data;
+        return this->data < node.lock()->data;
     }
 }// namespace collections
 

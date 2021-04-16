@@ -113,24 +113,24 @@ namespace collections {
             return true;
         }
 
-        if (temp.get()->get() == head.get()->get())
+        if (temp->get() == head->get())
             return false;
 
-        if (temp.get()->get() < head.get()->get()) {
-            head.get()->set_prev(temp);
-            temp.get()->set_next(head);
+        if (temp->get() < head->get()) {
+            head->set_prev(temp);
+            temp->set_next(head);
             head = temp;
             size++;
 
             return true;
         }
 
-        if (temp.get()->get() == tail.get()->get())
+        if (temp->get() == tail->get())
             return false;
 
-        if (temp.get()->get() > tail.get()->get()) {
-            temp.get()->set_prev(tail);
-            tail.get()->set_next(temp);
+        if (temp->get() > tail->get()) {
+            temp->set_prev(tail);
+            tail->set_next(temp);
             tail = temp;
             size++;
 
@@ -138,19 +138,19 @@ namespace collections {
         }
 
         const_set_iterator<T> iter = ++(cbegin());
-        while (*iter < temp.get()->get())
+        while (*iter < temp->get())
             ++iter;
 
-        if (*iter == temp.get()->get())
+        if (*iter == temp->get())
             return false;
 
         auto t = iter;
 
         --t;
-        temp.get()->set_prev(t.get_cur());
-        temp.get()->set_next(iter.get_cur());
-        t.get_cur().set_next(*temp.get());
-        iter.get_cur().set_prev(*temp.get());
+        temp->set_prev(t.get_cur());
+        temp->set_next(iter.get_cur());
+        t.get_cur().set_next(*temp);
+        iter.get_cur().set_prev(*temp);
         size++;
 
         return true;
@@ -290,11 +290,11 @@ namespace collections {
         while (head) {
             auto t = head;
             head = head->get_next();
-            t.get()->set_next(nullptr);
+            t->set_next(nullptr);
 
             t = tail;
             tail = tail->get_prev();
-            t.get()->set_prev(nullptr);
+            t->set_prev(nullptr);
         }
 
         size = 0;
@@ -581,7 +581,7 @@ namespace collections {
 
     template<typename T>
     const_set_iterator<T> set<T>::cend() const {
-        return const_set_iterator<T>(tail ? tail.get()->get_next() : nullptr);
+        return const_set_iterator<T>(tail ? tail->get_next() : nullptr);
     }
 }// namespace collections
 
