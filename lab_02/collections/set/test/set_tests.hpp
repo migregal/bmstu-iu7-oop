@@ -7,12 +7,21 @@
 
 
 #include <constructor_tests.hpp>
+
 #include <equality_tests.hpp>
+
 #include <insertion_tests.hpp>
+
+#include <combining_tests.hpp>
+
 #include <erase_tests.hpp>
+
 #include <clear_tests.hpp>
+
 #include <lookup_tests.h>
+
 #include <operators_tests.hpp>
+
 #include <search_tests.hpp>
 
 

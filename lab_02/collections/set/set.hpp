@@ -10,6 +10,7 @@
 
 #include <errors.h>
 
+
 namespace collections {
     template<typename T>
     set<T>::set(const set<T> &list) : set() {
@@ -169,6 +170,21 @@ namespace collections {
             temp_node->set(el);
             insert(temp_node);
         }
+    }
+
+    template<typename T>
+    set<T> set<T>::combine(set<T> &set) {
+        return *this | set;
+    }
+
+    template<typename T>
+    set<T> set<T>::combine(T &data) {
+        return *this | data;
+    }
+
+    template<typename T>
+    set<T> set<T>::combine(const T &data) {
+        return *this | data;
     }
 
     template<typename T>
@@ -343,6 +359,21 @@ namespace collections {
         set<T> s{*this};
         s += data;
         return s;
+    }
+
+    template<typename T>
+    set<T> collections::set<T>::operator|(collections::set<T> &set) {
+        return *this + set;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator|(T &data) {
+        return *this + data;
+    }
+
+    template<typename T>
+    set<T> set<T>::operator|(const T &data) {
+        return *this + data;
     }
 
     template<typename T>

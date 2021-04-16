@@ -34,6 +34,10 @@ namespace collections {
         bool insert(T &&value) noexcept(false);
         void insert(std::initializer_list<T> ilist) noexcept(false);
 
+        set<T> combine(set<T> &set);
+        set<T> combine(T &data);
+        set<T> combine(const T &data);
+
         size_t erase(const T &value);
         const_set_iterator<T> erase(const_set_iterator<T> pos);
         const_set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
@@ -59,6 +63,10 @@ namespace collections {
         set<T> operator+(set<T> &set);
         set<T> operator+(T &data);
         set<T> operator+(const T &data);
+
+        set<T> operator|(set<T> &set);
+        set<T> operator|(T &data);
+        set<T> operator|(const T &data);
 
         // Iterators
         const_set_iterator<T> cbegin() const;
