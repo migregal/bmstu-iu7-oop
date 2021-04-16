@@ -10,6 +10,21 @@
 
 using namespace collections;
 
+TEST(OperatorsTest, Assigment) {
+    auto a = set<int>{1, 2, 3, 4};
+    auto b = a;
+    EXPECT_EQ(b, a);
+}
+
+TEST(OperatorsTest, AssigmentClearing) {
+    auto a = set<int>{1, 2, 3, 4};
+    set<int> b;
+    b = a;
+    b.clear();
+    EXPECT_EQ(b, set<int>());
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4}));
+}
+
 TEST(OperatorsTest, AddConst) {
     auto a = set<int>{1, 2, 3, 4};
     a += 10;

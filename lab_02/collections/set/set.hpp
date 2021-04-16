@@ -257,6 +257,34 @@ namespace collections {
 
     // Non-member
     template<typename T>
+    set<T> &set<T>::operator=(const set<T> &list) {
+        if (&list == this)
+            return *this;
+
+        this->clear();
+
+        size = 0;
+        head = nullptr;
+        tail = nullptr;
+
+        for (auto iter = list.cbegin(); list.cend() != iter; ++iter) {
+            std::shared_ptr<set_node<T>> temp_node = nullptr;
+
+            try {
+                temp_node = std::shared_ptr<set_node<T>>(new set_node<T>);
+            } catch (std::bad_alloc &error) {
+                auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+                throw bad_alloc_err(ctime(&t), __FILE__, typeid(list).name(), __FUNCTION__);
+            }
+
+            temp_node->set(*iter);
+            insert(temp_node);
+        }
+
+        return *this;
+    }
+
+    template<typename T>
     bool set<T>::operator==(const set<T> &list) const {
         if (size != list.size)
             return false;
@@ -319,8 +347,16 @@ namespace collections {
 
     template<typename T>
     std::ostream &operator<<(std::ostream &os, set<T> &list) {
-        for (const auto &el : list)
-            os << el << " ";
+        for (auto el = list.cbegin(); el != list.cend(); ++el)
+            os << *el << " ";
+
+        return os;
+    }
+
+    template<typename T>
+    std::ostream &operator<<(std::ostream &os, const set<T> &list) {
+        for (auto el = list.cbegin(); el != list.cend(); ++el)
+            os << *el << " ";
 
         return os;
     }
