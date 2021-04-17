@@ -15,12 +15,6 @@
 namespace collections {
     template<typename T>
     class set : public base_collection {
-        std::shared_ptr<set_node<T>> head;
-        std::shared_ptr<set_node<T>> tail;
-
-    protected:
-        bool insert(const std::shared_ptr<set_node<T>> &node) noexcept(false);
-
     public:
         set() = default;
         set(const set<T> &list) noexcept(false);
@@ -112,6 +106,13 @@ namespace collections {
         const_set_iterator<T> cbegin() const;
 
         const_set_iterator<T> cend() const;
+
+    protected:
+        bool insert(const std::shared_ptr<set_node<T>> &node) noexcept(false);
+
+    private:
+        std::shared_ptr<set_node<T>> head;
+        std::shared_ptr<set_node<T>> tail;
     };
 }// namespace collections
 

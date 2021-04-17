@@ -13,13 +13,6 @@
 namespace collections {
     template<typename T>
     class const_set_iterator : std::iterator<std::input_iterator_tag, T> {
-    protected:
-        std::weak_ptr<set_node<T>> cur;
-
-        virtual void set_cur(set_node<T> & node);
-        virtual set_node<T> &get_cur();
-        virtual set_node<T> &get_cur() const;
-
     public:
         const_set_iterator();
         explicit const_set_iterator(const std::shared_ptr<set_node<T>> &node);
@@ -47,6 +40,14 @@ namespace collections {
 
         template<typename U>
         friend class set;
+
+    protected:
+        virtual void set_cur(set_node<T> & node);
+        virtual set_node<T> &get_cur();
+        virtual set_node<T> &get_cur() const;
+
+    private:
+        std::weak_ptr<set_node<T>> cur;
     };
 }// namespace collections
 

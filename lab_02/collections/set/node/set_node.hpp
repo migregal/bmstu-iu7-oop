@@ -5,7 +5,6 @@
 #ifndef LAB_02_SET_NODE_HPP
 #define LAB_02_SET_NODE_HPP
 
-#include "set_node.h"
 
 namespace collections {
     template<typename T>
@@ -21,6 +20,17 @@ namespace collections {
     template<typename T>
     void set_node<T>::set(const T &value) {
         data = value;
+    }
+
+    template<typename T>
+    void set_node<T>::exclude() {
+        if (next)
+            next->prev = prev;
+
+        if (prev)
+            prev->next = next;
+
+        set_null();
     }
 
     template<typename T>

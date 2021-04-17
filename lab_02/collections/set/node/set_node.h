@@ -22,6 +22,9 @@ namespace collections {
 
         void set(const T &value);
 
+        void insert_before(std::shared_ptr<set_node<T>> node);
+        void exclude();
+
         void set_next(const set_node<T> &node);
         void set_next(const std::shared_ptr<set_node<T>> &node);
 

@@ -5,8 +5,6 @@
 #ifndef LAB_02_CONST_SET_ITERATOR_HPP
 #define LAB_02_CONST_SET_ITERATOR_HPP
 
-#include "const_set_iterator.h"
-
 namespace collections {
     template<typename T>
     const_set_iterator<T>::const_set_iterator() {

@@ -8,7 +8,6 @@
 
 #include <chrono>
 
-#include "set.h"
 #include <errors.h>
 
 
@@ -258,14 +257,8 @@ namespace collections {
         if (head->get() == t->get())
             head = t->get_next();
 
-        if (t->get_next())
-            t->get_next()->set_prev(t->get_prev());
-
-        if (t->get_prev())
-            t->get_prev()->set_next(t->get_next());
-
         auto r = t->get_next();
-        t->set_null();
+        t->exclude();
 
         --size;
         return const_set_iterator<T>(r);
@@ -626,28 +619,29 @@ namespace collections {
     }
 
     template<typename T>
-    collections::set<T> &collections::set<T>::operator-=(collections::set<T> &set) {
-        for (auto i = set.cbegin(); set.cend() != i; erase(*i), ++i);
+    set<T> &set<T>::operator-=(set<T> &set) {
+        for (auto i = set.cbegin(); set.cend() != i; erase(*i), ++i)
+            ;
 
         return *this;
     }
 
     template<typename T>
-    collections::set<T> &collections::set<T>::operator-=(const T &data) {
+    set<T> &set<T>::operator-=(const T &data) {
         erase(data);
 
         return *this;
     }
 
     template<typename T>
-    collections::set<T> &collections::set<T>::operator-=(T &&data) {
+    set<T> &set<T>::operator-=(T &&data) {
         erase(data);
 
         return *this;
     }
 
     template<typename T>
-    collections::set<T> &collections::set<T>::operator^=(collections::set<T> &list) {
+    set<T> &set<T>::operator^=(set<T> &list) {
         set<T> temp = *this ^ list;
 
         clear();
@@ -658,7 +652,7 @@ namespace collections {
     }
 
     template<typename T>
-    collections::set<T> &collections::set<T>::operator^=(const T &data) {
+    set<T> &set<T>::operator^=(const T &data) {
         if (!find(data))
             insert(data);
         else
@@ -668,7 +662,7 @@ namespace collections {
     }
 
     template<typename T>
-    collections::set<T> &collections::set<T>::operator^=(T &&data) {
+    set<T> &set<T>::operator^=(T &&data) {
         if (!find(data))
             insert(data);
         else
