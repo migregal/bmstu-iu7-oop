@@ -55,16 +55,4 @@ public:
     }
 };
 
-class size_error : base_err {
-public:
-    size_error(const str &time, const str &filename, const str &classname, const str &method) : base_err(time, filename, classname, method){};
-
-    const char *what() const noexcept override {
-        std::string message = "\nERROR: Set is empty. " + error_info;
-        char *cmessage = new char[1 + message.size()];
-        std::strcpy(cmessage, message.c_str());
-        return cmessage;
-    }
-};
-
 #endif//LAB_02_ERRORS_H
