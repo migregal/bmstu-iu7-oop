@@ -245,20 +245,24 @@ namespace collections {
 
     template<typename T>
     const_set_iterator<T> set<T>::erase(const_set_iterator<T> pos) {
-        if (!size) {
-            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
-        }
+        if (!size)
+            return cend();
 
-        if (cend() == pos) {
+        if (!pos) {
             auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
             throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
         }
 
         auto t = std::make_shared<set_node<T>>(pos.get_cur());
 
-        t->get_prev()->set_next(t->get_next());
-        t->get_next()->set_prev(t->get_prev());
+        if (head->get() == t->get())
+            head = t->get_next();
+
+        if (t->get_next())
+            t->get_next()->set_prev(t->get_prev());
+
+        if (t->get_prev())
+            t->get_prev()->set_next(t->get_next());
 
         auto r = t->get_next();
         t->set_null();
@@ -269,11 +273,6 @@ namespace collections {
 
     template<typename T>
     const_set_iterator<T> set<T>::erase(const_set_iterator<T> first, const_set_iterator<T> last) {
-        if (!size) {
-            auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            throw size_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
-        }
-
         if (cend() == first || cend() == last) {
             auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
             throw iterator_error(ctime(&t), __FILE__, typeid(set).name(), __FUNCTION__);
@@ -287,6 +286,7 @@ namespace collections {
 
     template<typename T>
     void set<T>::clear() {
+        auto r = this;
         while (head) {
             auto t = head;
             head = head->get_next();
@@ -366,26 +366,6 @@ namespace collections {
     }
 
     template<typename T>
-    set<T> &set<T>::operator+=(set<T> &list) {
-        for (auto iter = list.cbegin(); list.cend() != iter; ++iter)
-            insert(*iter);
-
-        return *this;
-    }
-
-    template<typename T>
-    set<T> &set<T>::operator+=(const T &data) {
-        insert(data);
-        return *this;
-    }
-
-    template<typename T>
-    set<T> &set<T>::operator+=(T &&data) {
-        insert(data);
-        return *this;
-    }
-
-    template<typename T>
     set<T> set<T>::operator+(set<T> &ds) {
         set<T> s{*this};
         s += ds;
@@ -407,7 +387,7 @@ namespace collections {
     }
 
     template<typename T>
-    set<T> set<T>::operator&(collections::set<T> &data) {
+    set<T> set<T>::operator&(set<T> &data) {
         set<T> res;
 
         auto iter1 = this->cbegin(), iter2 = data.cbegin();
@@ -443,7 +423,7 @@ namespace collections {
     }
 
     template<typename T>
-    set<T> collections::set<T>::operator|(collections::set<T> &set) {
+    set<T> set<T>::operator|(set<T> &set) {
         return *this + set;
     }
 
@@ -505,7 +485,7 @@ namespace collections {
     }
 
     template<typename T>
-    set<T> set<T>::operator^(collections::set<T> &data) {
+    set<T> set<T>::operator^(set<T> &data) {
         set<T> res;
 
         auto iter1 = this->cbegin(), iter2 = data.cbegin();
@@ -555,6 +535,149 @@ namespace collections {
         res.erase(data);
 
         return res;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator+=(set<T> &list) {
+        for (auto iter = list.cbegin(); list.cend() != iter; ++iter)
+            insert(*iter);
+
+        return *this;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator+=(const T &data) {
+        insert(data);
+        return *this;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator+=(T &&data) {
+        insert(data);
+        return *this;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator&=(set<T> &list) {
+        set<T> res;
+
+        for (auto i = this->cbegin(), j = list.cbegin(); i && j;) {
+            if (*i == *j) {
+                res.insert(*i);
+                ++i;
+                ++j;
+            } else if (*i < *j) {
+                ++i;
+            } else {
+                ++j;
+            }
+        }
+
+        this->clear();
+
+        for (auto i = res.cbegin(); i && (res.cend() != i); ++i)
+            insert(*i);
+
+        return *this;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator&=(T &data) {
+        if (!find(data)) {
+            clear();
+        } else {
+            clear();
+            insert(data);
+        }
+
+        return *this;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator&=(const T &data) {
+        if (!find(data)) {
+            clear();
+        } else {
+            clear();
+            insert(data);
+        }
+
+        return *this;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator|=(set<T> &set) {
+        *this += set;
+
+        return *this;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator|=(T &data) {
+        *this += data;
+
+        return *this;
+    }
+
+    template<typename T>
+    set<T> &set<T>::operator|=(const T &data) {
+        *this += data;
+
+        return *this;
+    }
+
+    template<typename T>
+    collections::set<T> &collections::set<T>::operator-=(collections::set<T> &set) {
+        for (auto i = set.cbegin(); set.cend() != i; erase(*i), ++i);
+
+        return *this;
+    }
+
+    template<typename T>
+    collections::set<T> &collections::set<T>::operator-=(const T &data) {
+        erase(data);
+
+        return *this;
+    }
+
+    template<typename T>
+    collections::set<T> &collections::set<T>::operator-=(T &&data) {
+        erase(data);
+
+        return *this;
+    }
+
+    template<typename T>
+    collections::set<T> &collections::set<T>::operator^=(collections::set<T> &list) {
+        set<T> temp = *this ^ list;
+
+        clear();
+        for (auto i = temp.cbegin(); i != temp.cend(); ++i)
+            insert(*i);
+
+        return *this;
+    }
+    template<typename T>
+    collections::set<T> &collections::set<T>::operator^=(const T &data) {
+        if (!find(data)) {
+            clear();
+        } else {
+            clear();
+            insert(data);
+        }
+
+        return *this;
+    }
+    template<typename T>
+    collections::set<T> &collections::set<T>::operator^=(T &&data) {
+        if (!find(data)) {
+            clear();
+        } else {
+            clear();
+            insert(data);
+        }
+
+        return *this;
     }
 
     template<typename T>

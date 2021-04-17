@@ -68,10 +68,6 @@ namespace collections {
         bool operator==(const set<T> &list) const;
         bool operator!=(const set<T> &list) const;
 
-        set<T> &operator+=(set<T> &set);
-        set<T> &operator+=(const T &data);
-        set<T> &operator+=(T &&data);
-
         set<T> operator+(set<T> &set);
         set<T> operator+(T &data);
         set<T> operator+(const T &data);
@@ -91,6 +87,26 @@ namespace collections {
         set<T> operator^(set<T> &set);
         set<T> operator^(T &data);
         set<T> operator^(const T &data);
+
+        set<T> &operator+=(set<T> &set);
+        set<T> &operator+=(const T &data);
+        set<T> &operator+=(T &&data);
+
+        set<T> &operator&=(set<T> &set);
+        set<T> &operator&=(T &data);
+        set<T> &operator&=(const T &data);
+
+        set<T> &operator|=(set<T> &set);
+        set<T> &operator|=(T &data);
+        set<T> &operator|=(const T &data);
+
+        set<T> &operator-=(set<T> &set);
+        set<T> &operator-=(const T &data);
+        set<T> &operator-=(T &&data);
+
+        set<T> &operator^=(set<T> &set);
+        set<T> &operator^=(const T &data);
+        set<T> &operator^=(T &&data);
 
         // Iterators
         const_set_iterator<T> cbegin() const;
