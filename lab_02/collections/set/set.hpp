@@ -286,7 +286,6 @@ namespace collections {
 
     template<typename T>
     void set<T>::clear() {
-        auto r = this;
         while (head) {
             auto t = head;
             head = head->get_next();
