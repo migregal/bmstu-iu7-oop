@@ -648,12 +648,11 @@ namespace collections {
 
     template<typename T>
     collections::set<T> &collections::set<T>::operator^=(collections::set<T> &list) {
-        for (auto i = list.cbegin(); i != list.cend(); ++i) {
-            if (!find(*i))
-                insert(*i);
-            else
-                erase(*i);
-        }
+        set<T> temp = *this ^ list;
+
+        clear();
+        for (auto i = temp.cbegin(); i != temp.cend(); ++i)
+            insert(*i);
 
         return *this;
     }
