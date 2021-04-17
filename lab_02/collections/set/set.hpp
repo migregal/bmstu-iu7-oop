@@ -648,33 +648,32 @@ namespace collections {
 
     template<typename T>
     collections::set<T> &collections::set<T>::operator^=(collections::set<T> &list) {
-        set<T> temp = *this ^ list;
-
-        clear();
-        for (auto i = temp.cbegin(); i != temp.cend(); ++i)
-            insert(*i);
+        for (auto i = list.cbegin(); i != list.cend(); ++i) {
+            if (!find(*i))
+                insert(*i);
+            else
+                erase(*i);
+        }
 
         return *this;
     }
+
     template<typename T>
     collections::set<T> &collections::set<T>::operator^=(const T &data) {
-        if (!find(data)) {
-            clear();
-        } else {
-            clear();
+        if (!find(data))
             insert(data);
-        }
+        else
+            erase(data);
 
         return *this;
     }
+
     template<typename T>
     collections::set<T> &collections::set<T>::operator^=(T &&data) {
-        if (!find(data)) {
-            clear();
-        } else {
-            clear();
+        if (!find(data))
             insert(data);
-        }
+        else
+            erase(data);
 
         return *this;
     }
