@@ -50,5 +50,25 @@ TEST(CombineTest, EmptyWithSetOperator) {
     EXPECT_EQ(t, (set<int>{1, 2, 3, 4}));
 }
 
+TEST(CombineTest, EmptyWithConstOperator2) {
+    auto a = set<int>();
+    a |= 6;
+    EXPECT_EQ(a, (set<int>{6}));
+}
+
+TEST(CombineTest, EmptyWithVariableOperator2) {
+    auto a = set<int>();
+    auto v = 6;
+    a |= v;
+    EXPECT_EQ(a, (set<int>{6}));
+}
+
+TEST(CombineTest, EmptyWithSetOperator2) {
+    auto a = set<int>();
+    auto b = set<int>{1, 2, 3, 4};
+    a |= b;
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4}));
+}
+
 
 #endif//LAB_02_COMBINING_TESTS_HPP

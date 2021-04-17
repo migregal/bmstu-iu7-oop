@@ -75,7 +75,7 @@ TEST(IntersectionTest, NonAndEmptySetOperator) {
 
 TEST(IntersectionTest, NonEmptySetOperator) {
     auto a = set<int>{1, 2, 3, 4, 5};
-    auto b = set<int>{3, 4, 5, 6, 7};
+    auto b = set<int>{0, 3, 4, 5, 6, 7};
     EXPECT_EQ(a & b, (set<int>{3, 4, 5}));
 }
 
@@ -88,6 +88,40 @@ TEST(IntersectionTest, NonEmptyAndVariableOperator) {
     auto a = set<int>{1, 2, 3, 4, 5};
     auto v = 5;
     EXPECT_EQ(a & v, (set<int>{5}));
+}
+
+TEST(IntersectionTest, EmptySetAndConstOperator2) {
+    auto a = set<int>();
+    EXPECT_EQ(a &= 5, (set<int>()));
+}
+
+TEST(IntersectionTest, EmptySetsAndVariableOperator2) {
+    auto a = set<int>();
+    auto v = 5;
+    EXPECT_EQ(a &= v, (set<int>()));
+}
+
+TEST(IntersectionTest, NonAndEmptySetOperator2) {
+    auto a = set<int>{1, 2, 3, 4, 5};
+    auto b = set<int>();
+    EXPECT_EQ(a &= b, (set<int>()));
+}
+
+TEST(IntersectionTest, NonEmptySetOperator2) {
+    auto a = set<int>{1, 2, 3, 4, 5};
+    auto b = set<int>{0, 3, 4, 5, 6, 7};
+    EXPECT_EQ(a &= b, (set<int>{3, 4, 5}));
+}
+
+TEST(IntersectionTest, NonEmptyAndConstOperator2) {
+    auto a = set<int>{1, 2, 3, 4, 5};
+    EXPECT_EQ(a &= 5, (set<int>{5}));
+}
+
+TEST(IntersectionTest, NonEmptyAndVariableOperator2) {
+    auto a = set<int>{1, 2, 3, 4, 5};
+    auto v = 5;
+    EXPECT_EQ(a &= v, (set<int>{5}));
 }
 
 #endif//LAB_02_INTERSECTION_TESTS_H

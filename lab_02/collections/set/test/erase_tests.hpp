@@ -13,7 +13,7 @@ using namespace collections;
 
 TEST(EraseTest, Empty) {
     auto b = set<int>{};
-    EXPECT_THROW(b.erase(b.find(5)), size_error);
+    EXPECT_EQ(b.erase(b.find(5)), b.cend());
 }
 
 TEST(EraseTest, NonEmptyIncorrect) {
@@ -42,7 +42,7 @@ TEST(EraseTest, NonEmptyCorrectConst) {
 
 TEST(EraseTest, EmptyIncorrectList) {
     set<int> b;
-    EXPECT_THROW(b.erase(b.find(0), b.find(13)), size_error);
+    EXPECT_THROW(b.erase(b.find(0), b.find(13)), iterator_error);
 }
 
 TEST(EraseTest, NonEmptyIncorrectList) {

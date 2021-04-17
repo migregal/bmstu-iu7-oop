@@ -16,6 +16,12 @@ TEST(OperatorsTest, Assigment) {
     EXPECT_EQ(b, a);
 }
 
+TEST(OperatorsTest, SelfAssigment) {
+    auto a = set<int>{1, 2, 3, 4};
+    a = a;
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4}));
+}
+
 TEST(OperatorsTest, AssigmentClearing) {
     auto a = set<int>{1, 2, 3, 4};
     set<int> b;
@@ -61,6 +67,34 @@ TEST(OperatorsTest, SumVariable) {
     auto a = set<int>{1, 2, 3, 4};
     auto val = 10;
     EXPECT_EQ(a + val++ + val, (set<int>{1, 2, 3, 4, 10, 11}));
+}
+
+TEST(OperatorsTest, StringifyEmpty) {
+    auto a = set<int>();
+    std::ostringstream ss;
+    ss << a;
+    EXPECT_EQ(ss.str(), "");
+}
+
+TEST(OperatorsTest, StringifyConstEmpty) {
+    const auto a = set<int>();
+    std::ostringstream ss;
+    ss << a;
+    EXPECT_EQ(ss.str(), "");
+}
+
+TEST(OperatorsTest, Stringify) {
+    auto a = set<int>{1, 2, 3, 4};
+    std::ostringstream ss;
+    ss << a;
+    EXPECT_EQ(ss.str(), "1 2 3 4 ");
+}
+
+TEST(OperatorsTest, StringifyConst) {
+    const auto a = set<int>{1, 2, 3, 4};
+    std::ostringstream ss;
+    ss << a;
+    EXPECT_EQ(ss.str(), "1 2 3 4 ");
 }
 
 #endif//LAB_02_OPERATORS_TESTS_HPP
