@@ -5,6 +5,8 @@
 #ifndef LAB_02_CONST_SET_ITERATOR_HPP
 #define LAB_02_CONST_SET_ITERATOR_HPP
 
+#include "const_set_iterator.h"
+
 namespace collections {
     template<typename T>
     const_set_iterator<T>::const_set_iterator() {
@@ -74,9 +76,25 @@ namespace collections {
     }
 
     template<typename T>
+    const collections::const_set_iterator<T> collections::const_set_iterator<T>::operator++(int) {
+        auto t = *this;
+        this->next();
+
+        return t;
+    }
+
+    template<typename T>
     const_set_iterator<T> &const_set_iterator<T>::operator--() {
         this->prev();
         return *this;
+    }
+
+    template<typename T>
+    const const_set_iterator<T> collections::const_set_iterator<T>::operator--(int) {
+        auto t = *this;
+        this->prev();
+
+        return t;
     }
 
     template<typename T>

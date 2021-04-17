@@ -36,8 +36,11 @@ namespace collections {
         explicit operator bool() const;
 
         const_set_iterator<T> &operator=(const const_set_iterator<T> &iterator);
+
         virtual const_set_iterator<T> &operator++();
+        virtual const const_set_iterator<T> operator++(int);
         virtual const_set_iterator<T> &operator--();
+        virtual const const_set_iterator<T> operator--(int);
 
         bool operator!=(const const_set_iterator<T> &iterator) const;
         bool operator==(const const_set_iterator<T> &iterator) const;
