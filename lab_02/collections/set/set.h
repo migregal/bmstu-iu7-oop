@@ -83,7 +83,7 @@ namespace collections {
         const_set_iterator<T> find(const T &val) const;
 
         // Non-member
-        set<T> &operator=(const set<T> &list);
+        set<T> &operator=(const set<T> &list) noexcept(false);
         set<T> &operator=(set<T> &&list) noexcept;
 
         bool operator==(const set<T> &list) const;
