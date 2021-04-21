@@ -27,6 +27,7 @@ namespace collections {
         bool append(const T &value) noexcept(false);
         bool append(T &&value) noexcept(false);
         void append(std::initializer_list<T> ilist) noexcept(false);
+        void append(T *ilist, size_t len) noexcept(false);
 
         set<T> operator+(const set<T> &set);
         set<T> operator+(const T &data);

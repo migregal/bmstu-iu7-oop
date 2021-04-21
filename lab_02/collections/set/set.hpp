@@ -142,6 +142,12 @@ namespace collections {
     }
 
     template<typename T>
+    void collections::set<T>::append(T *ilist, size_t len) noexcept(false) {
+        for (size_t i = 0; i < len; ++i)
+            append(ilist[i]);
+    }
+
+    template<typename T>
     set<T> set<T>::intersect(const set<T> &set) {
         return *this & set;
     }
