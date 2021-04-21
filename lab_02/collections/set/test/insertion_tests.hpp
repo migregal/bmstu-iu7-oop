@@ -48,4 +48,14 @@ TEST(InsertTest, MultipleRepeatedToNonEmpty) {
     EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 9, 12, 21}));
 }
 
+TEST(InsertTest, MultipleRepeatedArrayToNonEmpty) {
+    auto a = set<int>{1, 2, 3, 4, 5};
+
+    int * b = new int[13]{3, 3, 3, 4, 4, 4, 4, 1, 2, 3, 9, 12, 21};
+    a.append(b, 13);
+    delete[] b;
+
+    EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 9, 12, 21}));
+}
+
 #endif//LAB_02_INSERTION_TESTS_HPP
