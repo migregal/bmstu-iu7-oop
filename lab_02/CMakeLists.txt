@@ -49,7 +49,8 @@ set(TESTS_SRC
         ${SET_TESTS_DOMAIN}/combining_tests.hpp
         ${SET_TESTS_DOMAIN}/intersection_tests.h
         ${SET_TESTS_DOMAIN}/difference_tests.hpp
-        ${SET_TESTS_DOMAIN}/symmetric_difference_tests.hpp)
+        ${SET_TESTS_DOMAIN}/symmetric_difference_tests.hpp
+        ${SET_TESTS_DOMAIN}/update_tests.hpp)
 
 ##############
 #  Dir conf  #

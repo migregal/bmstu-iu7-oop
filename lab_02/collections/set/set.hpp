@@ -148,6 +148,44 @@ namespace collections {
     }
 
     template<typename T>
+    set<T> set<T>::update(const T &value) {
+        set<int> res(*this);
+
+        res.append(value);
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> set<T>::update(T &&value) {
+        set<int> res(*this);
+
+        res.append(value);
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> set<T>::update(std::initializer_list<T> ilist) {
+        set<int> res(*this);
+
+        for (auto &el : ilist)
+            res.append(el);
+
+        return res;
+    }
+
+    template<typename T>
+    set<T> collections::set<T>::update(T *ilist, size_t len) noexcept(false) {
+        set<int> res(*this);
+
+        for (size_t i = 0; i < len; ++i)
+            res.append(ilist[i]);
+
+        return res;
+    }
+
+    template<typename T>
     set<T> set<T>::intersect(const set<T> &set) {
         return *this & set;
     }

@@ -30,5 +30,6 @@
 
 #include <search_tests.hpp>
 
+#include <update_tests.hpp>
 
 #endif//LAB_02_SET_TESTS_HPP
