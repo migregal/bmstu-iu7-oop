@@ -70,8 +70,8 @@ namespace collections {
         set<T> &operator^=(const T &data);
 
 
-        size_t erase(const T &value);
-        const_set_iterator<T> erase(const_set_iterator<T> pos);
+        void erase(const T &value);
+        void erase(const_set_iterator<T> pos);
 
         void clear() override;
 
