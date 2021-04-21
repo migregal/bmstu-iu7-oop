@@ -2,8 +2,8 @@
 // Created by gregory on 10.04.2021.
 //
 
-#ifndef LAB_02_BASE_COLLECTION_HPP
-#define LAB_02_BASE_COLLECTION_HPP
+#ifndef LAB_02_BASE_COLLECTION_H
+#define LAB_02_BASE_COLLECTION_H
 
 #include <cstddef>
 
@@ -17,10 +17,4 @@ public:
     virtual ~base_collection() = 0;
 };
 
-base_collection::~base_collection() = default;
-
-bool base_collection::empty() const {
-    return 0 == size;
-}
-
-#endif//LAB_02_BASE_COLLECTION_HPP
+#endif//LAB_02_BASE_COLLECTION_H

@@ -8,7 +8,7 @@
 
 #include <memory>
 
-#include <base_collection.hpp>
+#include <base_collection.h>
 #include <const_set_iterator.h>
 #include <set_node.h>
 

@@ -358,35 +358,18 @@ namespace collections {
     set<T> set<T>::operator-(const set<T> &data) {
         set<T> res;
 
-        auto iter1 = this->begin(), iter2 = data.begin();
-        while (iter1 and iter2) {
-            if (*iter1 < *iter2) {
-                res.append(*iter1);
-                ++iter1;
-                continue;
-            }
+        for (auto i : *this)
+            res.append(i);
 
-            if (*iter2 < *iter1) {
-                ++iter2;
-                continue;
-            }
-
-            ++iter1;
-            ++iter2;
-        }
-
-        while (iter1) {
-            res.append(*iter1);
-            ++iter1;
-        }
+        for (auto i : data)
+            res.erase(i);
 
         return res;
     }
 
     template<typename T>
     set<T> set<T>::operator-(const T &data) {
-        set<T> res;
-        res = *this;
+        set<T> res = *this;
         res.erase(data);
 
         return res;
@@ -396,33 +379,13 @@ namespace collections {
     set<T> set<T>::operator^(const set<T> &data) {
         set<T> res;
 
-        auto iter1 = this->begin(), iter2 = data.begin();
-        while (iter1 and iter2) {
-            if (*iter1 < *iter2) {
-                res.append(*iter1);
-                ++iter1;
-                continue;
-            }
+        for (auto i : *this)
+            if (!data.find(i))
+                res.append(i);
 
-            if (*iter2 < *iter1) {
-                res.append(*iter2);
-                ++iter2;
-                continue;
-            }
-
-            ++iter1;
-            ++iter2;
-        }
-
-        while (iter1) {
-            res.append(*iter1);
-            ++iter1;
-        }
-
-        while (iter2) {
-            res.append(*iter2);
-            ++iter2;
-        }
+        for (auto i : data)
+            if (!find(i))
+                res.append(i);
 
         return res;
     }

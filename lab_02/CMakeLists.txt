@@ -12,7 +12,8 @@ find_package(Threads REQUIRED)
 
 set(COLLECTIONS_DOMAIN collections)
 set(BASE_SRC
-        ${COLLECTIONS_DOMAIN}/base_collection.hpp
+        ${COLLECTIONS_DOMAIN}/base_collection.cpp
+        ${COLLECTIONS_DOMAIN}/base_collection.h
         ${COLLECTIONS_DOMAIN}/errors.h)
 
 set(SET_DOMAIN collections/set)
