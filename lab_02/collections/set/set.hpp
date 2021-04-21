@@ -113,44 +113,12 @@ namespace collections {
             return true;
         }
 
-        if (temp->get() == head->get())
+        if (find(temp->get()))
             return false;
 
-        if (temp->get() < head->get()) {
-            head->set_prev(temp);
-            temp->set_next(head);
-            head = temp;
-            size++;
-
-            return true;
-        }
-
-        if (temp->get() == tail->get())
-            return false;
-
-        if (temp->get() > tail->get()) {
-            temp->set_prev(tail);
-            tail->set_next(temp);
-            tail = temp;
-            size++;
-
-            return true;
-        }
-
-        const_set_iterator<T> iter = ++(begin());
-        while (*iter < temp->get())
-            ++iter;
-
-        if (*iter == temp->get())
-            return false;
-
-        auto t = iter;
-
-        --t;
-        temp->set_prev(t.get_cur());
-        temp->set_next(iter.get_cur());
-        t.get_cur().set_next(*temp);
-        iter.get_cur().set_prev(*temp);
+        temp->set_prev(tail);
+        tail->set_next(temp);
+        tail = temp;
         size++;
 
         return true;
@@ -318,11 +286,8 @@ namespace collections {
         if (size != list.size)
             return false;
 
-        auto fst = begin();
-        auto snd = list.begin();
-
-        for (; fst != end() && snd != list.end(); ++fst, ++snd)
-            if (*fst != *snd)
+        for (auto i : list)
+            if (!find(i))
                 return false;
 
         return true;
