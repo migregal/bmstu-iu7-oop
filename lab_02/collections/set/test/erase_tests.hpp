@@ -13,7 +13,7 @@ using namespace collections;
 
 TEST(EraseTest, Empty) {
     auto b = set<int>{};
-    EXPECT_EQ(b.erase(b.find(5)), b.cend());
+    EXPECT_EQ(b.erase(b.find(5)), b.end());
 }
 
 TEST(EraseTest, NonEmptyIncorrect) {
@@ -38,27 +38,6 @@ TEST(EraseTest, NonEmptyCorrectConst) {
     auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
 
     EXPECT_EQ(b.erase(5), 1);
-}
-
-TEST(EraseTest, EmptyIncorrectList) {
-    set<int> b;
-    EXPECT_THROW(b.erase(b.find(0), b.find(13)), iterator_error);
-}
-
-TEST(EraseTest, NonEmptyIncorrectList) {
-    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
-    EXPECT_THROW(b.erase(b.find(0), b.find(13)), iterator_error);
-}
-
-TEST(EraseTest, NonEmptyPartialList) {
-    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
-    EXPECT_THROW(b.erase(b.find(4), b.find(13)), iterator_error);
-}
-
-TEST(EraseTest, NonEmptyCorrectList) {
-    auto b = set<int>{1, 2, 3, 4, 5, 9, 12, 21};
-    b.erase(b.find(5), b.find(12));
-    EXPECT_EQ(b, (set<int>{1, 2, 3, 4, 12, 21}));
 }
 
 #endif//LAB_02_ERASE_TESTS_HPP

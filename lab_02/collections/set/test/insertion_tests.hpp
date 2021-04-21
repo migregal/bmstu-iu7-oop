@@ -13,38 +13,38 @@ using namespace collections;
 TEST(InsertTest, ToEmptySet) {
     auto a = set<int>();
     auto v = 6;
-    EXPECT_EQ(a.insert(v), true);
+    EXPECT_EQ(a.append(v), true);
     EXPECT_EQ(a, (set<int>{6}));
 }
 
 TEST(InsertTest, ToEmptySetRValue) {
     auto a = set<int>();
-    EXPECT_EQ(a.insert(6), true);
+    EXPECT_EQ(a.append(6), true);
     EXPECT_EQ(a, (set<int>{6}));
 }
 
 TEST(InsertTest, SingleToNonEmpty) {
     auto a = set<int>{1, 2, 3, 4, 5};
     auto v = 6;
-    EXPECT_EQ(a.insert(v), true);
+    EXPECT_EQ(a.append(v), true);
     EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 6}));
 }
 
 TEST(InsertTest, SingleToNonEmptyRValue) {
     auto a = set<int>{1, 2, 3, 4, 5};
-    EXPECT_EQ(a.insert(6), true);
+    EXPECT_EQ(a.append(6), true);
     EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 6}));
 }
 
 TEST(InsertTest, MultipleToNonEmpty) {
     auto a = set<int>{1, 2, 3, 4, 5};
-    a.insert({8, 9, 10});
+    a.append({8, 9, 10});
     EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 8, 9, 10}));
 }
 
 TEST(InsertTest, MultipleRepeatedToNonEmpty) {
     auto a = set<int>{1, 2, 3, 4, 5};
-    a.insert({3, 3, 3, 4, 4, 4, 4, 1, 2, 3, 9, 12, 21});
+    a.append({3, 3, 3, 4, 4, 4, 4, 1, 2, 3, 9, 12, 21});
     EXPECT_EQ(a, (set<int>{1, 2, 3, 4, 5, 9, 12, 21}));
 }
 

@@ -24,29 +24,54 @@ namespace collections {
         ~set() override;
 
         // Modifiers
-        bool insert(const T &value) noexcept(false);
-        bool insert(T &&value) noexcept(false);
-        void insert(std::initializer_list<T> ilist) noexcept(false);
+        bool append(const T &value) noexcept(false);
+        bool append(T &&value) noexcept(false);
+        void append(std::initializer_list<T> ilist) noexcept(false);
 
-        set<T> intersect(set<T> &set);
-        set<T> intersect(T &data);
+        set<T> operator+(const set<T> &set);
+        set<T> operator+(const T &data);
+        set<T> &operator+=(const set<T> &set);
+        set<T> &operator+=(const T &data);
+
+
+        set<T> intersect(const set<T> &set);
         set<T> intersect(const T &data);
 
-        set<T> combine(set<T> &set);
-        set<T> combine(T &data);
+        set<T> operator&(const set<T> &set);
+        set<T> operator&(const T &data);
+        set<T> &operator&=(const set<T> &set);
+        set<T> &operator&=(const T &data);
+
+
+        set<T> combine(const set<T> &set);
         set<T> combine(const T &data);
 
-        set<T> difference(set<T> &set);
-        set<T> difference(T &data);
+        set<T> operator|(const set<T> &set);
+        set<T> operator|(const T &data);
+        set<T> &operator|=(const set<T> &set);
+        set<T> &operator|=(const T &data);
+
+
+        set<T> difference(const set<T> &set);
         set<T> difference(const T &data);
 
-        set<T> symmetric_difference(set<T> &set);
-        set<T> symmetric_difference(T &data);
+        set<T> operator-(const set<T> &set);
+        set<T> operator-(const T &data);
+        set<T> &operator-=(const set<T> &set);
+        set<T> &operator-=(const T &data);
+
+
+        set<T> symmetric_difference(const set<T> &set);
         set<T> symmetric_difference(const T &data);
+
+        set<T> operator^(const set<T> &set);
+        set<T> operator^(const T &data);
+        set<T> &operator^=(const set<T> &set);
+        set<T> &operator^=(const T &data);
+
 
         size_t erase(const T &value);
         const_set_iterator<T> erase(const_set_iterator<T> pos);
-        const_set_iterator<T> erase(const_set_iterator<T> first, const_set_iterator<T> last);
 
         void clear() override;
 
@@ -58,57 +83,17 @@ namespace collections {
 
         // Non-member
         set<T> &operator=(const set<T> &list);
+        set<T> &operator=(set<T> &&list) noexcept;
 
         bool operator==(const set<T> &list) const;
         bool operator!=(const set<T> &list) const;
 
-        set<T> operator+(set<T> &set);
-        set<T> operator+(T &data);
-        set<T> operator+(const T &data);
-
-        set<T> operator&(set<T> &set);
-        set<T> operator&(T &data);
-        set<T> operator&(const T &data);
-
-        set<T> operator|(set<T> &set);
-        set<T> operator|(T &data);
-        set<T> operator|(const T &data);
-
-        set<T> operator-(set<T> &set);
-        set<T> operator-(T &data);
-        set<T> operator-(const T &data);
-
-        set<T> operator^(set<T> &set);
-        set<T> operator^(T &data);
-        set<T> operator^(const T &data);
-
-        set<T> &operator+=(set<T> &set);
-        set<T> &operator+=(const T &data);
-        set<T> &operator+=(T &&data);
-
-        set<T> &operator&=(set<T> &set);
-        set<T> &operator&=(T &data);
-        set<T> &operator&=(const T &data);
-
-        set<T> &operator|=(set<T> &set);
-        set<T> &operator|=(T &data);
-        set<T> &operator|=(const T &data);
-
-        set<T> &operator-=(set<T> &set);
-        set<T> &operator-=(const T &data);
-        set<T> &operator-=(T &&data);
-
-        set<T> &operator^=(set<T> &set);
-        set<T> &operator^=(const T &data);
-        set<T> &operator^=(T &&data);
-
         // Iterators
-        const_set_iterator<T> cbegin() const;
-
-        const_set_iterator<T> cend() const;
+        const_set_iterator<T> begin() const;
+        const_set_iterator<T> end() const;
 
     protected:
-        bool insert(const std::shared_ptr<set_node<T>> &node) noexcept(false);
+        bool append(const std::shared_ptr<set_node<T>> &node) noexcept(false);
 
     private:
         std::shared_ptr<set_node<T>> head;
