@@ -191,10 +191,8 @@ namespace collections {
     void set<T>::erase(const T &value) {
         auto t = find(value);
 
-        if (!t)
-            return;
-
-        erase(t);
+        if (t)
+            erase(t);
     }
 
     template<typename T>
