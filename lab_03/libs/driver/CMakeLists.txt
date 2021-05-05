@@ -10,6 +10,10 @@ set(SOURCES
         src/objects/point.cpp
         src/objects/edge.h
         src/objects/edge.cpp
+        src/vector/vector.h
+        src/vector/vector.hpp
+        src/vector/iterator.h
+        src/vector/iterator.hpp
         )
 
 add_library(${PROJECT_NAME} ${SOURCES})
