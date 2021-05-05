@@ -10,6 +10,8 @@ set(SOURCES
         src/objects/point.cpp
         src/objects/edge.h
         src/objects/edge.cpp
+        src/objects/details.h
+        src/objects/details.cpp
         src/vector/vector.h
         src/vector/vector.hpp
         src/vector/iterator.h
