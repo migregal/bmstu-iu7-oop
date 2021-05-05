@@ -2,8 +2,10 @@
 
 #include <memory>
 
-#include <vector/iterator.h>
+#include <visitor.h>
+
 #include <objects/point.h>
+#include <vector/iterator.h>
 
 class Object {
 public:
@@ -17,11 +19,11 @@ public:
     virtual Iterator<std::shared_ptr<Object>> end(){};
 
     [[nodiscard]] virtual bool is_composite() const { return false; };
-    virtual void accept(std::shared_ptr<visitor> visitor) = 0;
-    virtual void reform(const point &move, const point &scale, const point &turn) = 0;
+    virtual void accept(std::shared_ptr<Visitor> visitor) = 0;
+    virtual void reform(const Point &move, const Point &scale, const Point &turn) = 0;
 };
 
-class VisibleObject : public object {
+class VisibleObject : public Object {
 public:
     VisibleObject() = default;
     ~VisibleObject() override = default;
@@ -29,7 +31,7 @@ public:
     virtual bool is_visible() { return true; }
 };
 
-class InvisibleObject : public object {
+class InvisibleObject : public Object {
 public:
     InvisibleObject() = default;
     ~InvisibleObject() override = default;

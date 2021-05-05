@@ -14,6 +14,8 @@ set(SOURCES
         src/objects/details.cpp
         src/objects/model.h
         src/objects/model.cpp
+        src/objects/camera.h
+        src/objects/camera.cpp
 
         src/vector/vector.h
         src/vector/vector.hpp
