@@ -8,6 +8,8 @@ set(SOURCES
         src/object.h
         src/objects/point.h
         src/objects/point.cpp
+        src/objects/edge.h
+        src/objects/edge.cpp
         )
 
 add_library(${PROJECT_NAME} ${SOURCES})
