@@ -2,7 +2,8 @@
 #define ITERATOR_HPP
 
 #include "iterator.h"
-#include <QDebug>
+
+using namespace Collections;
 
 template<typename T>
 Iterator<T>::Iterator(const Iterator<T> &iter)

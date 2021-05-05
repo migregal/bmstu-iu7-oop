@@ -1,8 +1,8 @@
-#pragma ocne
-
-#include <vector/vector.h>
+#pragma once
 
 #include <vector/iterator.h>
+
+using namespace Collections;
 
 template<typename T>
 Vector<T>::Vector() {
@@ -62,7 +62,7 @@ Vector<T> &Vector<T>::operator+=(const T &elem) {
 }
 
 template<typename T>
-void Vector<T>::remove(iterator<T> _iterator) {
+void Vector<T>::remove(Iterator<T> _iterator) {
     //todo
 }
 
@@ -73,26 +73,26 @@ void Vector<T>::remove(size_t index) {
 }
 
 template<typename T>
-iterator<T> Vector<T>::begin() {
-    iterator<T> iterator(*this);
+Iterator<T> Vector<T>::begin() {
+    Iterator<T> iterator(*this);
     return iterator;
 }
 
 template<typename T>
-iterator<T> Vector<T>::end() {
-    iterator<T> iterator(*this);
+Iterator<T> Vector<T>::end() {
+    Iterator<T> iterator(*this);
     return iterator + this->size;
 }
 
 template<typename T>
-const iterator<T> Vector<T>::begin() const {
-    const iterator<T> iterator(*this);
+const Iterator<T> Vector<T>::begin() const {
+    const Iterator<T> iterator(*this);
     return iterator;
 }
 
 template<typename T>
-const iterator<T> Vector<T>::end() const {
-    const iterator<T> iterator(*this);
+const Iterator<T> Vector<T>::end() const {
+    const Iterator<T> iterator(*this);
     return iterator + this->size;
 }
 
