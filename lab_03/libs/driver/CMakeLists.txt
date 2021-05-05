@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(SOURCES
         src/object.h
+        src/objects/point.h
+        src/objects/point.cpp
         )
 
 add_library(${PROJECT_NAME} ${SOURCES})
