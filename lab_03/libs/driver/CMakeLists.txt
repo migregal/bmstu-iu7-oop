@@ -29,6 +29,7 @@ set(COLLECTIONS
 
 set(PUB_INC
         include/driver/visitor.h
+        include/driver/error.h
         )
 
 add_library(${PROJECT_NAME} ${OBJECTS} ${COLLECTIONS} ${PUB_INC})
