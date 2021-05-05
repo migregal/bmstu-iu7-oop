@@ -4,7 +4,7 @@ project(driver)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(SOURCES
+set(OBJECTS
         src/object.h
         src/objects/point.h
         src/objects/point.cpp
@@ -16,16 +16,22 @@ set(SOURCES
         src/objects/model.cpp
         src/objects/camera.h
         src/objects/camera.cpp
+        src/objects/composite.h
+        src/objects/composite.cpp
+        )
 
+set(COLLECTIONS
         src/vector/vector.h
         src/vector/vector.hpp
         src/vector/iterator.h
         src/vector/iterator.hpp
+        )
 
+set(PUB_INC
         include/driver/visitor.h
         )
 
-add_library(${PROJECT_NAME} ${SOURCES})
+add_library(${PROJECT_NAME} ${OBJECTS} ${COLLECTIONS} ${PUB_INC})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
         ./include/driver/
