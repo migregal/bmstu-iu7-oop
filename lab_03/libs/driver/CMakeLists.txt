@@ -12,10 +12,15 @@ set(SOURCES
         src/objects/edge.cpp
         src/objects/details.h
         src/objects/details.cpp
+        src/objects/model.h
+        src/objects/model.cpp
+
         src/vector/vector.h
         src/vector/vector.hpp
         src/vector/iterator.h
         src/vector/iterator.hpp
+
+        include/driver/visitor.h
         )
 
 add_library(${PROJECT_NAME} ${SOURCES})

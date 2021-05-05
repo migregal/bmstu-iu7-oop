@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector/vector.h>
 
 #include <objects/edge.h>
