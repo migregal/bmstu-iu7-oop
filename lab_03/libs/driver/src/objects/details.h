@@ -8,17 +8,21 @@
 class ModelDetails {
 public:
     ModelDetails() = default;
-    ModelDetails(Vector<Point> &_points, Vector<Edge> &_edges) : points(_points), edges(_edges){};
+    ModelDetails(Vector<Point> &_points, Vector<Edge> &_edges);
+    ModelDetails(Point &center, Vector<Point> &points, Vector<Edge> &edges);
     ~ModelDetails() = default;
 
     void add_point(const Point &pt);
     void add_edge(const Edge &edge);
+    [[nodiscard]] const Point &get_center() const;
     [[nodiscard]] const Vector<Point> &get_points() const;
     [[nodiscard]] const Vector<Edge> &get_edges() const;
 
     void reform(const Point &move, const Point &scale, const Point &rotate);
 
 private:
-    Vector<Point> points;
-    Vector<Edge> edges;
+    Point _center;
+
+    Vector<Point> _points;
+    Vector<Edge> _edges;
 };

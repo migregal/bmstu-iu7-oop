@@ -18,7 +18,7 @@ std::shared_ptr<Model> FileLoader::load_model(std::shared_ptr<BaseBuilder> build
     for (size_t i = 0; i < links_count; i++) {
         size_t pt1, pt2;
         file >> pt1 >> pt2;
-        builder->build_link(pt1, pt2);
+        builder->build_edge(pt1, pt2);
     }
 
     return builder->get();

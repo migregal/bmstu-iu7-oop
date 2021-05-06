@@ -42,6 +42,30 @@ void Point::set_z(double const &z) {
     _z = z;
 }
 
+Point Point::operator+(const Point &p) {
+    Point point{*this};
+
+    point.set_x(point._x + p._x);
+    point.set_y(point._y + p._y);
+    point.set_z(point._z + p._z);
+
+    return point;
+}
+
+Point Point::operator-(const Point &p) {
+    Point point{*this};
+
+    point.set_x(point._x - p._x);
+    point.set_y(point._y - p._y);
+    point.set_z(point._z - p._z);
+
+    return point;
+}
+
+Point Point::relative_to(const Point &c) {
+    return *this + c;
+}
+
 void Point::move(const double dx, const double dy, const double dz) {
     _x += dx;
     _y += dy;
@@ -76,4 +100,16 @@ void Point::rotate_z(const double &oz) {
     const double temp_x = _x;
     _x = _x * cos(oz * M_PI / 180) + _y * sin(oz * M_PI / 180);
     _y = -temp_x * sin(oz * M_PI / 180) + _y * cos(oz * M_PI / 180);
+}
+
+bool Point::operator==(const Point &point) const noexcept {
+    return (point._x == _x) && (point._y == _y) && (point._z == _z);
+}
+
+bool Point::equals(const Point &point) const noexcept {
+    return *this == point;
+}
+
+bool Point::operator!=(const Point &point) const noexcept {
+    return !(*this == point);
 }

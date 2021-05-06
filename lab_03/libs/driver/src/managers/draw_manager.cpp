@@ -13,10 +13,11 @@ void DrawManager::set_cam(std::shared_ptr<Camera> new_cam) {
 void DrawManager::visit(const Model &_model) {
     auto points = _model.get_details()->get_points();
 
+    auto center = _model.get_details()->get_center();
     for (auto edge : _model.get_details()->get_edges())
         _drawer->draw_line(
-                proect_point(points.at(edge.get_fst())),
-                proect_point(points.at(edge.get_snd())));
+                proect_point(points.at(edge.get_fst()).relative_to(center)),
+                proect_point(points.at(edge.get_snd())).relative_to(center));
 }
 
 Point DrawManager::proect_point(const Point &_point) {

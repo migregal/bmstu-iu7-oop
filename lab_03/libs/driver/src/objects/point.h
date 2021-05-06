@@ -11,6 +11,10 @@ public:
     Point(const Point &&point) noexcept;
     Point &operator=(Point &&point) noexcept;
 
+    bool operator==(const Point &point) const noexcept;
+    [[nodiscard]] bool equals(const Point &point) const noexcept;
+    bool operator!=(const Point &point) const noexcept;
+
     ~Point() = default;
 
     [[nodiscard]] double get_x() const;
@@ -20,6 +24,11 @@ public:
     void set_x(double const &x);
     void set_y(double const &y);
     void set_z(double const &z);
+
+    Point operator+(const Point &p);
+    Point operator-(const Point &p);
+
+    Point relative_to(const Point &c);
 
     void move(const double dx, const double dy, const double dz);
     void scale(const double kx, const double ky, const double kz);

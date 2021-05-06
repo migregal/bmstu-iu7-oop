@@ -55,7 +55,10 @@ void MainWindow::on_move_button_clicked() {
         return;
     }
 
-    MoveModel move_command(10, 10, 10, 1);
+    MoveModel move_command(
+            ui->dx_box->value(),
+            ui->dy_box->value(),
+            ui->dz_box->value(), 1);
     move_command.execute(_facade);
     update_scene();
 }
@@ -72,7 +75,11 @@ void MainWindow::on_scale_button_clicked() {
         return;
     }
 
-    ScaleModel scale_command(2, 2, 2, 1);
+    ScaleModel scale_command(
+            ui->kx_box->value(),
+            ui->ky_box->value(),
+            ui->kz_box->value(),
+            1);
     scale_command.execute(_facade);
     update_scene();
 }
@@ -89,8 +96,11 @@ void MainWindow::on_turn_button_clicked() {
         return;
     }
 
-    RotateModel turn_command(3, 3, 3, 1);
-    turn_command.execute(_facade);
+    RotateModel rotate_command(
+            ui->ox_box->value(),
+            ui->oy_box->value(),
+            ui->oz_box->value(), 1);
+    rotate_command.execute(_facade);
     update_scene();
 }
 
@@ -112,7 +122,7 @@ void MainWindow::on_load_button_clicked() {
     try {
         load_command.execute(_facade);
     } catch (const FileError &error) {
-        QMessageBox::critical(nullptr, "Ошибка", "Что-то не так пошло при загрузке файла...");
+        QMessageBox::critical(nullptr, "Ошибка", "Что-то пошло не так при загрузке файла...");
         return;
     }
 
@@ -141,7 +151,8 @@ void MainWindow::clear_scene() {
 }
 
 void MainWindow::on_add_camera_clicked() {
-    AddCamera camera_command(win_x / 2, win_y / 2, 0);
+    auto rcontent = ui->graphicsView->contentsRect();
+    AddCamera camera_command(rcontent.width() / 2.0, rcontent.height() / 2.0, 0.0);
     camera_command.execute(_facade);
 }
 
@@ -174,7 +185,7 @@ void MainWindow::on_up_button_clicked() {
         return;
     }
 
-    MoveCamera camera_command(1, 0, 10);
+    MoveCamera camera_command(1, 0, -10);
     camera_command.execute(_facade);
     update_scene();
 }
@@ -191,7 +202,7 @@ void MainWindow::on_down_button_clicked() {
         return;
     }
 
-    MoveCamera camera_command(1, 0, -10);
+    MoveCamera camera_command(1, 0, 10);
     camera_command.execute(_facade);
     update_scene();
 }

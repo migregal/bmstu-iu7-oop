@@ -15,7 +15,7 @@ void ModelBuilder::build_point(const double &x, const double &y, const double &z
     model_ptr->add_point(pt_obj);
 }
 
-void ModelBuilder::build_link(const std::size_t &pt1, const std::size_t &pt2) {
+void ModelBuilder::build_edge(const std::size_t &pt1, const std::size_t &pt2) {
     if (!is_build()) {}
 
     Edge edge_obj(pt1, pt2);

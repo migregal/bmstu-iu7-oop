@@ -12,7 +12,7 @@ public:
     [[nodiscard]] bool is_build() const override;
     void build() override;
     void build_point(const double &x, const double &y, const double &z) override;
-    void build_link(const std::size_t &pt1, const std::size_t &pt2) override;
+    void build_edge(const std::size_t &pt1, const std::size_t &pt2) override;
 
     std::shared_ptr<Model> get() override;
 
