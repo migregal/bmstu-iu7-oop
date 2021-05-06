@@ -36,6 +36,8 @@ set(MANAGERS
         src/managers/reform_manager.cpp
         src/managers/scene_manager.h
         src/managers/scene_manager.cpp
+        src/managers/load_manager.h
+        src/managers/load_manager.cpp
         )
 
 set(LOAD
