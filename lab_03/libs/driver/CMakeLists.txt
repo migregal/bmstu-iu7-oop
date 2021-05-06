@@ -20,6 +20,9 @@ set(OBJECTS
         src/objects/composite.cpp
         )
 
+set(MANAGERS
+        src/managers/base_manager.h)
+
 set(COLLECTIONS
         src/vector/vector.h
         src/vector/vector.hpp
@@ -32,7 +35,7 @@ set(PUB_INC
         include/driver/error.h
         )
 
-add_library(${PROJECT_NAME} ${OBJECTS} ${COLLECTIONS} ${PUB_INC})
+add_library(${PROJECT_NAME} ${OBJECTS} ${COLLECTIONS} ${PUB_INC} ${MANAGERS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
         ./include/driver/
