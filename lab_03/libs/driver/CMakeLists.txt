@@ -24,6 +24,8 @@ set(MANAGERS
         src/managers/base_manager.h
         src/managers/draw_manager.h
         src/managers/draw_manager.cpp
+        src/managers/reform_manager.h
+        src/managers/reform_manager.cpp
         )
 
 set(COLLECTIONS
