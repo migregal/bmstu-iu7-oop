@@ -36,6 +36,7 @@ set(MANAGERS
         src/managers/scene_manager.cpp
         src/managers/load_manager.h
         src/managers/load_manager.cpp
+        src/visitor.h
         )
 
 set(LOAD
@@ -74,7 +75,6 @@ set(PUB_INC
         include/driver/scene_command.h
         src/command/scene_command.cpp
         include/driver/error.h
-        include/driver/visitor.h
         )
 
 add_library(${PROJECT_NAME}
