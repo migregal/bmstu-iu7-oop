@@ -38,6 +38,21 @@ set(MANAGERS
         src/managers/scene_manager.cpp
         )
 
+set(LOAD
+        src/load/abstract_loader.h
+        src/load/abstract_loader.cpp
+        src/load/model_loader.h
+        src/load/model_loader.cpp
+
+        src/load/base_loader.h
+        src/load/file_loader.h
+        src/load/file_loader.cpp
+
+        src/load/base_builder.h
+        src/load/model_builder.h
+        src/load/model_builder.cpp
+        )
+
 set(COLLECTIONS
         src/vector/vector.h
         src/vector/vector.hpp
@@ -50,7 +65,14 @@ set(PUB_INC
         include/driver/error.h
         )
 
-add_library(${PROJECT_NAME} ${OBJECTS} ${DRAWERS} ${MANAGERS} ${COLLECTIONS} ${PUB_INC})
+add_library(${PROJECT_NAME}
+        ${OBJECTS}
+        ${DRAWERS}
+        ${MANAGERS}
+        ${LOAD}
+        ${COLLECTIONS}
+        ${PUB_INC}
+        )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
         ./include/driver/
