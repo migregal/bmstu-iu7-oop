@@ -71,7 +71,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1231, 893);
+        MainWindow->resize(890, 527);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setLayoutDirection(Qt::LeftToRight);
@@ -289,13 +289,29 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
+        QWidget::setTabOrder(graphicsView, dx_box);
+        QWidget::setTabOrder(dx_box, dy_box);
+        QWidget::setTabOrder(dy_box, dz_box);
+        QWidget::setTabOrder(dz_box, move_button);
+        QWidget::setTabOrder(move_button, kx_box);
+        QWidget::setTabOrder(kx_box, ky_box);
+        QWidget::setTabOrder(ky_box, kz_box);
+        QWidget::setTabOrder(kz_box, scale_button);
+        QWidget::setTabOrder(scale_button, ox_box);
+        QWidget::setTabOrder(ox_box, oy_box);
+        QWidget::setTabOrder(oy_box, oz_box);
+        QWidget::setTabOrder(oz_box, turn_button);
+        QWidget::setTabOrder(turn_button, left_button);
+        QWidget::setTabOrder(left_button, up_button);
+        QWidget::setTabOrder(up_button, load_button);
+        QWidget::setTabOrder(load_button, add_camera);
+        QWidget::setTabOrder(add_camera, down_button);
+        QWidget::setTabOrder(down_button, right_button);
 
         retranslateUi(MainWindow);
-
-        QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QMainWindow *MainWindow) const
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         left_button->setText(QCoreApplication::translate("MainWindow", "\342\227\200", nullptr));
@@ -312,9 +328,9 @@ public:
         label_4->setText(QCoreApplication::translate("MainWindow", " kx", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", " kz", nullptr));
         scale_button->setText(QCoreApplication::translate("MainWindow", "\320\234\320\260\321\201\321\210\321\202\320\260\320\261\320\270\321\200\320\276\320\262\320\260\321\202\321\214", nullptr));
-        label_12->setText(QCoreApplication::translate("MainWindow", " ky", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "oy", nullptr));
         label_11->setText(QCoreApplication::translate("MainWindow", " ox", nullptr));
-        label_10->setText(QCoreApplication::translate("MainWindow", " kz", nullptr));
+        label_10->setText(QCoreApplication::translate("MainWindow", "oz", nullptr));
         turn_button->setText(QCoreApplication::translate("MainWindow", "\320\222\321\200\320\260\321\211\320\260\321\202\321\214", nullptr));
     } // retranslateUi
 

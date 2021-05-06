@@ -42,6 +42,9 @@ protected:
 
     void check_models_exist();
 
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
 private slots:
     void on_move_button_clicked();
 

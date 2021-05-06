@@ -1,5 +1,7 @@
-#include "mainwindow.h"
-#include "../factory.h"
+#include <gui/mainwindow.h>
+
+#include <factory.h>
+
 #include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
@@ -8,6 +10,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui->setupUi(this);
     setup_scene();
     _facade = std::shared_ptr<Facade>(Facade::instance());
+
+    connect(ui->load_button, &QPushButton::clicked, this, &MainWindow::on_load_button_clicked);
+
+    connect(ui->add_camera, &QPushButton::clicked, this, &MainWindow::on_add_camera_clicked);
+
+    connect(ui->right_button, &QPushButton::clicked, this, &MainWindow::on_right_button_clicked);
+    connect(ui->up_button, &QPushButton::clicked, this, &MainWindow::on_up_button_clicked);
+    connect(ui->down_button, &QPushButton::clicked, this, &MainWindow::on_down_button_clicked);
+    connect(ui->left_button, &QPushButton::clicked, this, &MainWindow::on_left_button_clicked);
+
+    connect(ui->move_button, &QPushButton::clicked, this, &MainWindow::on_move_button_clicked);
+    connect(ui->scale_button, &QPushButton::clicked, this, &MainWindow::on_scale_button_clicked);
+    connect(ui->turn_button, &QPushButton::clicked, this, &MainWindow::on_turn_button_clicked);
 }
 
 MainWindow::~MainWindow() {
@@ -108,7 +123,9 @@ void MainWindow::setup_scene() {
     _scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(_scene);
     ui->graphicsView->setAlignment(Qt::AlignTop | Qt::AlignLeft);
-    _scene->setSceneRect(0, 0, win_x, win_y);
+
+    auto rcontent = ui->graphicsView->contentsRect();
+    _scene->setSceneRect(0, 0, rcontent.width(), rcontent.height());
 
     std::shared_ptr<AbstractFactory> factory(new QtFactory);
     std::shared_ptr<BaseDrawer> drawer(new QtDrawer(_scene));
@@ -194,4 +211,13 @@ void MainWindow::on_left_button_clicked() {
     MoveCamera camera_command(1, -10, 0);
     camera_command.execute(_facade);
     update_scene();
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event) {
+    QWidget::resizeEvent(event);
+
+    _scene->setSceneRect(0, 0, ui->graphicsView->width(), ui->graphicsView->height());
+
+    auto rcontent = ui->graphicsView->contentsRect();
+    _scene->setSceneRect(0, 0, rcontent.width(), rcontent.height());
 }
