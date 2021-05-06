@@ -20,6 +20,12 @@ set(OBJECTS
         src/objects/composite.cpp
         src/scene/scene.h
         src/scene/scene.cpp
+
+        src/drawer/drawer.h
+        )
+
+set(DRAWERS
+        src/drawer/drawer.h
         )
 
 set(MANAGERS
@@ -44,7 +50,7 @@ set(PUB_INC
         include/driver/error.h
         )
 
-add_library(${PROJECT_NAME} ${OBJECTS} ${COLLECTIONS} ${PUB_INC} ${MANAGERS})
+add_library(${PROJECT_NAME} ${OBJECTS} ${DRAWERS} ${MANAGERS} ${COLLECTIONS} ${PUB_INC})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
         ./include/driver/
