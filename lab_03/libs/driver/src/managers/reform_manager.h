@@ -1,5 +1,4 @@
-#ifndef REFORM_MANAGER_H
-#define REFORM_MANAGER_H
+#pragma once
 
 #include <managers/base_manager.h>
 #include <object.h>
@@ -15,5 +14,3 @@ public:
     static void scale_object(const std::shared_ptr<Object> &_object, const double &kx, const double &ky, const double &kz);
     static void turn_object(const std::shared_ptr<Object> &_object, const double &ox, const double &oy, const double &oz);
 };
-
-#endif

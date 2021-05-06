@@ -1,29 +1,29 @@
 #include <objects/composite.h>
 
 Composite::Composite(std::shared_ptr<Object> &component) {
-    this->objects.push_back(component);
+    objects.push_back(component);
 }
 
 Composite::Composite(const Vector<std::shared_ptr<Object>> &vector) {
-    this->objects = vector;
+    objects = vector;
 }
 
 bool Composite::add(const std::shared_ptr<Object> &component) {
-    this->objects.push_back(component);
+    objects.push_back(component);
     return true;
 }
 
 bool Composite::remove(const Iterator<std::shared_ptr<Object>> &iterator) {
-    this->objects.remove(iterator);
+    objects.remove(iterator);
     return true;
 }
 
 Iterator<std::shared_ptr<Object>> Composite::begin() {
-    return this->objects.begin();
+    return objects.begin();
 }
 
 Iterator<std::shared_ptr<Object>> Composite::end() {
-    return this->objects.end();
+    return objects.end();
 }
 
 bool Composite::is_composite() const {
@@ -31,7 +31,7 @@ bool Composite::is_composite() const {
 }
 
 size_t Composite::size() const {
-    return this->objects.get_size();
+    return objects.get_size();
 }
 
 void Composite::reform(const Point &move, const Point &scale, const Point &turn) {

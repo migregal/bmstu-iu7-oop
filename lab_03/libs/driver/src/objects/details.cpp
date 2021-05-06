@@ -1,19 +1,19 @@
 #include <objects/details.h>
 
 void ModelDetails::add_point(const Point &pt) {
-    this->points.push_back(pt);
+    points.push_back(pt);
 }
 
 void ModelDetails::add_edge(const Edge &link) {
-    this->edges.push_back(link);
+    edges.push_back(link);
 }
 
 const Vector<Point> &ModelDetails::get_points() const {
-    return this->points;
+    return points;
 }
 
 const Vector<Edge> &ModelDetails::get_edges() const {
-    return this->edges;
+    return edges;
 }
 
 void ModelDetails::reform(const Point &_move, const Point &_scale, const Point &_turn) {

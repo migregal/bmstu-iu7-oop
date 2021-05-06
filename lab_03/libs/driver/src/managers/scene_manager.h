@@ -1,5 +1,4 @@
-#ifndef SCENE_MANAGER_H
-#define SCENE_MANAGER_H
+#pragma once
 
 #include <scene/scene.h>
 #include <managers/base_manager.h>
@@ -21,5 +20,3 @@ private:
     std::shared_ptr<Scene> _scene;
     std::shared_ptr<Camera> current_cam;
 };
-
-#endif

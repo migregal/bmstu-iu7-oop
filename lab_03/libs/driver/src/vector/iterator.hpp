@@ -14,9 +14,9 @@ Iterator<T>::Iterator(const Iterator<T> &iter)
 
 template<typename T>
 Iterator<T>::Iterator(const Vector<T> &vector) {
-    this->current_index = 0;
-    this->vector_size = vector.get_size();
-    this->ptr = vector.value;
+    current_index = 0;
+    vector_size = vector.get_size();
+    ptr = vector.value;
 }
 
 template<typename T>
@@ -59,7 +59,7 @@ Iterator<T> Iterator<T>::operator+(size_t number) const {
 
 template<typename T>
 Iterator<T> &Iterator<T>::operator++() {
-    this->current_index++;
+    current_index++;
 
     return *this;
 }
@@ -73,17 +73,17 @@ const Iterator<T> Iterator<T>::operator++(int) {
 
 template<typename T>
 bool Iterator<T>::operator==(const Iterator<T> &iterator) const {
-    return this->current_index == iterator.current_index;
+    return current_index == iterator.current_index;
 }
 
 template<typename T>
 bool Iterator<T>::operator!=(const Iterator<T> &iterator) const {
-    return this->current_index != iterator.current_index;
+    return current_index != iterator.current_index;
 }
 
 template<typename T>
 T *Iterator<T>::get_current() const {
-    return this->ptr.lock().get() + current_index;
+    return ptr.lock().get() + current_index;
 }
 
 #endif

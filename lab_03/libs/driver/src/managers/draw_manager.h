@@ -1,5 +1,4 @@
-#ifndef DRAW_MANAGER_H
-#define DRAW_MANAGER_H
+#pragma once
 
 #include <memory>
 
@@ -28,5 +27,3 @@ private:
     std::shared_ptr<BaseDrawer> _drawer;
     std::shared_ptr<Camera> cam;
 };
-
-#endif

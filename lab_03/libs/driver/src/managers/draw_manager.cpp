@@ -7,17 +7,16 @@ void DrawManager::set_drawer(std::shared_ptr<BaseDrawer> drawer) {
 }
 
 void DrawManager::set_cam(std::shared_ptr<Camera> new_cam) {
-    this->cam = std::move(new_cam);
+    cam = std::move(new_cam);
 }
 
 void DrawManager::visit(const Model &_model) {
     auto points = _model.get_details()->get_points();
 
-    for (auto edge : _model.get_details()->get_edges()) {
-        this->_drawer->draw_line(
+    for (auto edge : _model.get_details()->get_edges())
+        _drawer->draw_line(
                 proect_point(points.at(edge.get_fst())),
                 proect_point(points.at(edge.get_snd())));
-    }
 }
 
 Point DrawManager::proect_point(const Point &_point) {
