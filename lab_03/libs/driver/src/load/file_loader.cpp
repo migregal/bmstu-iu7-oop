@@ -17,7 +17,7 @@ std::shared_ptr<Model> FileLoader::load_model(std::shared_ptr<BaseBuilder> build
 
     for (size_t i = 0; i < links_count; i++) {
         size_t pt1, pt2;
-        this->file >> pt1 >> pt2;
+        file >> pt1 >> pt2;
         builder->build_link(pt1, pt2);
     }
 
@@ -27,7 +27,7 @@ std::shared_ptr<Model> FileLoader::load_model(std::shared_ptr<BaseBuilder> build
 void FileLoader::fopen(std::string &fname) {
     file.open(fname);
 
-    if (!this->file) {
+    if (!file) {
         std::string message = "Error while open file.";
         throw FileError(message);
     }

@@ -9,5 +9,5 @@ void QtDrawer::clear_scene() {
 }
 
 void QtDrawer::draw_line(const Point &point1, const Point &point2) {
-    this->scene->addLine(point1.get_x(), point1.get_y(), point2.get_x(), point2.get_y());
+    scene->addLine(point1.get_x(), point1.get_y(), point2.get_x(), point2.get_y());
 }

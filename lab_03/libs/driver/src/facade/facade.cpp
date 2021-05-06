@@ -5,7 +5,7 @@
 #include <memory>
 
 void Facade::load_model(std::string fname) {
-    std::shared_ptr<Model> model = this->_load_manager->load_model(fname);
+    std::shared_ptr<Model> model = _load_manager->load_model(fname);
     _scene_manager.get_scene()->add_model(model);
 }
 

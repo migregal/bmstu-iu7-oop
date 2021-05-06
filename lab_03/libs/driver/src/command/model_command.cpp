@@ -44,7 +44,7 @@ void ReformModel::execute(std::shared_ptr<Facade> &facade) {
 LoadModel::LoadModel(std::string fname) : fname(std::move(fname)) {}
 
 void LoadModel::execute(std::shared_ptr<Facade> &facade) {
-    facade->load_model(this->fname);
+    facade->load_model(fname);
 }
 
 AddModel::AddModel(std::shared_ptr<Object> model) : model(std::move(model)) {}
