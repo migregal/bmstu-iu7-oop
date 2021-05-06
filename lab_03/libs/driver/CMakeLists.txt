@@ -21,7 +21,10 @@ set(OBJECTS
         )
 
 set(MANAGERS
-        src/managers/base_manager.h)
+        src/managers/base_manager.h
+        src/managers/draw_manager.h
+        src/managers/draw_manager.cpp
+        )
 
 set(COLLECTIONS
         src/vector/vector.h
