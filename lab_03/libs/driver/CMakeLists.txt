@@ -62,6 +62,11 @@ set(COLLECTIONS
         src/vector/iterator.hpp
         )
 
+set(FACADE
+        src/facade/facade.h
+        src/facade/facade.cpp
+        )
+
 set(PUB_INC
         include/driver/visitor.h
         include/driver/error.h
@@ -73,6 +78,7 @@ add_library(${PROJECT_NAME}
         ${MANAGERS}
         ${LOAD}
         ${COLLECTIONS}
+        ${FACADE}
         ${PUB_INC}
         )
 
