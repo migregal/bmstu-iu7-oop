@@ -68,8 +68,15 @@ set(FACADE
         )
 
 set(PUB_INC
-        include/driver/visitor.h
+        include/driver/base_command.h
+        include/driver/camera_command.h
+        src/command/camera_command.cpp
+        include/driver/model_command.h
+        src/command/model_command.cpp
+        include/driver/scene_command.h
+        src/command/scene_command.cpp
         include/driver/error.h
+        include/driver/visitor.h
         )
 
 add_library(${PROJECT_NAME}
