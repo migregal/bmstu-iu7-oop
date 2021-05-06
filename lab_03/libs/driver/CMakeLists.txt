@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.0)
 
 project(driver)
 
@@ -20,12 +20,10 @@ set(OBJECTS
         src/objects/composite.cpp
         src/scene/scene.h
         src/scene/scene.cpp
-
-        src/drawer/drawer.h
         )
 
 set(DRAWERS
-        src/drawer/drawer.h
+        include/driver/drawer.h
         )
 
 set(MANAGERS
@@ -63,7 +61,7 @@ set(COLLECTIONS
         )
 
 set(FACADE
-        src/facade/facade.h
+        include/driver/facade.h
         src/facade/facade.cpp
         )
 
@@ -89,6 +87,6 @@ add_library(${PROJECT_NAME}
         ${PUB_INC}
         )
 
-target_include_directories(${PROJECT_NAME} PRIVATE
+target_include_directories(${PROJECT_NAME} PUBLIC
         ./include/driver/
         ./src/)

@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include <drawer/drawer.h>
+#include <drawer.h>
 #include <managers/base_manager.h>
 #include <objects/camera.h>
 #include <objects/composite.h>

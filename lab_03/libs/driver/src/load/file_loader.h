@@ -1,4 +1,4 @@
-#pragmf once
+#pragma once
 
 #include <load/base_loader.h>
 

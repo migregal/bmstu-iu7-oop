@@ -34,10 +34,10 @@ void RotateModel::execute(std::shared_ptr<Facade> &facade) {
     facade->reform_model(model_numb, move, scale, turn);
 }
 
-reform_model::reform_model(const size_t &numb, const Point &move, const Point &scale, const Point &turn) :
+ReformModel::ReformModel(const size_t &numb, const Point &move, const Point &scale, const Point &turn) :
         model_numb(numb), move(move), scale(scale), turn(turn) {}
 
-void reform_model::execute(std::shared_ptr<Facade> &facade) {
+void ReformModel::execute(std::shared_ptr<Facade> &facade) {
     facade->reform_model(model_numb, move, scale, turn);
 }
 
@@ -53,8 +53,8 @@ void AddModel::execute(std::shared_ptr<Facade> &facade) {
     facade->add_model(model);
 }
 
-remove_model::remove_model(const size_t &model_numb) : model_numb(model_numb) {}
+RemoveModel::RemoveModel(const size_t &model_numb) : model_numb(model_numb) {}
 
-void remove_model::execute(std::shared_ptr<Facade> &facade) {
+void RemoveModel::execute(std::shared_ptr<Facade> &facade) {
     facade->remove_model(model_numb);
 }

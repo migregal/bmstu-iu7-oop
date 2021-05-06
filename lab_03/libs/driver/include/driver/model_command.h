@@ -50,12 +50,12 @@ private:
     double ox, oy, oz;
 };
 
-class reform_model : public ModelBaseCommand
+class ReformModel : public ModelBaseCommand
 {
 public:
-    reform_model() = delete;
-    reform_model(const size_t &numb, const Point &move, const Point &scale, const Point &turn);
-    ~reform_model() override = default;
+    ReformModel() = delete;
+    ReformModel(const size_t &numb, const Point &move, const Point &scale, const Point &turn);
+    ~ReformModel() override = default;
 
     void execute(std::shared_ptr<Facade> &facade) override;
 
@@ -91,12 +91,12 @@ private:
     std::shared_ptr<Object> model;
 };
 
-class remove_model : public ModelBaseCommand
+class RemoveModel : public ModelBaseCommand
 {
 public:
-    remove_model() = delete;
-    explicit remove_model(const size_t &model_numb);
-    ~remove_model() override = default;
+    RemoveModel() = delete;
+    explicit RemoveModel(const size_t &model_numb);
+    ~RemoveModel() override = default;
 
     void execute(std::shared_ptr<Facade> &facade) override;
 
