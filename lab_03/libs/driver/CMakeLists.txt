@@ -18,6 +18,8 @@ set(OBJECTS
         src/objects/camera.cpp
         src/objects/composite.h
         src/objects/composite.cpp
+        src/scene/scene.h
+        src/scene/scene.cpp
         )
 
 set(MANAGERS
