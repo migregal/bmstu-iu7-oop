@@ -28,6 +28,8 @@ set(MANAGERS
         src/managers/draw_manager.cpp
         src/managers/reform_manager.h
         src/managers/reform_manager.cpp
+        src/managers/scene_manager.h
+        src/managers/scene_manager.cpp
         )
 
 set(COLLECTIONS
