@@ -12,6 +12,14 @@ class Object;
 
 using Iterator = std::vector<std::shared_ptr<Object>>::iterator;
 
+// Alternative
+//
+//template<typename T>
+//using Vector = typename std::vector<T>;
+//
+//template<typename T>
+//using Iterator = typename T::iterator;
+
 class Object {
 public:
     Object() = default;
