@@ -2,6 +2,10 @@
 
 #include <cmath>
 
+inline double to_radians(const double &angle) {
+    return angle * (M_PI / 180);
+}
+
 Point::Point(const double x, const double y, const double z) : _x(x), _y(y), _z(z) {
 }
 
@@ -85,21 +89,30 @@ void Point::rotate(const double ox, const double oy, const double oz) {
 }
 
 void Point::rotate_x(const double &ox) {
+    const double r_cos = cos(to_radians(ox));
+    const double r_sin = sin(to_radians(ox));
     const double temp_y = _y;
-    _y = _y + cos(ox * M_PI / 180) + _z * sin(ox * M_PI / 180);
-    _z = -temp_y * sin(ox * M_PI / 180) + _z * cos(ox * M_PI / 180);
+
+    _y = _y * r_cos + _z * r_sin;
+    _z = -temp_y * r_sin + _z * r_cos;
 }
 
 void Point::rotate_y(const double &oy) {
+    const double r_cos = cos(to_radians(oy));
+    const double r_sin = sin(to_radians(oy));
     const double temp_x = _x;
-    _x = _x * cos(oy * M_PI / 180) + _z * sin(oy * M_PI / 180);
-    _z = -temp_x * sin(oy * M_PI / 180) + _z * cos(oy * M_PI / 180);
+
+    _x = _x * r_cos + _z * r_sin;
+    _z = -temp_x * r_sin + _z * r_cos;
 }
 
 void Point::rotate_z(const double &oz) {
+    const double r_cos = cos(to_radians(oz));
+    const double r_sin = sin(to_radians(oz));
     const double temp_x = _x;
-    _x = _x * cos(oz * M_PI / 180) + _y * sin(oz * M_PI / 180);
-    _y = -temp_x * sin(oz * M_PI / 180) + _y * cos(oz * M_PI / 180);
+
+    _x = _x * r_cos + _y * r_sin;
+    _y = -temp_x * r_sin + _y * r_cos;
 }
 
 bool Point::operator==(const Point &point) const noexcept {

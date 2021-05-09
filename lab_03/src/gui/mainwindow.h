@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <QMainWindow>
 #include <QMessageBox>
 
@@ -13,8 +12,6 @@
 #include <driver/error.h>
 
 #include "design.h"
-//#include "factory.h"
-//#include "drawer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
