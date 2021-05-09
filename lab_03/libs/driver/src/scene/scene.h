@@ -1,6 +1,8 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include <vector>
+
 #include <objects/camera.h>
 #include <objects/composite.h>
 
@@ -15,13 +17,13 @@ public:
     void add_camera(const std::shared_ptr<Camera> &camera);
     void remove_camera(const std::size_t cam_index);
 
-    Vector<std::shared_ptr<Object>> get_models();
+    std::vector<std::shared_ptr<Object>> get_models();
     std::shared_ptr<Composite> get_composite();
-    Vector<std::shared_ptr<Camera>> get_cams();
+    std::vector<std::shared_ptr<Camera>> get_cams();
 
 protected:
     std::shared_ptr<Composite> models;
-    Vector<std::shared_ptr<Camera>> cams;
+    std::vector<std::shared_ptr<Camera>> cams;
 };
 
 #endif

@@ -22,7 +22,7 @@ void Facade::add_camera(const Point &cam_pos) {
     cam->reform(cam_pos, cam_pos, cam_pos);
 
     _scene_manager.get_scene()->add_camera(cam);
-    _scene_manager.set_cam(_scene_manager.get_scene()->get_cams().get_size() - 1);
+    _scene_manager.set_cam(_scene_manager.get_scene()->get_cams().size() - 1);
 }
 
 void Facade::remove_camera(const size_t &index) {
@@ -51,11 +51,11 @@ void Facade::reform_cam(const size_t &cam_numb, const Point &shift) {
 }
 
 size_t Facade::cams_count() {
-    return _scene_manager.get_scene()->get_cams().get_size();
+    return _scene_manager.get_scene()->get_cams().size();
 }
 
 size_t Facade::models_count() {
-    return _scene_manager.get_scene()->get_cams().get_size();
+    return _scene_manager.get_scene()->get_cams().size();
 }
 
 Facade::Facade() {

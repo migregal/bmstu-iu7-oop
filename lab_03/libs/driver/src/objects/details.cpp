@@ -12,11 +12,11 @@ const Point &ModelDetails::get_center() const {
     return _center;
 }
 
-const Vector<Point> &ModelDetails::get_points() const {
+const std::vector<Point> &ModelDetails::get_points() const {
     return _points;
 }
 
-const Vector<Edge> &ModelDetails::get_edges() const {
+const std::vector<Edge> &ModelDetails::get_edges() const {
     return _edges;
 }
 
@@ -37,6 +37,6 @@ void ModelDetails::reform(const Point &move, const Point &scale, const Point &ro
     }
 }
 
-ModelDetails::ModelDetails(Vector<Point> &points, Vector<Edge> &edges) : _center{}, _points(points), _edges(edges) {}
+ModelDetails::ModelDetails(std::vector<Point> &points, std::vector<Edge> &edges) : _center{}, _points(points), _edges(edges) {}
 
-ModelDetails::ModelDetails(Point &center, Vector<Point> &points, Vector<Edge> &edges) : _center(center), _points(points), _edges(edges) {}
+ModelDetails::ModelDetails(Point &center, std::vector<Point> &points, std::vector<Edge> &edges) : _center(center), _points(points), _edges(edges) {}

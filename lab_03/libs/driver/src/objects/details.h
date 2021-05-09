@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector/vector.h>
+#include <vector>
 
 #include <objects/edge.h>
 #include <objects/point.h>
@@ -8,21 +8,21 @@
 class ModelDetails {
 public:
     ModelDetails() = default;
-    ModelDetails(Vector<Point> &_points, Vector<Edge> &_edges);
-    ModelDetails(Point &center, Vector<Point> &points, Vector<Edge> &edges);
+    ModelDetails(std::vector<Point> &_points, std::vector<Edge> &_edges);
+    ModelDetails(Point &center, std::vector<Point> &points, std::vector<Edge> &edges);
     ~ModelDetails() = default;
 
     void add_point(const Point &pt);
     void add_edge(const Edge &edge);
     [[nodiscard]] const Point &get_center() const;
-    [[nodiscard]] const Vector<Point> &get_points() const;
-    [[nodiscard]] const Vector<Edge> &get_edges() const;
+    [[nodiscard]] const std::vector<Point> &get_points() const;
+    [[nodiscard]] const std::vector<Edge> &get_edges() const;
 
     void reform(const Point &move, const Point &scale, const Point &rotate);
 
 private:
     Point _center;
 
-    Vector<Point> _points;
-    Vector<Edge> _edges;
+    std::vector<Point> _points;
+    std::vector<Edge> _edges;
 };

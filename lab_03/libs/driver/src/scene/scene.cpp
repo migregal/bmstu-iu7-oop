@@ -13,10 +13,10 @@ void Scene::add_camera(const std::shared_ptr<Camera> &camera) {
 }
 
 void Scene::remove_camera(const size_t index) {
-    cams.remove(index);
+//    cams.erase(a);
 }
 
-Vector<std::shared_ptr<Object>> Scene::get_models() {
+std::vector<std::shared_ptr<Object>> Scene::get_models() {
     return models->get_objects();
 }
 
@@ -24,6 +24,6 @@ std::shared_ptr<Composite> Scene::get_composite() {
     return models;
 }
 
-Vector<std::shared_ptr<Camera>> Scene::get_cams() {
+std::vector<std::shared_ptr<Camera>> Scene::get_cams() {
     return cams;
 }
