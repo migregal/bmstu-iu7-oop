@@ -9,7 +9,7 @@
 
 class LoadManager : public BaseManager {
 public:
-    LoadManager() = default;
+    LoadManager();
     ~LoadManager() = default;
 
     virtual std::shared_ptr<Model> load_model(std::string &name);

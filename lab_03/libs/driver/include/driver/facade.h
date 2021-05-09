@@ -40,7 +40,7 @@ private:
     Facade();
 
     SceneManager _scene_manager;
-    std::shared_ptr<AbstractLoader> _load_manager;
+    std::shared_ptr<LoadManager> _load_manager;
     std::shared_ptr<DrawManager> _draw_manager;
 };
 

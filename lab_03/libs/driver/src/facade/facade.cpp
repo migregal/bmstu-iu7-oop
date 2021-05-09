@@ -60,6 +60,5 @@ size_t Facade::models_count() {
 
 Facade::Facade() {
     _draw_manager = std::make_shared<DrawManager>();
-    std::shared_ptr<BaseLoader> floader(new FileLoader);
-    _load_manager = std::shared_ptr<AbstractLoader>(new ModelLoader(floader));
+    _load_manager = std::make_shared<LoadManager>();
 }
