@@ -30,7 +30,7 @@ void BaseFacade::remove_camera(const size_t &index) {
 }
 
 void BaseFacade::reform_model(const size_t &model_numb, const Point &move, const Point &scale, const Point &turn) {
-    std::shared_ptr<Object> model = _scene_manager.get_scene()->get_models().at(model_numb - 1);
+    std::shared_ptr<Object> model = _scene_manager.get_scene()->get_models().at(model_numb);
     ReformManager::reform_object(model, move, scale, turn);
 }
 

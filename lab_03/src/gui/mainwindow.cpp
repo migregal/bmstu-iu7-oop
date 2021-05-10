@@ -61,7 +61,7 @@ void MainWindow::on_move_button_clicked() {
             ui->dx_box->value(),
             ui->dy_box->value(),
             ui->dz_box->value(),
-            ui->model_choose->currentIndex() + 1);
+            ui->model_choose->currentIndex());
     move_command.execute(_facade);
     update_scene();
 }
@@ -82,7 +82,7 @@ void MainWindow::on_scale_button_clicked() {
             ui->kx_box->value(),
             ui->ky_box->value(),
             ui->kz_box->value(),
-            ui->model_choose->currentIndex() + 1);
+            ui->model_choose->currentIndex());
     scale_command.execute(_facade);
     update_scene();
 }
@@ -103,7 +103,7 @@ void MainWindow::on_turn_button_clicked() {
             ui->ox_box->value(),
             ui->oy_box->value(),
             ui->oz_box->value(),
-            ui->model_choose->currentIndex() + 1);
+            ui->model_choose->currentIndex());
     rotate_command.execute(_facade);
     update_scene();
 }
@@ -161,7 +161,7 @@ void MainWindow::on_add_camera_clicked() {
     AddCamera camera_command(rcontent.width() / 2.0, rcontent.height() / 2.0, 0.0);
     camera_command.execute(_facade);
 
-    ui->camera_choose->addItem(QString::number(ui->camera_choose->count() + 1));
+    ui->camera_choose->addItem(QString::number(ui->camera_choose->count()));
     ui->camera_choose->setCurrentIndex(ui->camera_choose->count() - 1);
     update_scene();
 }
