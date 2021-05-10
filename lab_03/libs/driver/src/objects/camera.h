@@ -1,6 +1,6 @@
 #pragma once
 
-#include <object.h>
+#include <objects/object.h>
 #include <visitor.h>
 
 class Camera : public InvisibleObject

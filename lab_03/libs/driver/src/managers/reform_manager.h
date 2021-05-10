@@ -1,7 +1,7 @@
 #pragma once
 
 #include <managers/base_manager.h>
-#include <object.h>
+#include <objects/object.h>
 
 class ReformManager : public BaseManager {
 public:

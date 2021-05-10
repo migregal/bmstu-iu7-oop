@@ -5,9 +5,9 @@
 
 #include <visitor.h>
 
-#include <object.h>
 #include <objects/details.h>
 #include <objects/edge.h>
+#include <objects/object.h>
 #include <objects/point.h>
 
 class Model : public VisibleObject {

@@ -5,7 +5,7 @@ project(driver)
 set(CMAKE_CXX_STANDARD 20)
 
 set(OBJECTS
-        src/object.h
+        src/objects/object.h
         src/objects/point.h
         src/objects/point.cpp
         src/objects/edge.h
@@ -64,12 +64,12 @@ set(FACADE
         )
 
 set(PUB_INC
-        include/driver/base_command.h
-        include/driver/camera_command.h
+        include/driver/commands/base_command.h
+        include/driver/commands/camera_command.h
         src/command/camera_command.cpp
-        include/driver/model_command.h
+        include/driver/commands/model_command.h
         src/command/model_command.cpp
-        include/driver/scene_command.h
+        include/driver/commands/scene_command.h
         src/command/scene_command.cpp
         include/driver/error.h
         )

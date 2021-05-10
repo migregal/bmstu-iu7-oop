@@ -1,4 +1,4 @@
-#include <camera_command.h>
+#include <commands/camera_command.h>
 
 #define cd const double
 

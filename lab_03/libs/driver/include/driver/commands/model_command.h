@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <memory>
 
-#include <base_command.h>
+#include <commands/base_command.h>
 
 
 class ModelBaseCommand : public BaseCommand {};

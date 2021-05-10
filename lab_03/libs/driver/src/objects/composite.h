@@ -1,7 +1,7 @@
 #pragma once
 
-#include <object.h>
 #include <objects/model.h>
+#include <objects/object.h>
 
 class Composite : public Object {
 public:

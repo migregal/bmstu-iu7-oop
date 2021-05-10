@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base_command.h>
+#include <commands/base_command.h>
 
 class CameraBaseCommand : public BaseCommand {};
 

@@ -1,4 +1,4 @@
-#include <scene_command.h>
+#include <commands/scene_command.h>
 
 #include <utility>
 
