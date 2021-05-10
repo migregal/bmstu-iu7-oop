@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGraphicsView>
@@ -65,13 +66,17 @@ public:
     QDoubleSpinBox *oz_box;
     QLabel *label_10;
     QPushButton *turn_button;
+    QFrame *frame;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *label_7;
+    QComboBox *model_choose;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(890, 527);
+        MainWindow->resize(1087, 702);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setLayoutDirection(Qt::LeftToRight);
@@ -282,6 +287,25 @@ public:
 
         verticalLayout->addWidget(frame_3);
 
+        frame = new QFrame(frame_4);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        verticalLayout_2 = new QVBoxLayout(frame);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        label_7 = new QLabel(frame);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        verticalLayout_2->addWidget(label_7);
+
+        model_choose = new QComboBox(frame);
+        model_choose->setObjectName(QString::fromUtf8("model_choose"));
+
+        verticalLayout_2->addWidget(model_choose);
+
+
+        verticalLayout->addWidget(frame);
+
 
         gridLayout_3->addWidget(frame_4, 0, 7, 1, 1, Qt::AlignTop);
 
@@ -301,7 +325,8 @@ public:
         QWidget::setTabOrder(ox_box, oy_box);
         QWidget::setTabOrder(oy_box, oz_box);
         QWidget::setTabOrder(oz_box, turn_button);
-        QWidget::setTabOrder(turn_button, left_button);
+        QWidget::setTabOrder(turn_button, model_choose);
+        QWidget::setTabOrder(model_choose, left_button);
         QWidget::setTabOrder(left_button, up_button);
         QWidget::setTabOrder(up_button, load_button);
         QWidget::setTabOrder(load_button, add_camera);
@@ -311,7 +336,7 @@ public:
         retranslateUi(MainWindow);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow) const
+    void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         left_button->setText(QCoreApplication::translate("MainWindow", "\342\227\200", nullptr));
@@ -332,6 +357,7 @@ public:
         label_11->setText(QCoreApplication::translate("MainWindow", " ox", nullptr));
         label_10->setText(QCoreApplication::translate("MainWindow", "oz", nullptr));
         turn_button->setText(QCoreApplication::translate("MainWindow", "\320\222\321\200\320\260\321\211\320\260\321\202\321\214", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "\320\234\320\276\320\264\320\265\320\273\321\214", nullptr));
     } // retranslateUi
 
 };

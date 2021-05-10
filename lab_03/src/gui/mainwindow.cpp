@@ -58,7 +58,8 @@ void MainWindow::on_move_button_clicked() {
     MoveModel move_command(
             ui->dx_box->value(),
             ui->dy_box->value(),
-            ui->dz_box->value(), 1);
+            ui->dz_box->value(),
+            ui->model_choose->currentIndex() + 1);
     move_command.execute(_facade);
     update_scene();
 }
@@ -79,7 +80,7 @@ void MainWindow::on_scale_button_clicked() {
             ui->kx_box->value(),
             ui->ky_box->value(),
             ui->kz_box->value(),
-            1);
+            ui->model_choose->currentIndex() + 1);
     scale_command.execute(_facade);
     update_scene();
 }
@@ -99,7 +100,8 @@ void MainWindow::on_turn_button_clicked() {
     RotateModel rotate_command(
             ui->ox_box->value(),
             ui->oy_box->value(),
-            ui->oz_box->value(), 1);
+            ui->oz_box->value(),
+            ui->model_choose->currentIndex() + 1);
     rotate_command.execute(_facade);
     update_scene();
 }
@@ -127,6 +129,8 @@ void MainWindow::on_load_button_clicked() {
     }
 
     update_scene();
+    ui->model_choose->addItem(QFileInfo(t.toUtf8().data()).fileName());
+    ui->model_choose->setCurrentIndex(ui->model_choose->count() - 1);
 }
 
 void MainWindow::setup_scene() {
