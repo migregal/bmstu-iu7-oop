@@ -46,7 +46,7 @@ void BaseFacade::draw_scene(const std::shared_ptr<BaseDrawer> &_drawer) {
 }
 
 void BaseFacade::reform_cam(const size_t &cam_numb, const Point &shift) {
-    auto camera = _scene_manager.get_scene()->get_cams().at(cam_numb - 1);
+    auto camera = _scene_manager.get_scene()->get_cams().at(cam_numb);
     ReformManager::reform_object(camera, shift, shift, shift);
 }
 

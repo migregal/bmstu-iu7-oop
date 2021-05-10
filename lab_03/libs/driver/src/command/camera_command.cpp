@@ -22,3 +22,9 @@ void MoveCamera::execute(std::shared_ptr<AbstractFacade> &facade) {
     Point shift(shift_ox, shift_oy, 0);
     facade->reform_cam(cam_number, shift);
 }
+
+SetCamera::SetCamera(const size_t &cam_number): cam_number(cam_number) {}
+
+void SetCamera::execute(std::shared_ptr<AbstractFacade> &facade) {
+    facade->set_camera(cam_number);
+}

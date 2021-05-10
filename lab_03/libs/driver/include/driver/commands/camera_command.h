@@ -47,3 +47,16 @@ private:
     double shift_ox;
     double shift_oy;
 };
+
+class SetCamera : public CameraBaseCommand
+{
+public:
+    SetCamera() = delete;
+    SetCamera(const size_t &cam_number);
+    ~SetCamera() override = default;
+
+    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+
+private:
+    size_t cam_number;
+};

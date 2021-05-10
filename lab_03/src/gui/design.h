@@ -70,6 +70,10 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label_7;
     QComboBox *model_choose;
+    QFrame *frame_5;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_8;
+    QComboBox *camera_choose;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -306,6 +310,25 @@ public:
 
         verticalLayout->addWidget(frame);
 
+        frame_5 = new QFrame(frame_4);
+        frame_5->setObjectName(QString::fromUtf8("frame_5"));
+        frame_5->setFrameShape(QFrame::StyledPanel);
+        frame_5->setFrameShadow(QFrame::Raised);
+        verticalLayout_3 = new QVBoxLayout(frame_5);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        label_8 = new QLabel(frame_5);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        verticalLayout_3->addWidget(label_8);
+
+        camera_choose = new QComboBox(frame_5);
+        camera_choose->setObjectName(QString::fromUtf8("camera_choose"));
+
+        verticalLayout_3->addWidget(camera_choose);
+
+
+        verticalLayout->addWidget(frame_5);
+
 
         gridLayout_3->addWidget(frame_4, 0, 7, 1, 1, Qt::AlignTop);
 
@@ -326,7 +349,8 @@ public:
         QWidget::setTabOrder(oy_box, oz_box);
         QWidget::setTabOrder(oz_box, turn_button);
         QWidget::setTabOrder(turn_button, model_choose);
-        QWidget::setTabOrder(model_choose, left_button);
+        QWidget::setTabOrder(model_choose, camera_choose);
+        QWidget::setTabOrder(camera_choose, left_button);
         QWidget::setTabOrder(left_button, up_button);
         QWidget::setTabOrder(up_button, load_button);
         QWidget::setTabOrder(load_button, add_camera);
@@ -358,6 +382,7 @@ public:
         label_10->setText(QCoreApplication::translate("MainWindow", "oz", nullptr));
         turn_button->setText(QCoreApplication::translate("MainWindow", "\320\222\321\200\320\260\321\211\320\260\321\202\321\214", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindow", "\320\234\320\276\320\264\320\265\320\273\321\214", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\320\274\320\265\321\200\320\260", nullptr));
     } // retranslateUi
 
 };

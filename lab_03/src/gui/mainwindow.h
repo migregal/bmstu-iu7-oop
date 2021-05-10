@@ -41,7 +41,9 @@ protected:
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
-private slots:
+private:
+    void change_cam();
+
     void on_move_button_clicked();
 
     void on_scale_button_clicked();

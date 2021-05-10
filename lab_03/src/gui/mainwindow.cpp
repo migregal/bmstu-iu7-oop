@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     connect(ui->move_button, &QPushButton::clicked, this, &MainWindow::on_move_button_clicked);
     connect(ui->scale_button, &QPushButton::clicked, this, &MainWindow::on_scale_button_clicked);
     connect(ui->turn_button, &QPushButton::clicked, this, &MainWindow::on_turn_button_clicked);
+
+    connect(ui->camera_choose, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::change_cam);
 }
 
 MainWindow::~MainWindow() {
@@ -158,6 +160,16 @@ void MainWindow::on_add_camera_clicked() {
     auto rcontent = ui->graphicsView->contentsRect();
     AddCamera camera_command(rcontent.width() / 2.0, rcontent.height() / 2.0, 0.0);
     camera_command.execute(_facade);
+
+    ui->camera_choose->addItem(QString::number(ui->camera_choose->count() + 1));
+    ui->camera_choose->setCurrentIndex(ui->camera_choose->count() - 1);
+    update_scene();
+}
+
+void MainWindow::change_cam() {
+    SetCamera camera_command(ui->camera_choose->currentIndex());
+    camera_command.execute(_facade);
+    update_scene();
 }
 
 void MainWindow::on_right_button_clicked() {
@@ -172,7 +184,7 @@ void MainWindow::on_right_button_clicked() {
         return;
     }
 
-    MoveCamera camera_command(1, 10, 0);
+    MoveCamera camera_command(ui->camera_choose->currentIndex(), 10, 0);
     camera_command.execute(_facade);
     update_scene();
 }
@@ -189,7 +201,7 @@ void MainWindow::on_up_button_clicked() {
         return;
     }
 
-    MoveCamera camera_command(1, 0, -10);
+    MoveCamera camera_command(ui->camera_choose->currentIndex(), 0, -10);
     camera_command.execute(_facade);
     update_scene();
 }
@@ -206,7 +218,7 @@ void MainWindow::on_down_button_clicked() {
         return;
     }
 
-    MoveCamera camera_command(1, 0, 10);
+    MoveCamera camera_command(ui->camera_choose->currentIndex(), 0, 10);
     camera_command.execute(_facade);
     update_scene();
 }
@@ -223,7 +235,7 @@ void MainWindow::on_left_button_clicked() {
         return;
     }
 
-    MoveCamera camera_command(1, -10, 0);
+    MoveCamera camera_command(ui->camera_choose->currentIndex(), -10, 0);
     camera_command.execute(_facade);
     update_scene();
 }
