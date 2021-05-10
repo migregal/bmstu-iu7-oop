@@ -55,8 +55,12 @@ set(LOAD
         )
 
 set(FACADE
-        include/driver/facade.h
-        src/facade/facade.cpp
+        include/driver/facade/abstract_facade_creator.h
+        include/driver/facade/base_facade_creator.h
+        src/facade/base_facade_creator.cpp
+        include/driver/facade/abstract_facade.h
+        include/driver/facade/base_facade.h
+        src/facade/base_facade.cpp
         )
 
 set(PUB_INC

@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
                                           _facade(nullptr) {
     ui->setupUi(this);
     setup_scene();
-    _facade = std::shared_ptr<Facade>(Facade::instance());
+    _facade = std::shared_ptr<AbstractFacade>(BaseFacadeCreator().createFacade());
 
     connect(ui->load_button, &QPushButton::clicked, this, &MainWindow::on_load_button_clicked);
 

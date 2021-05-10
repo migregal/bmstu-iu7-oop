@@ -1,10 +1,10 @@
 #pragma once
 
-#include <facade.h>
+#include <facade/base_facade.h>
 
 class BaseCommand {
 public:
     BaseCommand() = default;
     virtual ~BaseCommand() = default;
-    virtual void execute(std::shared_ptr<Facade> &facade) = 0;
+    virtual void execute(std::shared_ptr<AbstractFacade> &facade) = 0;
 };
