@@ -70,6 +70,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label_7;
     QComboBox *model_choose;
+    QPushButton *delete_model;
     QFrame *frame_5;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_8;
@@ -307,6 +308,11 @@ public:
 
         verticalLayout_2->addWidget(model_choose);
 
+        delete_model = new QPushButton(frame);
+        delete_model->setObjectName(QString::fromUtf8("delete_model"));
+
+        verticalLayout_2->addWidget(delete_model);
+
 
         verticalLayout->addWidget(frame);
 
@@ -349,7 +355,8 @@ public:
         QWidget::setTabOrder(oy_box, oz_box);
         QWidget::setTabOrder(oz_box, turn_button);
         QWidget::setTabOrder(turn_button, model_choose);
-        QWidget::setTabOrder(model_choose, camera_choose);
+        QWidget::setTabOrder(model_choose, delete_model);
+        QWidget::setTabOrder(delete_model, camera_choose);
         QWidget::setTabOrder(camera_choose, left_button);
         QWidget::setTabOrder(left_button, up_button);
         QWidget::setTabOrder(up_button, load_button);
@@ -382,6 +389,7 @@ public:
         label_10->setText(QCoreApplication::translate("MainWindow", "oz", nullptr));
         turn_button->setText(QCoreApplication::translate("MainWindow", "\320\222\321\200\320\260\321\211\320\260\321\202\321\214", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindow", "\320\234\320\276\320\264\320\265\320\273\321\214", nullptr));
+        delete_model->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", nullptr));
         label_8->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\320\274\320\265\321\200\320\260", nullptr));
     } // retranslateUi
 

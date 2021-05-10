@@ -325,6 +325,13 @@
           <item>
            <widget class="QComboBox" name="model_choose"/>
           </item>
+          <item>
+           <widget class="QPushButton" name="delete_model">
+            <property name="text">
+             <string>Удалить</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -372,6 +379,7 @@
   <tabstop>oz_box</tabstop>
   <tabstop>turn_button</tabstop>
   <tabstop>model_choose</tabstop>
+  <tabstop>delete_model</tabstop>
   <tabstop>camera_choose</tabstop>
   <tabstop>left_button</tabstop>
   <tabstop>up_button</tabstop>

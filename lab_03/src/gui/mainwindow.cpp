@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     _facade = std::shared_ptr<AbstractFacade>(BaseFacadeCreator().createFacade());
 
     connect(ui->load_button, &QPushButton::clicked, this, &MainWindow::on_load_button_clicked);
+    connect(ui->delete_model, &QPushButton::clicked, this, &MainWindow::on_delete_model_button_clicked);
 
     connect(ui->add_camera, &QPushButton::clicked, this, &MainWindow::on_add_camera_clicked);
 
@@ -135,6 +136,22 @@ void MainWindow::on_load_button_clicked() {
     ui->model_choose->setCurrentIndex(ui->model_choose->count() - 1);
 }
 
+void MainWindow::on_delete_model_button_clicked() {
+    try {
+        check_models_exist();
+    } catch (const ModelError &error) {
+        QMessageBox::critical(nullptr, "Ошибка", "Прежде чем удалять модель, добавьте хотя бы одну.");
+        return;
+    }
+
+    RemoveModel remove_command(ui->model_choose->currentIndex());
+    remove_command.execute(_facade);
+
+    update_scene();
+
+    ui->model_choose->removeItem(ui->model_choose->currentIndex());
+}
+
 void MainWindow::setup_scene() {
     _scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(_scene);
@@ -161,9 +178,10 @@ void MainWindow::on_add_camera_clicked() {
     AddCamera camera_command(rcontent.width() / 2.0, rcontent.height() / 2.0, 0.0);
     camera_command.execute(_facade);
 
+    update_scene();
+
     ui->camera_choose->addItem(QString::number(ui->camera_choose->count()));
     ui->camera_choose->setCurrentIndex(ui->camera_choose->count() - 1);
-    update_scene();
 }
 
 void MainWindow::change_cam() {

@@ -55,7 +55,7 @@ size_t BaseFacade::cams_count() {
 }
 
 size_t BaseFacade::models_count() {
-    return _scene_manager.get_scene()->get_cams().size();
+    return _scene_manager.get_scene()->get_models().size();
 }
 
 BaseFacade::BaseFacade() {
