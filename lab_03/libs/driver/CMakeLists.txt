@@ -54,13 +54,6 @@ set(LOAD
         src/load/model_builder.cpp
         )
 
-set(COLLECTIONS
-        src/vector/vector.h
-        src/vector/vector.hpp
-        src/vector/iterator.h
-        src/vector/iterator.hpp
-        )
-
 set(FACADE
         include/driver/facade.h
         src/facade/facade.cpp
@@ -82,7 +75,6 @@ add_library(${PROJECT_NAME}
         ${DRAWERS}
         ${MANAGERS}
         ${LOAD}
-        ${COLLECTIONS}
         ${FACADE}
         ${PUB_INC}
         )
