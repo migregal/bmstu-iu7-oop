@@ -354,6 +354,13 @@
           <item>
            <widget class="QComboBox" name="camera_choose"/>
           </item>
+          <item>
+           <widget class="QPushButton" name="delete_camera">
+            <property name="text">
+             <string>Удалить</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -381,6 +388,7 @@
   <tabstop>model_choose</tabstop>
   <tabstop>delete_model</tabstop>
   <tabstop>camera_choose</tabstop>
+  <tabstop>delete_camera</tabstop>
   <tabstop>left_button</tabstop>
   <tabstop>up_button</tabstop>
   <tabstop>load_button</tabstop>

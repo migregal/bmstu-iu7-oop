@@ -36,6 +36,8 @@ protected:
 
     void check_cam_exist();
 
+    void check_can_delete_cam();
+
     void check_models_exist();
 
 protected:
@@ -55,6 +57,8 @@ private:
     void on_delete_model_button_clicked();
 
     void on_add_camera_clicked();
+
+    void on_delete_camera_clicked();
 
     void on_right_button_clicked();
 

@@ -75,6 +75,7 @@ public:
     QVBoxLayout *verticalLayout_3;
     QLabel *label_8;
     QComboBox *camera_choose;
+    QPushButton *delete_camera;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -332,6 +333,11 @@ public:
 
         verticalLayout_3->addWidget(camera_choose);
 
+        delete_camera = new QPushButton(frame_5);
+        delete_camera->setObjectName(QString::fromUtf8("delete_camera"));
+
+        verticalLayout_3->addWidget(delete_camera);
+
 
         verticalLayout->addWidget(frame_5);
 
@@ -357,7 +363,8 @@ public:
         QWidget::setTabOrder(turn_button, model_choose);
         QWidget::setTabOrder(model_choose, delete_model);
         QWidget::setTabOrder(delete_model, camera_choose);
-        QWidget::setTabOrder(camera_choose, left_button);
+        QWidget::setTabOrder(camera_choose, delete_camera);
+        QWidget::setTabOrder(delete_camera, left_button);
         QWidget::setTabOrder(left_button, up_button);
         QWidget::setTabOrder(up_button, load_button);
         QWidget::setTabOrder(load_button, add_camera);
@@ -391,6 +398,7 @@ public:
         label_7->setText(QCoreApplication::translate("MainWindow", "\320\234\320\276\320\264\320\265\320\273\321\214", nullptr));
         delete_model->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", nullptr));
         label_8->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\320\274\320\265\321\200\320\260", nullptr));
+        delete_camera->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", nullptr));
     } // retranslateUi
 
 };

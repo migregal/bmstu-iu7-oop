@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     connect(ui->delete_model, &QPushButton::clicked, this, &MainWindow::on_delete_model_button_clicked);
 
     connect(ui->add_camera, &QPushButton::clicked, this, &MainWindow::on_add_camera_clicked);
+    connect(ui->delete_camera, &QPushButton::clicked, this, &MainWindow::on_delete_camera_clicked);
 
     connect(ui->right_button, &QPushButton::clicked, this, &MainWindow::on_right_button_clicked);
     connect(ui->up_button, &QPushButton::clicked, this, &MainWindow::on_up_button_clicked);
@@ -35,6 +36,13 @@ MainWindow::~MainWindow() {
 void MainWindow::check_cam_exist() {
     if (!_facade->cams_count()) {
         std::string message = "No camera found.";
+        throw CameraError(message);
+    }
+}
+
+void MainWindow::check_can_delete_cam() {
+    if (_facade->cams_count() <= 1 && _facade->models_count()) {
+        std::string message = "Can not delete the last camera with the loaded models";
         throw CameraError(message);
     }
 }
@@ -180,11 +188,52 @@ void MainWindow::on_add_camera_clicked() {
 
     update_scene();
 
-    ui->camera_choose->addItem(QString::number(ui->camera_choose->count()));
+    auto cam = ui->camera_choose;
+    if (0 == cam->count())
+        cam->addItem(QString::number(1));
+    else
+        cam->addItem(QString::number(
+                cam->itemText(cam->count() - 1).toInt() + 1));
+
     ui->camera_choose->setCurrentIndex(ui->camera_choose->count() - 1);
 }
 
+void MainWindow::on_delete_camera_clicked() {
+    try {
+        check_cam_exist();
+    } catch (const CameraError &error) {
+        QMessageBox::critical(nullptr, "Ошибка", "Прежде чем удалять камеру, добавьте хотя бы одну.");
+        return;
+    }
+
+    try {
+        check_can_delete_cam();
+    } catch (const CameraError &error) {
+        QMessageBox::critical(nullptr, "Ошибка", "Прежде чем удалять камеру, необходимо удалить оставшиеся модели.");
+        return;
+    }
+
+    RemoveCamera remove_command(ui->camera_choose->currentIndex());
+    remove_command.execute(_facade);
+
+    ui->camera_choose->removeItem(ui->camera_choose->currentIndex());
+
+    try {
+        check_cam_exist();
+    } catch (const CameraError &error) {
+        return;
+    }
+
+    update_scene();
+}
+
 void MainWindow::change_cam() {
+    try {
+        check_cam_exist();
+    } catch (const CameraError &error) {
+        return;
+    }
+
     SetCamera camera_command(ui->camera_choose->currentIndex());
     camera_command.execute(_facade);
     update_scene();
