@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     connect(ui->add_camera, &QPushButton::clicked, this, &MainWindow::on_add_camera_clicked);
     connect(ui->delete_camera, &QPushButton::clicked, this, &MainWindow::on_delete_camera_clicked);
 
+    connect(ui->clear_screen, &QPushButton::clicked, this, &MainWindow::clear_scene);
+
     connect(ui->right_button, &QPushButton::clicked, this, &MainWindow::on_right_button_clicked);
     connect(ui->up_button, &QPushButton::clicked, this, &MainWindow::on_up_button_clicked);
     connect(ui->down_button, &QPushButton::clicked, this, &MainWindow::on_down_button_clicked);
@@ -155,9 +157,9 @@ void MainWindow::on_delete_model_button_clicked() {
     RemoveModel remove_command(ui->model_choose->currentIndex());
     remove_command.execute(_facade);
 
-    update_scene();
-
     ui->model_choose->removeItem(ui->model_choose->currentIndex());
+
+    update_scene();
 }
 
 void MainWindow::setup_scene() {
@@ -179,6 +181,21 @@ void MainWindow::update_scene() {
 }
 
 void MainWindow::clear_scene() {
+    try {
+        check_models_exist();
+    } catch (const ModelError &error) {
+        QMessageBox::critical(nullptr, "Ошибка", "Прежде чем удалять модели, добавьте хотя бы одну.");
+        return;
+    }
+
+    for (int i = ui->model_choose->count() - 1; i >= 0; --i) {
+        RemoveModel remove_command(i);
+        remove_command.execute(_facade);
+
+        ui->model_choose->removeItem(i);
+    }
+
+    update_scene();
 }
 
 void MainWindow::on_add_camera_clicked() {
