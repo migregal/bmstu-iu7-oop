@@ -14,7 +14,6 @@ public:
 
     void set_scene(std::shared_ptr<Scene> scene_);
     void set_cam(const size_t &cam_numb);
-    void next_cam();
 
 private:
     std::shared_ptr<Scene> _scene;

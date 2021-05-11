@@ -24,5 +24,3 @@ void SceneManager::set_cam(const size_t &number) {
     current_cam = _camera;
 }
 
-void SceneManager::next_cam() {
-}
