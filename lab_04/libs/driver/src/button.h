@@ -12,17 +12,17 @@ public:
   explicit Button(QWidget *parent = nullptr);
   ~Button() override = default;
 
-  void set_floor(const ssize_t &floor);
+  void set_floor(const int &floor);
 
 public slots:
   void pressed();
   void unpressed();
 
 signals:
-  void floor_pressed(ssize_t floor);
+  void floor_pressed(int floor);
   void unpress_signal();
 
 private:
   status status;
-  ssize_t button_floor;
+  int button_floor;
 };

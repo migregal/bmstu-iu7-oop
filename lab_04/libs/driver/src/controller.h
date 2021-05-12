@@ -1,5 +1,4 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -26,12 +25,12 @@ public:
   ~Controller() override = default;
 
 public slots:
-  void new_target(ssize_t floor);
-  void passed_floor(ssize_t floor, direction direction_);
+  void new_target(int floor);
+  void passed_floor(int floor, direction direction_);
 
 signals:
-  void new_target_signal(ssize_t floor);
-  void stopped_signal(bool, ssize_t = 1);
+  void new_target_signal(int floor);
+  void stopped_signal(bool, int = 1);
 
 private:
   status status;
@@ -43,7 +42,5 @@ private:
   std::vector<bool> visited_floors;
   std::unique_ptr<QVBoxLayout> layout;
 
-  bool target_exist(ssize_t &new_floor);
+  bool target_exist(int &new_floor);
 };
-
-#endif

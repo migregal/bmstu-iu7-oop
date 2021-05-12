@@ -1,5 +1,4 @@
-#ifndef DOOR_H
-#define DOOR_H
+#pragma once
 
 #include <QDebug>
 #include <QObject>
@@ -32,5 +31,3 @@ private:
   QTimer closing_timer;
   QTimer opened_timer;
 };
-
-#endif

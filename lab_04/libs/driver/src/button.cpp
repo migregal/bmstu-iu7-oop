@@ -10,7 +10,7 @@ Button::Button(QWidget *parrent) : QPushButton(parrent) {
   button_floor = 1;
 }
 
-void Button::set_floor(const ssize_t &floor) { button_floor = floor; }
+void Button::set_floor(const int &floor) { button_floor = floor; }
 
 void Button::pressed() {
   if (status == not_active) {

@@ -15,12 +15,12 @@ Controller::Controller(QWidget *parent) : QWidget(parent) {
     layout->addWidget(dynamic_cast<QPushButton *>(btn.get()));
 
     visited_floors.push_back(true);
-    QObject::connect(btn.get(), SIGNAL(floor_pressed(ssize_t)), this,
-                     SLOT(new_target(ssize_t)));
+    QObject::connect(btn.get(), SIGNAL(floor_pressed(int)), this,
+                     SLOT(new_target(int)));
   }
 }
 
-void Controller::new_target(ssize_t floor) {
+void Controller::new_target(int floor) {
   status = BUSY;
   visited_floors[floor - 1] = false;
 
@@ -29,7 +29,7 @@ void Controller::new_target(ssize_t floor) {
   emit new_target_signal(floor);
 }
 
-void Controller::passed_floor(ssize_t floor, direction direction_) {
+void Controller::passed_floor(int floor, direction direction_) {
   if (status == BUSY) {
     current_floor = floor;
     _direction = direction_;
@@ -51,7 +51,7 @@ void Controller::passed_floor(ssize_t floor, direction direction_) {
   }
 }
 
-bool Controller::target_exist(ssize_t &new_floor) {
+bool Controller::target_exist(int &new_floor) {
   int direction = _direction != STOP ? _direction : DOWN;
 
   for (int i = current_floor - 1; i >= 0 && i < FLOOR_COUNT; i += direction) {

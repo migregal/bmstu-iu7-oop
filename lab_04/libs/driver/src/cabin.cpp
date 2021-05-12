@@ -11,8 +11,8 @@ Cabin::Cabin(QObject *parent) {
   QObject::connect(&move_timer, SIGNAL(timeout()), this, SLOT(cabin_moving()));
 
   QObject::connect(this, SIGNAL(moving_signal()), this, SLOT(cabin_moving()));
-  QObject::connect(this, SIGNAL(stopped_signal(bool, ssize_t)), this,
-                   SLOT(cabin_stopped(bool, ssize_t)));
+  QObject::connect(this, SIGNAL(stopped_signal(bool, int)), this,
+                   SLOT(cabin_stopped(bool, int)));
   QObject::connect(this, SIGNAL(open_doors_signal()), &_door, SLOT(opening()));
   QObject::connect(&_door, SIGNAL(closed_signal()), this, SLOT(cabin_moving()));
 }
@@ -32,7 +32,7 @@ void Cabin::cabin_moving() {
   }
 }
 
-void Cabin::cabin_stopped(bool is_last, ssize_t new_floor) {
+void Cabin::cabin_stopped(bool is_last, int new_floor) {
   if (is_last) {
     status = FREE;
   } else {
@@ -44,7 +44,7 @@ void Cabin::cabin_stopped(bool is_last, ssize_t new_floor) {
   emit open_doors_signal();
 }
 
-void Cabin::cabin_take_target(ssize_t floor) {
+void Cabin::cabin_take_target(int floor) {
   status = GET;
   need_floor = floor;
 
