@@ -14,7 +14,7 @@ public:
     MoveModel(const double &dx, const double &dy, const double &dz, const size_t &mnumb);
     ~MoveModel() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     size_t model_numb;
@@ -28,7 +28,7 @@ public:
     ScaleModel(const double &kx, const double &ky, const double &kz, const std::size_t &mnumb);
     ~ScaleModel() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     size_t model_numb;
@@ -42,7 +42,7 @@ public:
     RotateModel(const double &ox, const double &oy, const double &oz, const std::size_t &mnumb);
     ~RotateModel() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     size_t model_numb;
@@ -57,7 +57,7 @@ public:
     ReformModel(const size_t &numb, const Point &move, const Point &scale, const Point &turn);
     ~ReformModel() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     size_t model_numb;
@@ -72,7 +72,7 @@ public:
     explicit LoadModel(std::string fname);
     ~LoadModel() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     std::string fname;
@@ -85,7 +85,7 @@ public:
     explicit AddModel(std::shared_ptr<Object> model);
     ~AddModel() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     std::shared_ptr<Object> model;
@@ -98,8 +98,21 @@ public:
     explicit RemoveModel(const size_t &model_numb);
     ~RemoveModel() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     size_t model_numb;
+};
+
+class ModelCount : public ModelBaseCommand
+{
+public:
+    ModelCount() = delete;
+    explicit ModelCount(std::shared_ptr<size_t> &count);
+    ~ModelCount() override = default;
+
+    void execute(std::shared_ptr<AbstractController> &facade) override;
+
+private:
+    std::shared_ptr<size_t> &_count;
 };

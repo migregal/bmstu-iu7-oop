@@ -6,13 +6,13 @@
 #include <managers/reform_manager.h>
 #include <managers/load_manager.h>
 
-class AbstractFacade {
+class AbstractController {
 public:
-    AbstractFacade() = default;
-    AbstractFacade(const AbstractFacade &) = default;
-    AbstractFacade &operator=(const AbstractFacade &) = delete;
+    AbstractController() = default;
+    AbstractController(const AbstractController &) = default;
+    AbstractController &operator=(const AbstractController &) = delete;
 
-    virtual ~AbstractFacade() = default;
+    virtual ~AbstractController() = default;
 
     virtual void load_model(std::string fname) = 0;
     virtual void add_model(const std::shared_ptr<Object> &) = 0;

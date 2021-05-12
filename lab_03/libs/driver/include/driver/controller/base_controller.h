@@ -1,19 +1,19 @@
 #pragma once
 
-#include <facade/abstract_facade.h>
+#include <controller/abstract_controller.h>
 #include <load/base_loader.h>
 #include <managers/draw_manager.h>
 #include <managers/load_manager.h>
 #include <managers/reform_manager.h>
 #include <managers/scene_manager.h>
 
-class BaseFacade : public AbstractFacade {
+class BaseController : public AbstractController {
 public:
-    BaseFacade();
-    BaseFacade(const BaseFacade &) = delete;
-    BaseFacade &operator=(const BaseFacade &) = delete;
+    BaseController();
+    BaseController(const BaseController &) = delete;
+    BaseController &operator=(const BaseController &) = delete;
 
-    ~BaseFacade() override = default;
+    ~BaseController() override = default;
 
     void load_model(std::string fname) override;
     void add_model(const std::shared_ptr<Object> &) override;

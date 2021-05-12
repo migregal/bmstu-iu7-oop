@@ -11,7 +11,7 @@ public:
     AddCamera(const double x, const double y, const double z);
     ~AddCamera() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     double x_pos;
@@ -26,7 +26,7 @@ public:
     explicit RemoveCamera(const size_t &camera_numb);
     ~RemoveCamera() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     size_t camera_numb;
@@ -39,7 +39,7 @@ public:
     MoveCamera(const size_t &cam_number, const double &shift_ox, const double &shift_oy);
     ~MoveCamera() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
 
 private:
     size_t cam_number;
@@ -52,11 +52,25 @@ class SetCamera : public CameraBaseCommand
 {
 public:
     SetCamera() = delete;
-    SetCamera(const size_t &cam_number);
+    explicit SetCamera(const size_t &cam_number);
     ~SetCamera() override = default;
 
-    void execute(std::shared_ptr<AbstractFacade> &facade) override;
+    void execute(std::shared_ptr<AbstractController> &facade) override;
+
 
 private:
     size_t cam_number;
+};
+
+class CameraCount : public CameraBaseCommand
+{
+public:
+    CameraCount() = delete;
+    explicit CameraCount(std::shared_ptr<size_t> &count);
+    ~CameraCount() override = default;
+
+    void execute(std::shared_ptr<AbstractController> &facade) override;
+
+private:
+    std::shared_ptr<size_t> &_count;
 };

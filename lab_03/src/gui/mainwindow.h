@@ -9,8 +9,7 @@
 #include <driver/commands/scene_command.h>
 #include <driver/drawer.h>
 #include <driver/error.h>
-#include <driver/facade/base_facade.h>
-#include <driver/facade/base_facade_creator.h>
+#include <driver/facade/facade.h>
 
 #include "design.h"
 
@@ -71,6 +70,6 @@ private:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *_scene;
-    std::shared_ptr<AbstractFacade> _facade;
+    std::shared_ptr<Facade> _facade;
     std::shared_ptr<BaseDrawer> _drawer;
 };
