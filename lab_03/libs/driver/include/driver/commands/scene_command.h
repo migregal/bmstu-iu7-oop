@@ -3,8 +3,8 @@
 
 #include <memory>
 
+#include <base_drawer.h>
 #include <commands/base_command.h>
-#include <drawer.h>
 
 
 class SceneBaseCommand : public BaseCommand {};

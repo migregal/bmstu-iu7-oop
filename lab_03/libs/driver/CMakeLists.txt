@@ -23,7 +23,7 @@ set(OBJECTS
         )
 
 set(DRAWERS
-        include/driver/drawer.h
+        include/driver/base_drawer.h
         )
 
 set(MANAGERS
@@ -74,6 +74,7 @@ set(PUB_INC
         include/driver/commands/scene_command.h
         src/command/scene_command.cpp
         include/driver/error.h
+        include/driver/abstract_fabric.h
         )
 
 add_library(${PROJECT_NAME}

@@ -3,11 +3,11 @@
 #include <QMainWindow>
 #include <QMessageBox>
 
+#include <driver/base_drawer.h>
 #include <driver/commands/base_command.h>
 #include <driver/commands/camera_command.h>
 #include <driver/commands/model_command.h>
 #include <driver/commands/scene_command.h>
-#include <driver/drawer.h>
 #include <driver/error.h>
 #include <driver/facade/facade.h>
 

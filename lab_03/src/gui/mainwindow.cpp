@@ -186,9 +186,8 @@ void MainWindow::setup_scene() {
     auto rcontent = ui->graphicsView->contentsRect();
     _scene->setSceneRect(0, 0, rcontent.width(), rcontent.height());
 
-    std::shared_ptr<AbstractFactory> factory(new QtFactory);
-    std::shared_ptr<BaseDrawer> drawer(new QtDrawer(_scene));
-    _drawer = drawer;
+    std::shared_ptr<AbstractFactory> factory(new QtFactory(_scene));
+    _drawer = factory->create_graphics();
 }
 
 void MainWindow::update_scene() {
