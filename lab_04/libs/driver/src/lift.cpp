@@ -1,8 +1,9 @@
-#include "lift.h"
+#include <lift.h>
+
 #include <QPalette>
 
 Lift::Lift(QObject *parent) : QObject(parent) {
-  this->_controller.setStyleSheet("background-color:green;");
+  _controller.setStyleSheet("background-color:green;");
 
   QObject::connect(&_cabin, SIGNAL(floor_passed(ssize_t, direction)),
                    &_controller, SLOT(passed_floor(ssize_t, direction)));
@@ -12,4 +13,4 @@ Lift::Lift(QObject *parent) : QObject(parent) {
                    SLOT(cabin_stopped(bool, ssize_t)));
 }
 
-QWidget *Lift::widget() { return &this->_controller; }
+QWidget *Lift::widget() { return &_controller; }

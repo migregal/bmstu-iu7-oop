@@ -7,10 +7,10 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  this->setFixedSize(200, 500);
-  this->layout = std::make_unique<QVBoxLayout>();
-  this->ui->centralwidget->setLayout(this->layout.get());
-  this->layout->addWidget(this->_lift.widget());
+  setFixedSize(200, 500);
+  layout = std::make_unique<QVBoxLayout>();
+  ui->centralwidget->setLayout(layout.get());
+  layout->addWidget(_lift.widget());
 }
 
 MainWindow::~MainWindow() { delete ui; }

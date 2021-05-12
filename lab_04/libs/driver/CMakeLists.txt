@@ -18,8 +18,8 @@ set(SOURCES
         src/cabin.cpp
         src/controller.h
         src/controller.cpp
-        src/Door.h
-        src/Door.cpp
+        src/door.h
+        src/door.cpp
         src/lift.cpp
         )
 

@@ -1,8 +1,9 @@
-#include "Door.h"
-#include "controller.h"
+#include <door.h>
+
+#include <controller.h>
 
 Door::Door() {
-  this->status = CLOSED;
+  status = CLOSED;
 
   QObject::connect(&opening_timer, SIGNAL(timeout()), this, SLOT(opened()));
   QObject::connect(&opened_timer, SIGNAL(timeout()), this, SLOT(closing()));
@@ -10,40 +11,40 @@ Door::Door() {
 }
 
 void Door::opening() {
-  if (status == CLOSED || status == CLOSING) {
+  if (CLOSED == status || CLOSING == status) {
     qDebug() << "Двери открываются.";
 
-    if (this->status == CLOSED) {
-      this->status = OPENING;
-      this->opening_timer.start(DOORS_TIME);
+    if (CLOSED == status) {
+      status = OPENING;
+      opening_timer.start(DOORS_TIME);
     } else {
-      this->status = OPENING;
+      status = OPENING;
       auto timer = closing_timer.remainingTime();
       closing_timer.stop();
-      this->opening_timer.start(DOORS_TIME - timer);
+      opening_timer.start(DOORS_TIME - timer);
     }
   }
 }
 
 void Door::opened() {
-  if (status == OPENING) {
-    this->status = OPEN;
+  if (OPENING == status) {
+    status = OPEN;
     qDebug() << "Двери открыты!";
-    this->opened_timer.start(DOORS_TIME);
+    opened_timer.start(DOORS_TIME);
   }
 }
 
 void Door::closing() {
-  if (status == OPEN) {
-    this->status = CLOSING;
+  if (OPEN == status) {
+    status = CLOSING;
     qDebug() << "Двери закрываются.";
-    this->closing_timer.start(DOORS_TIME);
+    closing_timer.start(DOORS_TIME);
   }
 }
 
 void Door::closed() {
-  if (status == CLOSING) {
-    this->status = CLOSED;
+  if (CLOSING == status) {
+    status = CLOSED;
     qDebug() << "Двери закрыты.";
     emit closed_signal();
   }

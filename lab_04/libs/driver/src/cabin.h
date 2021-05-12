@@ -2,8 +2,8 @@
 
 #include <QObject>
 
-#include <Door.h>
 #include <controller.h>
+#include <door.h>
 
 class Cabin : public QObject {
   Q_OBJECT;
@@ -25,7 +25,7 @@ signals:
 
 private:
   Door _door;
-  ssize_t current_floor;
+  ssize_t cur_floor;
   ssize_t need_floor;
 
   direction _direction;

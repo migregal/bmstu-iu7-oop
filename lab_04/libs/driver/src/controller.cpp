@@ -1,8 +1,10 @@
-#include "controller.h"
+#include <controller.h>
+
+#include <memory>
 
 Controller::Controller(QWidget *parent) : QWidget(parent) {
-  this->layout = std::unique_ptr<QVBoxLayout>(new QVBoxLayout);
-  this->setLayout(this->layout.get());
+  layout = std::make_unique<QVBoxLayout>();
+  setLayout(layout.get());
 
   for (int i = 0; i < FLOOR_COUNT; i++) {
     std::shared_ptr<Button> btn(new Button);
@@ -19,30 +21,30 @@ Controller::Controller(QWidget *parent) : QWidget(parent) {
 }
 
 void Controller::new_target(ssize_t floor) {
-  this->status = BUSY;
-  this->visited_floors[floor - 1] = false;
+  status = BUSY;
+  visited_floors[floor - 1] = false;
 
   target_exist(floor);
-  this->needed_floor = floor;
+  needed_floor = floor;
   emit new_target_signal(floor);
 }
 
 void Controller::passed_floor(ssize_t floor, direction direction_) {
   if (status == BUSY) {
-    this->current_floor = floor;
-    this->_direction = direction_;
+    current_floor = floor;
+    _direction = direction_;
 
     if (current_floor == needed_floor) {
       qDebug() << "Лифт остановился на этаже: " << floor;
 
-      emit this->buttons.at(floor - 1)->unpress_signal();
-      this->visited_floors[floor - 1] = true;
+      emit buttons.at(floor - 1)->unpress_signal();
+      visited_floors[floor - 1] = true;
 
       if (target_exist(floor)) {
-        this->needed_floor = floor;
+        needed_floor = floor;
         emit stopped_signal(false, floor);
       } else {
-        this->status = FREE;
+        status = FREE;
         emit stopped_signal(true);
       }
     }
