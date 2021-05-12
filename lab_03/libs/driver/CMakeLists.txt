@@ -55,11 +55,11 @@ set(LOAD
         )
 
 set(CONTROLLER
-        include/driver/controller/abstract_controller_creator.h
-        include/driver/controller/base_controller_creator.h
+        src/controller/abstract_controller_creator.h
+        src/controller/base_controller_creator.h
         src/controller/base_controller_creator.cpp
-        include/driver/controller/abstract_controller.h
-        include/driver/controller/base_controller.h
+        src/controller/abstract_controller.h
+        src/controller/base_controller.h
         src/controller/base_controller.cpp
         include/driver/facade/facade.h
         src/facade/facade.cpp
