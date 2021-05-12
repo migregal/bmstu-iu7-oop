@@ -2,8 +2,8 @@
 
 #include <QObject>
 
-#include <controller.h>
-#include <door.h>
+#include <controller/controller.h>
+#include <door/door.h>
 
 class Cabin : public QObject {
   Q_OBJECT;

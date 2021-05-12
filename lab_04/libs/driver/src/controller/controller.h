@@ -7,7 +7,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-#include <button.h>
+#include <button/button.h>
 
 #define FLOOR_COUNT 9
 #define DOORS_TIME 500

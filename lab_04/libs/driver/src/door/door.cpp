@@ -1,6 +1,6 @@
-#include <door.h>
+#include <door/door.h>
 
-#include <controller.h>
+#include <controller/controller.h>
 
 Door::Door() {
   status = CLOSED;

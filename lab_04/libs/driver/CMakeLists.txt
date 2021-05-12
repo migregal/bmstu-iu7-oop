@@ -12,15 +12,15 @@ set(REQUIRED_LIBS Core Gui Widgets)
 set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets)
 
 set(SOURCES
-        src/button.h
-        src/button.cpp
-        src/cabin.h
-        src/cabin.cpp
-        src/controller.h
-        src/controller.cpp
-        src/door.h
-        src/door.cpp
-        src/lift.cpp
+        src/button/button.h
+        src/button/button.cpp
+        src/cabin/cabin.h
+        src/cabin/cabin.cpp
+        src/controller/controller.h
+        src/controller/controller.cpp
+        src/door/door.h
+        src/door/door.cpp
+        src/lift/lift.cpp
         )
 
 set(PUB_INC

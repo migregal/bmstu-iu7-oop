@@ -2,8 +2,8 @@
 
 #include <QObject>
 
-#include <cabin.h>
-#include <controller.h>
+#include <cabin/cabin.h>
+#include <controller/controller.h>
 
 class Lift : public QObject {
   Q_OBJECT;

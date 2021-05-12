@@ -1,4 +1,4 @@
-#include <cabin.h>
+#include <cabin/cabin.h>
 
 #include <QDebug>
 
