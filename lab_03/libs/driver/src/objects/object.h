@@ -31,6 +31,7 @@ public:
     virtual Iterator begin() { return Iterator(); };
     virtual Iterator end() { return Iterator(); };
 
+    virtual bool is_visible() { return false; }
     [[nodiscard]] virtual bool is_composite() const { return false; };
     virtual void accept(std::shared_ptr<Visitor> visitor) = 0;
     virtual void reform(const Point &move, const Point &scale, const Point &turn) = 0;
@@ -41,7 +42,7 @@ public:
     VisibleObject() = default;
     ~VisibleObject() override = default;
 
-    virtual bool is_visible() { return true; }
+    bool is_visible() override { return true; }
 };
 
 class InvisibleObject : public Object {
@@ -49,5 +50,5 @@ public:
     InvisibleObject() = default;
     ~InvisibleObject() override = default;
 
-    virtual bool is_visible() { return false; }
+    bool is_visible() override { return false; }
 };

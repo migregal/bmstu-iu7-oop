@@ -26,6 +26,10 @@ Iterator Composite::end() {
     return objects.end();
 }
 
+bool Composite::is_visible() {
+    return false;
+}
+
 bool Composite::is_composite() const {
     return true;
 }
