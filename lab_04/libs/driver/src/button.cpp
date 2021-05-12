@@ -13,22 +13,24 @@ Button::Button(QWidget *parrent) : QPushButton(parrent) {
 void Button::set_floor(const int &floor) { button_floor = floor; }
 
 void Button::pressed() {
-  if (status == not_active) {
-    setStyleSheet("background-color:red;");
-    update();
+  if (status != not_active)
+    return;
 
-    status = active;
-    setDisabled(true);
-    emit floor_pressed(button_floor);
-  }
+  setStyleSheet("background-color:red;");
+  update();
+
+  status = active;
+  setDisabled(true);
+  emit floor_pressed(button_floor);
 }
 
 void Button::unpressed() {
-  if (status == active) {
-    setStyleSheet("background-color:green;");
-    update();
+  if (status != active)
+    return;
 
-    status = not_active;
-    setDisabled(false);
-  }
+  setStyleSheet("background-color:green;");
+  update();
+
+  status = not_active;
+  setDisabled(false);
 }

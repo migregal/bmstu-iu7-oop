@@ -18,17 +18,18 @@ Cabin::Cabin(QObject *parent) {
 }
 
 void Cabin::cabin_moving() {
-  if (status == MOVING || status == GET) {
-    status = MOVING;
-    move_timer.start(MOVING_TIME);
+  if (status != MOVING && status != GET)
+    return;
 
-    qDebug() << "Лифт едет. Этаж: " << cur_floor;
-    emit floor_passed(cur_floor, _direction);
+  status = MOVING;
+  move_timer.start(MOVING_TIME);
 
-    if (cur_floor != need_floor) {
-      _direction = cur_floor > need_floor ? DOWN : UP;
-      cur_floor = cur_floor > need_floor ? cur_floor - 1 : cur_floor + 1;
-    }
+  qDebug() << "Лифт едет. Этаж: " << cur_floor;
+  emit floor_passed(cur_floor, _direction);
+
+  if (cur_floor != need_floor) {
+    _direction = cur_floor > need_floor ? DOWN : UP;
+    cur_floor = cur_floor > need_floor ? cur_floor - 1 : cur_floor + 1;
   }
 }
 

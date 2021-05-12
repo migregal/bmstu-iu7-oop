@@ -30,43 +30,43 @@ void Controller::new_target(int floor) {
 }
 
 void Controller::passed_floor(int floor, direction direction_) {
-  if (status == BUSY) {
-    current_floor = floor;
-    _direction = direction_;
+  if (status != BUSY)
+    return;
 
-    if (current_floor == needed_floor) {
-      qDebug() << "Лифт остановился на этаже: " << floor;
+  current_floor = floor;
+  _direction = direction_;
 
-      emit buttons.at(floor - 1)->unpress_signal();
-      visited_floors[floor - 1] = true;
+  if (current_floor != needed_floor)
+    return;
 
-      if (target_exist(floor)) {
-        needed_floor = floor;
-        emit stopped_signal(false, floor);
-      } else {
-        status = FREE;
-        emit stopped_signal(true);
-      }
-    }
+  qDebug() << "Лифт остановился на этаже: " << floor;
+
+  emit buttons.at(floor - 1)->unpress_signal();
+  visited_floors[floor - 1] = true;
+
+  if (target_exist(floor)) {
+    needed_floor = floor;
+    emit stopped_signal(false, floor);
+  } else {
+    status = FREE;
+    emit stopped_signal(true);
   }
 }
 
 bool Controller::target_exist(int &new_floor) {
   int direction = _direction != STOP ? _direction : DOWN;
 
-  for (int i = current_floor - 1; i >= 0 && i < FLOOR_COUNT; i += direction) {
+  for (int i = current_floor - 1; i >= 0 && i < FLOOR_COUNT; i += direction)
     if (!visited_floors[i]) {
       new_floor = i + 1;
       return true;
     }
-  }
 
-  for (int i = current_floor - 1; i >= 0 && i < FLOOR_COUNT; i += -direction) {
+  for (int i = current_floor - 1; i >= 0 && i < FLOOR_COUNT; i += -direction)
     if (!visited_floors[i]) {
       new_floor = i + 1;
       return true;
     }
-  }
 
   return false;
 }
