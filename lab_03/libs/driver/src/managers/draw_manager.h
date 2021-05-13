@@ -11,9 +11,9 @@
 
 class DrawManager : public Visitor, public BaseManager {
 public:
-    DrawManager() = default;
-    DrawManager(DrawManager &manager) : _drawer(manager._drawer), cam(manager.cam){};
     ~DrawManager() = default;
+
+    static std::shared_ptr<DrawManager> instance();
 
     void visit(const Camera &cam) override;
     void visit(const Model &model) override;
@@ -23,6 +23,8 @@ public:
     void set_cam(std::shared_ptr<Camera>);
 
 private:
+    DrawManager() = default;
+
     Point proect_point(const Point &point);
     std::shared_ptr<BaseDrawer> _drawer;
     std::shared_ptr<Camera> cam;

@@ -54,13 +54,7 @@ set(LOAD
         src/load/model_builder.cpp
         )
 
-set(CONTROLLER
-        src/controller/abstract_controller_creator.h
-        src/controller/base_controller_creator.h
-        src/controller/base_controller_creator.cpp
-        src/controller/abstract_controller.h
-        src/controller/base_controller.h
-        src/controller/base_controller.cpp
+set(FACADE
         include/driver/facade/facade.h
         src/facade/facade.cpp
         )
@@ -82,7 +76,7 @@ add_library(${PROJECT_NAME}
         ${DRAWERS}
         ${MANAGERS}
         ${LOAD}
-        ${CONTROLLER}
+        ${FACADE}
         ${PUB_INC}
         )
 

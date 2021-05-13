@@ -1,5 +1,10 @@
 #include <managers/reform_manager.h>
 
+std::shared_ptr<ReformManager> ReformManager::instance() {
+    static std::shared_ptr<ReformManager> _manager(new ReformManager());
+    return _manager;
+}
+
 void ReformManager::reform_object(const std::shared_ptr<Object>& _object, const Point &move, const Point &scale, const Point &turn) {
     _object->reform(move, scale, turn);
 }

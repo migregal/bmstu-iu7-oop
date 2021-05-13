@@ -24,3 +24,8 @@ void SceneManager::set_cam(const size_t &number) {
     current_cam = _camera;
 }
 
+std::shared_ptr<SceneManager> SceneManager::instance() {
+    static std::shared_ptr<SceneManager> _manager(new SceneManager());
+
+    return _manager;
+}

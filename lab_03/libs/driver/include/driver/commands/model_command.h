@@ -4,6 +4,7 @@
 #include <memory>
 
 #include <commands/base_command.h>
+#include <objects/object.h>
 
 
 class ModelBaseCommand : public BaseCommand {};
@@ -14,7 +15,7 @@ public:
     MoveModel(const double &dx, const double &dy, const double &dz, const size_t &mnumb);
     ~MoveModel() override = default;
 
-    void execute(std::shared_ptr<AbstractController> &facade) override;
+    void execute() override;
 
 private:
     size_t model_numb;
@@ -28,7 +29,7 @@ public:
     ScaleModel(const double &kx, const double &ky, const double &kz, const std::size_t &mnumb);
     ~ScaleModel() override = default;
 
-    void execute(std::shared_ptr<AbstractController> &facade) override;
+    void execute() override;
 
 private:
     size_t model_numb;
@@ -42,7 +43,7 @@ public:
     RotateModel(const double &ox, const double &oy, const double &oz, const std::size_t &mnumb);
     ~RotateModel() override = default;
 
-    void execute(std::shared_ptr<AbstractController> &facade) override;
+    void execute() override;
 
 private:
     size_t model_numb;
@@ -50,14 +51,13 @@ private:
     double ox, oy, oz;
 };
 
-class ReformModel : public ModelBaseCommand
-{
+class ReformModel : public ModelBaseCommand {
 public:
     ReformModel() = delete;
     ReformModel(const size_t &numb, const Point &move, const Point &scale, const Point &turn);
     ~ReformModel() override = default;
 
-    void execute(std::shared_ptr<AbstractController> &facade) override;
+    void execute() override;
 
 private:
     size_t model_numb;
@@ -65,53 +65,49 @@ private:
     Point move, scale, turn;
 };
 
-class LoadModel : public ModelBaseCommand
-{
+class LoadModel : public ModelBaseCommand {
 public:
     LoadModel() = delete;
     explicit LoadModel(std::string fname);
     ~LoadModel() override = default;
 
-    void execute(std::shared_ptr<AbstractController> &facade) override;
+    void execute() override;
 
 private:
     std::string fname;
 };
 
-class AddModel : public ModelBaseCommand
-{
+class AddModel : public ModelBaseCommand {
 public:
     AddModel() = delete;
     explicit AddModel(std::shared_ptr<Object> model);
     ~AddModel() override = default;
 
-    void execute(std::shared_ptr<AbstractController> &facade) override;
+    void execute() override;
 
 private:
     std::shared_ptr<Object> model;
 };
 
-class RemoveModel : public ModelBaseCommand
-{
+class RemoveModel : public ModelBaseCommand {
 public:
     RemoveModel() = delete;
     explicit RemoveModel(const size_t &model_numb);
     ~RemoveModel() override = default;
 
-    void execute(std::shared_ptr<AbstractController> &facade) override;
+    void execute() override;
 
 private:
     size_t model_numb;
 };
 
-class ModelCount : public ModelBaseCommand
-{
+class ModelCount : public ModelBaseCommand {
 public:
     ModelCount() = delete;
     explicit ModelCount(std::shared_ptr<size_t> &count);
     ~ModelCount() override = default;
 
-    void execute(std::shared_ptr<AbstractController> &facade) override;
+    void execute() override;
 
 private:
     std::shared_ptr<size_t> &_count;

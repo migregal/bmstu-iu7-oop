@@ -2,6 +2,11 @@
 
 #include <utility>
 
+std::shared_ptr<DrawManager> DrawManager::instance() {
+    static std::shared_ptr<DrawManager> _manager(new DrawManager());
+    return _manager;
+}
+
 void DrawManager::set_drawer(std::shared_ptr<BaseDrawer> drawer) {
     _drawer = std::move(drawer);
 }
@@ -30,4 +35,4 @@ Point DrawManager::proect_point(const Point &_point) {
 }
 
 void DrawManager::visit(const Camera &camera){};
-void DrawManager::visit(const Composite &composite){};
+void DrawManager::visit(const Composite &composite){}
