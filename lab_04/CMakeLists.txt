@@ -14,9 +14,6 @@ add_executable(${PROJECT_NAME}
         ./src/main.cpp
         src/gui/mainwindow.h
         src/gui/mainwindow.cpp
-#        src/drawer/qt_drawer.h
-#        src/drawer/qt_drawer.cpp
-#        ./src/factory.h
         )
 
 target_include_directories(${PROJECT_NAME} PRIVATE

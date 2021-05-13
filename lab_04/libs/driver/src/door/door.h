@@ -1,33 +1,31 @@
 #pragma once
 
-#include <QDebug>
 #include <QObject>
-#include <QTimer>
 
-class Door : public QObject {
-  Q_OBJECT;
+#include <constants.h>
 
-  enum status { OPEN, OPENING, CLOSING, CLOSED };
+class Doors : public QObject {
+  Q_OBJECT
+  enum doors_state { OPENNING, OPENED, CLOSING, CLOSED };
 
 public:
-  Door();
-  ~Door() override = default;
-
-public slots:
-  void opened();
-  void closed();
-
-private slots:
-  void opening();
-  void closing();
+  explicit Doors(QObject *parent = nullptr);
 
 signals:
-  void closed_signal();
+  void closed_doors();
+  void opened_doors();
+
+public slots:
+  void start_openning();
+  void start_closing();
+
+private slots:
+  void open();
+  void close();
 
 private:
-  status status;
-
-  QTimer opening_timer;
-  QTimer closing_timer;
-  QTimer opened_timer;
+  doors_state current_state;
+  QTimer doors_open_timer;
+  QTimer doors_close_timer;
+  QTimer doors_stay_open_timer;
 };

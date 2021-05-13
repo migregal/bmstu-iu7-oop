@@ -1,58 +1,68 @@
 #include <cabin/cabin.h>
 
+#include <QString>
+
 #include <QDebug>
 
-Cabin::Cabin(QObject *parent) {
-  status = FREE;
-  cur_floor = 1;
-  need_floor = 1;
-  _direction = STOP;
+Cabin::Cabin(QObject *parent)
+    : QObject(parent), current_floor(1), target(-1), new_target(false),
+      current_state(STOP), current_direction(STAY) {
+  crossing_floor_timer.setSingleShot(true);
 
-  QObject::connect(&move_timer, SIGNAL(timeout()), this, SLOT(cabin_moving()));
-
-  QObject::connect(this, SIGNAL(moving_signal()), this, SLOT(cabin_moving()));
-  QObject::connect(this, SIGNAL(stopped_signal(bool, int)), this,
-                   SLOT(cabin_stopped(bool, int)));
-  QObject::connect(this, SIGNAL(open_doors_signal()), &_door, SLOT(opening()));
-  QObject::connect(&_door, SIGNAL(closed_signal()), this, SLOT(cabin_moving()));
+  QObject::connect(this, SIGNAL(cabin_called()), &doors, SLOT(start_closing()));
+  QObject::connect(this, SIGNAL(cabin_reached_target(int)), this,
+                   SLOT(cabin_stopping()));
+  QObject::connect(this, SIGNAL(cabin_stopped(int)), &doors,
+                   SLOT(start_openning()));
+  QObject::connect(&doors, SIGNAL(closed_doors()), this, SLOT(cabin_move()));
+  QObject::connect(&crossing_floor_timer, SIGNAL(timeout()), this,
+                   SLOT(cabin_move()));
 }
 
-void Cabin::cabin_moving() {
-  if (status != MOVING && status != GET)
+void Cabin::cabin_move() {
+  if (new_target && current_state == WAIT) {
+    current_state = MOVE;
+
+    if (current_floor == target) {
+      emit cabin_reached_target(current_floor);
+    } else {
+      crossing_floor_timer.start(CROSSING_FLOOR);
+    }
+
+    return;
+  }
+
+  if (current_state == MOVE) {
+    current_state = MOVE;
+
+    current_floor += current_direction;
+
+    if (current_floor == target) {
+      emit cabin_reached_target(current_floor);
+    } else {
+      emit cabin_crossing_floor(current_floor, current_direction);
+      crossing_floor_timer.start(CROSSING_FLOOR);
+    }
+  }
+}
+
+void Cabin::cabin_stopping() {
+  if (current_state != MOVE)
     return;
 
-  status = MOVING;
-  move_timer.start(MOVING_TIME);
-
-  qDebug() << "Лифт едет. Этаж: " << cur_floor;
-  emit floor_passed(cur_floor, _direction);
-
-  if (cur_floor != need_floor) {
-    _direction = cur_floor > need_floor ? DOWN : UP;
-    cur_floor = cur_floor > need_floor ? cur_floor - 1 : cur_floor + 1;
-  }
+  current_state = STOP;
+  qDebug() << "Stopped at floor " << QString::number(current_floor) << ".";
+  emit cabin_stopped(current_floor);
 }
 
-void Cabin::cabin_stopped(bool is_last, int new_floor) {
-  if (is_last) {
-    status = FREE;
-  } else {
-    status = GET;
-    need_floor = new_floor;
-  }
+void Cabin::cabin_call(int floor, direction dir) {
+  if (current_state != STOP)
+    return;
 
-  move_timer.stop();
-  emit open_doors_signal();
-}
+  new_target = true;
+  current_state = WAIT;
+  target = floor;
 
-void Cabin::cabin_take_target(int floor) {
-  status = GET;
-  need_floor = floor;
-
-  if (cur_floor == need_floor) {
-    emit floor_passed(cur_floor, _direction);
-  } else {
-    _direction = need_floor > cur_floor ? UP : DOWN;
-    emit moving_signal();
-  }
+  current_direction = dir;
+  emit cabin_called();
 }

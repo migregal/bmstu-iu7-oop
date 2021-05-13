@@ -1,16 +1,12 @@
 #include <lift.h>
 
-#include <QPalette>
-
-Lift::Lift(QObject *parent) : QObject(parent) {
-  _controller.setStyleSheet("background-color:green;");
-
-  QObject::connect(&_cabin, SIGNAL(floor_passed(int, direction)),
-                   &_controller, SLOT(passed_floor(int, direction)));
-  QObject::connect(&_controller, SIGNAL(new_target_signal(int)), &_cabin,
-                   SLOT(cabin_take_target(int)));
-  QObject::connect(&_controller, SIGNAL(stopped_signal(bool, int)), &_cabin,
-                   SLOT(cabin_stopped(bool, int)));
+Lift::Lift() {
+  QObject::connect(&control_panel, SIGNAL(set_target(int, direction)), &cabin,
+                   SLOT(cabin_call(int, direction)));
+  QObject::connect(&cabin, SIGNAL(cabin_crossing_floor(int, direction)),
+                   &control_panel, SLOT(passed_floor(int)));
+  QObject::connect(&cabin, SIGNAL(cabin_stopped(int)), &control_panel,
+                   SLOT(achieved_floor(int)));
 }
 
-QWidget *Lift::widget() { return &_controller; }
+void Lift::click(int floor) { control_panel.set_new_target(floor); }

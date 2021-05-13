@@ -2,38 +2,34 @@
 
 #include <QObject>
 
-#include <controller/controller.h>
+#include <constants.h>
+#include <control_panel/control_panel.h>
 #include <door/door.h>
 
 class Cabin : public QObject {
-  Q_OBJECT;
-
-  enum cabin_status { GET, FREE, MOVING };
+  Q_OBJECT
+  enum cabin_state { MOVE, WAIT, STOP };
 
 public:
   explicit Cabin(QObject *parent = nullptr);
-  ~Cabin() override = default;
+
+signals:
+  void cabin_called();
+  void cabin_crossing_floor(int floor, direction d);
+  void cabin_reached_target(int floor);
+  void cabin_stopped(int floor);
 
 public slots:
-  void cabin_moving();
-  void cabin_take_target(int floor);
-  void cabin_stopped(bool is_last, int new_floor = 1);
-
-signals:
-  void open_doors_signal();
-  void floor_passed(int floor, direction dir);
+  void cabin_move();
+  void cabin_stopping();
+  void cabin_call(int floor, direction dir);
 
 private:
-  Door _door;
-  int cur_floor;
-  int need_floor;
-
-  direction _direction;
-  cabin_status status;
-
-  QTimer move_timer;
-
-signals:
-  void moving_signal();
-  void stopped_signal(bool = true, int = 1);
+  int current_floor;
+  int target;
+  bool new_target;
+  cabin_state current_state;
+  direction current_direction;
+  Doors doors;
+  QTimer crossing_floor_timer;
 };

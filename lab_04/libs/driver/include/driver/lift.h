@@ -1,20 +1,20 @@
 #pragma once
 
 #include <QObject>
+#include <QTextEdit>
 
 #include <cabin/cabin.h>
-#include <controller/controller.h>
+#include <constants.h>
+#include <control_panel/control_panel.h>
 
 class Lift : public QObject {
-  Q_OBJECT;
+  Q_OBJECT
 
 public:
-  explicit Lift(QObject *parent = nullptr);
-  ~Lift() override = default;
-
-  QWidget *widget();
+  Lift();
+  void click(int floor);
 
 private:
-  Controller _controller;
-  Cabin _cabin;
+  ControlPanel control_panel;
+  Cabin cabin;
 };
