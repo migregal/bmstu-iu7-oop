@@ -1,11 +1,11 @@
 #include <managers/load_manager.h>
 
-#include <load/file_loader.h>
 #include <load/model_loader.h>
+#include <source/file_source.h>
 #include <utility>
 
 LoadManager::LoadManager() {
-    std::shared_ptr<BaseLoader> floader(new FileLoader);
+    std::shared_ptr<BaseSource> floader(new FileSource);
     loader = std::shared_ptr<AbstractLoader>(new ModelLoader(floader));
 }
 

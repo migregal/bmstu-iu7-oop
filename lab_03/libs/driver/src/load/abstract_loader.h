@@ -6,7 +6,7 @@
 #include "base_builder.h"
 
 class Model;
-class BaseLoader;
+class BaseSource;
 
 class AbstractLoader {
 public:
@@ -14,8 +14,8 @@ public:
     ~AbstractLoader() = default;
 
     virtual std::shared_ptr<Model> load_model(std::string &name) = 0;
-    virtual void set_loader(std::shared_ptr<BaseLoader> _loader);
+    virtual void set_loader(std::shared_ptr<BaseSource> _loader);
 
 protected:
-    std::shared_ptr<BaseLoader> loader;
+    std::shared_ptr<BaseSource> loader;
 };

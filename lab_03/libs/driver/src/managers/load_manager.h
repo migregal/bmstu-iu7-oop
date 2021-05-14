@@ -3,9 +3,9 @@
 #include <memory>
 
 #include <load/abstract_loader.h>
-#include <load/base_loader.h>
 #include <managers/base_manager.h>
 #include <objects/model.h>
+#include <source/base_source.h>
 
 class LoadManager : public BaseManager {
 public:

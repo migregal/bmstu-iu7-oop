@@ -45,9 +45,9 @@ set(LOAD
         src/load/model_loader.h
         src/load/model_loader.cpp
 
-        src/load/base_loader.h
-        src/load/file_loader.h
-        src/load/file_loader.cpp
+        src/source/base_source.h
+        src/source/file_source.h
+        src/source/file_source.cpp
 
         src/load/base_builder.h
         src/load/model_builder.h

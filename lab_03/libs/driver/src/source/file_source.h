@@ -1,11 +1,11 @@
 #pragma once
 
-#include <load/base_loader.h>
+#include <source/base_source.h>
 
-class FileLoader : public BaseLoader {
+class FileSource : public BaseSource {
 public:
-    FileLoader() = default;
-    ~FileLoader() override = default;
+    FileSource() = default;
+    ~FileSource() override = default;
 
     std::shared_ptr<Model> load_model(std::shared_ptr<BaseBuilder> builder) override;
     void fopen(std::string &fname) override;
