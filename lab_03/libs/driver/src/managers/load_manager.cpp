@@ -1,7 +1,7 @@
 #include <managers/load_manager.h>
 
-#include <load_controller/model_load_controller.h>
-#include <loader/file_model_loader.h>
+#include <load_controller/model/model_load_controller.h>
+#include <loader/model/file_model_loader.h>
 #include <utility>
 
 LoadManager::LoadManager() {

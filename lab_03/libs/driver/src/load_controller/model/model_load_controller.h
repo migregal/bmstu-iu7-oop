@@ -1,9 +1,9 @@
 #pragma once
 
-#include <builder/model_builder.h>
+#include <builder/model/model_builder.h>
 #include <load_controller/abstract_load_controller.h>
 #include <loader/base_loader.h>
-#include <loader/base_model_loader.h>
+#include <loader/model/base_model_loader.h>
 #include <utility>
 
 class ModelLoadController : public AbstractLoadController {

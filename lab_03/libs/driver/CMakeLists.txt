@@ -42,17 +42,29 @@ set(MANAGERS
 set(LOAD
         src/load_controller/abstract_load_controller.h
         src/load_controller/abstract_load_controller.cpp
-        src/load_controller/model_load_controller.h
-        src/load_controller/model_load_controller.cpp
+        src/load_controller/model/model_load_controller.h
+        src/load_controller/model/model_load_controller.cpp
+        src/load_controller/scene/scene_load_controller.h
+        src/load_controller/scene/scene_load_controller.cpp
 
         src/loader/base_loader.h
-        src/loader/base_model_loader.h
-        src/loader/file_model_loader.h
-        src/loader/file_model_loader.cpp
+        src/loader/model/base_model_loader.h
+        src/loader/model/file_model_loader.h
+        src/loader/model/file_model_loader.cpp
+        src/loader/camera/base_camera_loader.h
+        src/loader/camera/file_camera_loader.h
+        src/loader/camera/file_camera_loader.cpp
+        src/loader/scene/base_scene_loader.h
+        src/loader/scene/file_scene_loader.h
+        src/loader/scene/file_scene_loader.cpp
 
         src/builder/base_builder.h
-        src/builder/model_builder.h
-        src/builder/model_builder.cpp
+        src/builder/model/model_builder.h
+        src/builder/model/model_builder.cpp
+        src/builder/scene/scene_builder.h
+        src/builder/scene/scene_builder.cpp
+        src/builder/camera/camera_builder.h
+        src/builder/camera/camera_builder.cpp
         )
 
 set(FACADE

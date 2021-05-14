@@ -13,7 +13,7 @@ public:
     void build_point(const double &x, const double &y, const double &z);
     void build_edge(const std::size_t &pt1, const std::size_t &pt2);
 
-    std::shared_ptr<Model> get() override;
+    std::shared_ptr<Object> get() override;
 
 private:
     std::shared_ptr<Model> model_ptr;

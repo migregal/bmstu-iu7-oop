@@ -1,6 +1,6 @@
 #pragma once
 
-#include <objects/model.h>
+#include <objects/object.h>
 
 class BaseBuilder {
 public:
@@ -10,5 +10,5 @@ public:
     [[nodiscard]] virtual bool is_build() const = 0;
     virtual void build() = 0;
 
-    virtual std::shared_ptr<Model> get() = 0;
+    virtual std::shared_ptr<Object> get() = 0;
 };

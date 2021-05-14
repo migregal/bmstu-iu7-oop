@@ -21,3 +21,15 @@ public:
 private:
     std::shared_ptr<BaseDrawer> _drawer;
 };
+
+class LoadScene : public SceneBaseCommand {
+public:
+    LoadScene() = delete;
+    explicit LoadScene(std::string fname);
+    ~LoadScene() override = default;
+
+    void execute() override;
+
+private:
+    std::string _fname;
+};

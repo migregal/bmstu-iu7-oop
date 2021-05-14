@@ -1,5 +1,6 @@
 #pragma once
 
+#include <builder/model/model_builder.h>
 #include <loader/base_loader.h>
 
 class BaseModelLoader : public BaseLoader {
