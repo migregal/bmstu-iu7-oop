@@ -1,18 +1,17 @@
 #pragma once
 
+#include <builder/base_builder.h>
 #include <objects/model.h>
-#include <load/base_builder.h>
 
-class ModelBuilder : public BaseBuilder
-{
+class ModelBuilder : public BaseBuilder {
 public:
     ModelBuilder() = default;
     ~ModelBuilder() = default;
 
     [[nodiscard]] bool is_build() const override;
     void build() override;
-    void build_point(const double &x, const double &y, const double &z) override;
-    void build_edge(const std::size_t &pt1, const std::size_t &pt2) override;
+    void build_point(const double &x, const double &y, const double &z);
+    void build_edge(const std::size_t &pt1, const std::size_t &pt2);
 
     std::shared_ptr<Model> get() override;
 

@@ -30,13 +30,13 @@ public:
     }
 };
 
-class FileError : public BaseError {
+class SourceError : public BaseError {
 public:
-    FileError() = default;
-    explicit FileError(std::string &message) : BaseError(message){};
+    SourceError() = default;
+    explicit SourceError(std::string &message) : BaseError(message){};
 
     [[nodiscard]] const char *what() const noexcept override {
-        return "File corrupt or does not exist.";
+        return "Load corrupt or does not exist.";
     }
 };
 

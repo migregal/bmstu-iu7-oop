@@ -40,23 +40,28 @@ set(MANAGERS
         )
 
 set(LOAD
-        src/load/abstract_loader.h
-        src/load/abstract_loader.cpp
-        src/load/model_loader.h
-        src/load/model_loader.cpp
+        src/load_controller/abstract_load_controller.h
+        src/load_controller/abstract_load_controller.cpp
+        src/load_controller/model_load_controller.h
+        src/load_controller/model_load_controller.cpp
 
-        src/source/base_source.h
-        src/source/file_source.h
-        src/source/file_source.cpp
+        src/loader/base_loader.h
+        src/loader/base_model_loader.h
+        src/loader/file_model_loader.h
+        src/loader/file_model_loader.cpp
 
-        src/load/base_builder.h
-        src/load/model_builder.h
-        src/load/model_builder.cpp
+        src/builder/base_builder.h
+        src/builder/model_builder.h
+        src/builder/model_builder.cpp
         )
 
 set(FACADE
         include/driver/facade/facade.h
         src/facade/facade.cpp
+        )
+
+set(SRCS
+        src/error/error.h
         )
 
 set(PUB_INC
@@ -77,6 +82,7 @@ add_library(${PROJECT_NAME}
         ${MANAGERS}
         ${LOAD}
         ${FACADE}
+        ${SRCS}
         ${PUB_INC}
         )
 

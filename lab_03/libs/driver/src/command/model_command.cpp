@@ -50,7 +50,7 @@ void ReformModel::execute() {
 LoadModel::LoadModel(std::string fname) : fname(std::move(fname)) {}
 
 void LoadModel::execute() {
-    auto model = LoadManager::instance()->load_model(fname);
+    auto model = LoadManager::instance()->load(fname);
     SceneManager::instance()->get_scene()->add_model(model);
 }
 

@@ -2,10 +2,10 @@
 
 #include <memory>
 
-#include <load/abstract_loader.h>
+#include <load_controller//abstract_load_controller.h>
 #include <managers/base_manager.h>
 #include <objects/model.h>
-#include <source/base_source.h>
+#include <loader/base_loader.h>
 
 class LoadManager : public BaseManager {
 public:
@@ -15,11 +15,11 @@ public:
 
     static std::shared_ptr<LoadManager> instance();
 
-    virtual std::shared_ptr<Model> load_model(std::string &name);
-    virtual void set_loader(std::shared_ptr<AbstractLoader> _loader);
+    virtual std::shared_ptr<Object> load(std::string &name);
+    virtual void set_loader(std::shared_ptr<AbstractLoadController> _loader);
 
 private:
     LoadManager();
 
-    std::shared_ptr<AbstractLoader> loader;
+    std::shared_ptr<AbstractLoadController> loader;
 };

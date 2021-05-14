@@ -152,7 +152,7 @@ void MainWindow::on_load_button_clicked() {
 
     try {
         _facade->execute(load_command);
-    } catch (const FileError &error) {
+    } catch (const SourceError &error) {
         QMessageBox::critical(nullptr, "Ошибка", "Что-то пошло не так при загрузке файла...");
         return;
     }

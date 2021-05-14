@@ -1,4 +1,4 @@
-#include <load/model_builder.h>
+#include <builder/model_builder.h>
 
 bool ModelBuilder::is_build() const {
     return model_ptr != nullptr;

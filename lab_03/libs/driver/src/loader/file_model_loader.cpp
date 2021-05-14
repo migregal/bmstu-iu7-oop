@@ -1,6 +1,9 @@
-#include <source/file_source.h>
+#include <builder/model_builder.h>
+#include <error.h>
+#include <error/error.h>
+#include <loader/file_model_loader.h>
 
-std::shared_ptr<Model> FileSource::load_model(std::shared_ptr<BaseBuilder> builder) {
+std::shared_ptr<Object> FileModelLoader::load(std::shared_ptr<ModelBuilder> builder) {
     builder->build();
 
     size_t points_count;
@@ -24,7 +27,7 @@ std::shared_ptr<Model> FileSource::load_model(std::shared_ptr<BaseBuilder> build
     return builder->get();
 }
 
-void FileSource::fopen(std::string &fname) {
+void FileModelLoader::open(std::string &fname) {
     file.open(fname);
 
     if (!file) {
@@ -33,7 +36,7 @@ void FileSource::fopen(std::string &fname) {
     }
 }
 
-void FileSource::fclose() {
+void FileModelLoader::close() {
     try {
         file.close();
     } catch (std::ifstream::failure &error) {
