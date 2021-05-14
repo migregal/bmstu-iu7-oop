@@ -9,17 +9,14 @@
 
 class LoadManager : public BaseManager {
 public:
-    LoadManager(const LoadManager&) = default;
+    LoadManager();
+    LoadManager(const LoadManager&) = delete;
     LoadManager& operator=(const LoadManager&) = delete;
     ~LoadManager() = default;
-
-    static std::shared_ptr<LoadManager> instance();
 
     virtual std::shared_ptr<Object> load(std::string &name);
     virtual void set_loader(std::shared_ptr<AbstractLoadController> _loader);
 
 private:
-    LoadManager();
-
     std::shared_ptr<AbstractLoadController> loader;
 };

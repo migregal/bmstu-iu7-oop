@@ -1,4 +1,4 @@
-#include <managers/scene_manager.h>
+#include <managers/scene/scene_manager.h>
 
 #include <memory>
 #include <utility>
@@ -22,10 +22,4 @@ void SceneManager::set_scene(std::shared_ptr<Scene> scene_) {
 void SceneManager::set_cam(const size_t &number) {
     auto _camera = _scene->get_cams().at(number);
     current_cam = _camera;
-}
-
-std::shared_ptr<SceneManager> SceneManager::instance() {
-    static std::shared_ptr<SceneManager> _manager(new SceneManager());
-
-    return _manager;
 }

@@ -2,17 +2,20 @@
 
 #include <load_controller/scene/scene_load_controller.h>
 #include <loader/scene/file_scene_loader.h>
-#include <managers/draw_manager.h>
-#include <managers/load_manager.h>
-#include <managers/scene_manager.h>
+#include <managers/draw/draw_manager.h>
+#include <managers/draw/draw_manager_creator.h>
+#include <managers/load/load_manager.h>
+#include <managers/load/load_manager_creator.h>
+#include <managers/scene/scene_manager.h>
+#include <managers/scene/scene_manager_creator.h>
 #include <utility>
 
 DrawScene::DrawScene(std::shared_ptr<BaseDrawer> drawer) : _drawer(std::move(drawer)) {
 }
 
 void DrawScene::execute() {
-    auto _draw_manager = DrawManager::instance();
-    auto _scene_manager = SceneManager::instance();
+    auto _draw_manager = DrawManagerCreator().create_manager();
+    auto _scene_manager = SceneManagerCreator().create_manager();
 
     _drawer->clear_scene();
     _draw_manager->set_drawer(_drawer);
@@ -23,9 +26,9 @@ void DrawScene::execute() {
 LoadScene::LoadScene(std::string fname): _fname(std::move(fname)) {}
 
 void LoadScene::execute() {
-    auto manager = LoadManager::instance();
+    auto manager = LoadManagerCreator().create_manager();
     std::shared_ptr<BaseSceneLoader> floader(new FileSceneLoader);
     manager->set_loader(std::shared_ptr<AbstractLoadController>(new SceneLoadController(floader)));
     auto scene = std::dynamic_pointer_cast<Scene>(manager->load(_fname));
-    SceneManager::instance()->set_scene(scene);
+    SceneManagerCreator().create_manager()->set_scene(scene);
 }

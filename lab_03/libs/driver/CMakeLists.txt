@@ -28,14 +28,27 @@ set(DRAWERS
 
 set(MANAGERS
         src/managers/base_manager.h
-        src/managers/draw_manager.h
-        src/managers/draw_manager.cpp
-        src/managers/reform_manager.h
-        src/managers/reform_manager.cpp
-        src/managers/scene_manager.h
-        src/managers/scene_manager.cpp
-        src/managers/load_manager.h
-        src/managers/load_manager.cpp
+
+        src/managers/draw/draw_manager.h
+        src/managers/draw/draw_manager.cpp
+        src/managers/draw/draw_manager_creator.h
+        src/managers/draw/draw_manager_creator.cpp
+
+        src/managers/reform/reform_manager.h
+        src/managers/reform/reform_manager.cpp
+        src/managers/reform/reform_manager_creator.h
+        src/managers/reform/reform_manager_creator.cpp
+
+        src/managers/scene/scene_manager.h
+        src/managers/scene/scene_manager.cpp
+        src/managers/scene/scene_manager_creator.h
+        src/managers/scene/scene_manager_creator.cpp
+
+        src/managers/load/load_manager.h
+        src/managers/load/load_manager.cpp
+        src/managers/load/load_manager_creator.h
+        src/managers/load/load_manager_creator.cpp
+
         src/visitor.h
         )
 

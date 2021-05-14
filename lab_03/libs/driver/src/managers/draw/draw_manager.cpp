@@ -1,11 +1,6 @@
-#include <managers/draw_manager.h>
+#include <managers/draw/draw_manager.h>
 
 #include <utility>
-
-std::shared_ptr<DrawManager> DrawManager::instance() {
-    static std::shared_ptr<DrawManager> _manager(new DrawManager());
-    return _manager;
-}
 
 void DrawManager::set_drawer(std::shared_ptr<BaseDrawer> drawer) {
     _drawer = std::move(drawer);
