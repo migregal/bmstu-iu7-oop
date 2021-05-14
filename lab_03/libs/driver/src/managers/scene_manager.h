@@ -6,7 +6,8 @@
 class SceneManager : public BaseManager
 {
 public:
-    SceneManager(SceneManager &manager) = delete;
+    SceneManager(const SceneManager&) = default;
+    SceneManager& operator=(const SceneManager&) = delete;
     ~SceneManager() = default;
 
     static std::shared_ptr<SceneManager> instance();

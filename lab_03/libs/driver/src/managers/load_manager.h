@@ -9,6 +9,8 @@
 
 class LoadManager : public BaseManager {
 public:
+    LoadManager(const LoadManager&) = default;
+    LoadManager& operator=(const LoadManager&) = delete;
     ~LoadManager() = default;
 
     static std::shared_ptr<LoadManager> instance();

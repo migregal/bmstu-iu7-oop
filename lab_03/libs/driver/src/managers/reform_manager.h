@@ -5,6 +5,8 @@
 
 class ReformManager : public BaseManager {
 public:
+    ReformManager(const ReformManager &) = default;
+    ReformManager &operator=(const ReformManager &) = delete;
     ~ReformManager() = default;
 
     static std::shared_ptr<ReformManager> instance();

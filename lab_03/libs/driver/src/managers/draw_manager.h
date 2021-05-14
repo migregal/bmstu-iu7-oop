@@ -11,6 +11,8 @@
 
 class DrawManager : public Visitor, public BaseManager {
 public:
+    DrawManager(const DrawManager &) = default;
+    DrawManager &operator=(const DrawManager &) = delete;
     ~DrawManager() = default;
 
     static std::shared_ptr<DrawManager> instance();
