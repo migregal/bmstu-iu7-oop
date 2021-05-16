@@ -4,6 +4,8 @@ project(driver)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -lconfig++")
+
 set(OBJECTS
         src/objects/object.h
         src/objects/point.h
@@ -23,7 +25,7 @@ set(OBJECTS
         )
 
 set(DRAWERS
-        include/driver/base_drawer.h
+        include/driver/drawer/abstract_drawer.h
         )
 
 set(MANAGERS
@@ -98,7 +100,16 @@ set(PUB_INC
         include/driver/commands/scene_command.h
         src/command/scene_command.cpp
         include/driver/error.h
-        include/driver/abstract_fabric.h
+        include/driver/drawer/abstract_drawer_factory.h
+        )
+
+set(CONFIGURATION
+        include/driver/configuration/configuration_creator.h
+        src/configuration/configuration_creator.cpp
+
+        include/driver/configuration/abstract_configuration.h
+        src/configuration/libconf/libconf_configuration.h
+        src/configuration/libconf/libconf_configuration.cpp
         )
 
 add_library(${PROJECT_NAME}
@@ -109,8 +120,11 @@ add_library(${PROJECT_NAME}
         ${FACADE}
         ${SRCS}
         ${PUB_INC}
+        ${CONFIGURATION}
         )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
         ./include/driver/
         ./src/)
+
+target_link_libraries(${PROJECT_NAME} config++)

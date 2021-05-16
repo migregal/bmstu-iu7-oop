@@ -8,6 +8,6 @@ public:
     explicit FileError(std::string &message) : SourceError(message){};
 
     [[nodiscard]] const char *what() const noexcept override {
-        return "File corrupt or does not exist.";
+        return error_info.c_str();
     }
 };

@@ -2,9 +2,9 @@
 
 #include <QGraphicsScene>
 
-#include <driver/base_drawer.h>
+#include <drawer/abstract_drawer.h>
 
-class QtDrawer : public BaseDrawer {
+class QtDrawer : public AbstractDrawer {
 public:
     QtDrawer() = delete;
     explicit QtDrawer(QGraphicsScene *_scene);

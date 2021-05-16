@@ -1,27 +1,18 @@
-/********************************************************************************
-** Form generated from reading UI file 'design.ui'
-**
-** Created by: Qt User Interface Compiler version 5.15.2
-**
-** WARNING! All changes made in this file will be lost when recompiling UI file!
-********************************************************************************/
+#pragma once
 
-#ifndef DESIGN_H
-#define DESIGN_H
-
-#include <QtCore/QVariant>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
-#include <QtWidgets/QDoubleSpinBox>
-#include <QtWidgets/QFrame>
-#include <QtWidgets/QGraphicsView>
-#include <QtWidgets/QGridLayout>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QWidget>
+#include <qt5/QtCore/QVariant>
+#include <qt5/QtWidgets/QApplication>
+#include <qt5/QtWidgets/QComboBox>
+#include <qt5/QtWidgets/QDoubleSpinBox>
+#include <qt5/QtWidgets/QFrame>
+#include <qt5/QtWidgets/QGraphicsView>
+#include <qt5/QtWidgets/QGridLayout>
+#include <qt5/QtWidgets/QLabel>
+#include <qt5/QtWidgets/QMainWindow>
+#include <qt5/QtWidgets/QPushButton>
+#include <qt5/QtWidgets/QStatusBar>
+#include <qt5/QtWidgets/QVBoxLayout>
+#include <qt5/QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -464,5 +455,3 @@ namespace Ui {
 } // namespace Ui
 
 QT_END_NAMESPACE
-
-#endif // DESIGN_H

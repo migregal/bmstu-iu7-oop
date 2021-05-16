@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include <base_drawer.h>
+#include <drawer/abstract_drawer.h>
 #include <managers/base_manager.h>
 #include <objects/camera.h>
 #include <objects/composite.h>
@@ -20,12 +20,12 @@ public:
     void visit(const Model &model) override;
     void visit(const Composite &composite) override;
 
-    void set_drawer(std::shared_ptr<BaseDrawer>);
+    void set_drawer(std::shared_ptr<AbstractDrawer>);
     void set_cam(std::shared_ptr<Camera>);
 
 private:
 
     Point proect_point(const Point &point);
-    std::shared_ptr<BaseDrawer> _drawer;
+    std::shared_ptr<AbstractDrawer> _drawer;
     std::shared_ptr<Camera> cam;
 };

@@ -1,15 +1,15 @@
 #pragma once
 
-#include <QMainWindow>
-#include <QMessageBox>
+#include <qt5/QtWidgets/QMainWindow>
+#include <qt5/QtWidgets/QMessageBox>
 
-#include <driver/base_drawer.h>
-#include <driver/commands/base_command.h>
-#include <driver/commands/camera_command.h>
-#include <driver/commands/model_command.h>
-#include <driver/commands/scene_command.h>
-#include <driver/error.h>
-#include <driver/facade/facade.h>
+#include <commands/base_command.h>
+#include <commands/camera_command.h>
+#include <commands/model_command.h>
+#include <commands/scene_command.h>
+#include <drawer/abstract_drawer.h>
+#include <error.h>
+#include <facade/facade.h>
 
 #include "design.h"
 
@@ -71,5 +71,5 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *_scene;
     std::shared_ptr<Facade> _facade;
-    std::shared_ptr<BaseDrawer> _drawer;
+    std::shared_ptr<AbstractDrawer> _drawer;
 };

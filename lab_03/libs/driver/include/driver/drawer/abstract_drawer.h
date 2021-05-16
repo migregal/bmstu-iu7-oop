@@ -2,11 +2,10 @@
 
 #include <objects/point.h>
 
-class BaseDrawer
-{
+class AbstractDrawer {
 public:
-    BaseDrawer() = default;
-    virtual ~BaseDrawer() = default;
+    AbstractDrawer() = default;
+    virtual ~AbstractDrawer() = default;
     virtual void draw_line(const Point &p1, const Point &p2) = 0;
     virtual void clear_scene() = 0;
 };

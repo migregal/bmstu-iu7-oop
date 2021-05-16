@@ -12,11 +12,12 @@ set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets)
 
 add_executable(${PROJECT_NAME}
         ./src/main.cpp
-        src/gui/mainwindow.h
-        src/gui/mainwindow.cpp
-        src/drawer/qt_drawer.h
-        src/drawer/qt_drawer.cpp
-        ./src/factory.h
+        src/gui/qt/mainwindow.h
+        src/gui/qt/mainwindow.cpp
+        src/qt/drawer/qt_drawer.h
+        src/qt/drawer/qt_drawer.cpp
+        src/qt/qt_drawer_factory.h
+        src/qt/qt_drawer_factory.cpp
         )
 
 target_include_directories(${PROJECT_NAME} PRIVATE

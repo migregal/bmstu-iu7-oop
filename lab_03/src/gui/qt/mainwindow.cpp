@@ -1,8 +1,9 @@
-#include <gui/mainwindow.h>
+#include <gui/qt/mainwindow.h>
 
-#include <factory.h>
 
 #include <QFileDialog>
+
+#include <qt/qt_drawer_factory.h>
 
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
@@ -186,7 +187,7 @@ void MainWindow::setup_scene() {
     auto rcontent = ui->graphicsView->contentsRect();
     _scene->setSceneRect(0, 0, rcontent.width(), rcontent.height());
 
-    std::shared_ptr<AbstractFactory> factory(new QtFactory(_scene));
+    std::shared_ptr<AbstractDrawerFactory> factory(new QtDrawerFactory(_scene));
     _drawer = factory->create_graphics();
 }
 

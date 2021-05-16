@@ -2,16 +2,25 @@
 
 #include <QScreen>
 #include <QStyle>
-#include <gui/mainwindow.h>
+
+#include <driver/configuration/configuration_creator.h>
+
+#include <gui/qt/mainwindow.h>
 
 int main(int argc, char *argv[]) {
-    QApplication a(argc, argv);
+    auto _conf = ConfigurationCreator().get_configuration();
 
-    MainWindow window;
-    window.setGeometry(QStyle::alignedRect(
-            Qt::LeftToRight, Qt::AlignCenter, window.size(),
-            QGuiApplication::primaryScreen()->availableGeometry()));
-    window.show();
+    switch (_conf->get_frame()) {
+        case AbstractConfiguration::QT:
+        default:
+            QApplication a(argc, argv);
 
-    return QApplication::exec();
+            MainWindow window;
+            window.setGeometry(QStyle::alignedRect(
+                    Qt::LeftToRight, Qt::AlignCenter, window.size(),
+                    QGuiApplication::primaryScreen()->availableGeometry()));
+            window.show();
+
+            return QApplication::exec();
+    }
 }

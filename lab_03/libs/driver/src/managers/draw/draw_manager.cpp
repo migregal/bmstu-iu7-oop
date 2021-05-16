@@ -2,7 +2,7 @@
 
 #include <utility>
 
-void DrawManager::set_drawer(std::shared_ptr<BaseDrawer> drawer) {
+void DrawManager::set_drawer(std::shared_ptr<AbstractDrawer> drawer) {
     _drawer = std::move(drawer);
 }
 

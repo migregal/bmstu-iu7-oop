@@ -10,7 +10,7 @@
 #include <managers/scene/scene_manager_creator.h>
 #include <utility>
 
-DrawScene::DrawScene(std::shared_ptr<BaseDrawer> drawer) : _drawer(std::move(drawer)) {
+DrawScene::DrawScene(std::shared_ptr<AbstractDrawer> drawer) : _drawer(std::move(drawer)) {
 }
 
 void DrawScene::execute() {
