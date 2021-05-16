@@ -45,7 +45,7 @@ void FileSceneLoader::close() {
 }
 
 void FileSceneLoader::load_models(std::shared_ptr<SceneBuilder> builder) {
-    size_t models_count;
+    std::size_t models_count;
     *file >> models_count;
 
     auto m_builder = std::make_shared<ModelBuilder>();
@@ -54,7 +54,7 @@ void FileSceneLoader::load_models(std::shared_ptr<SceneBuilder> builder) {
 }
 
 void FileSceneLoader::load_cameras(std::shared_ptr<SceneBuilder> builder) {
-    size_t cameras_count;
+    std::size_t cameras_count;
     *file >> cameras_count;
 
     auto c_builder = std::make_shared<CameraBuilder>();

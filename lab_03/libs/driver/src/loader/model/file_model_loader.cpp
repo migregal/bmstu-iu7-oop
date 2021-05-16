@@ -12,20 +12,20 @@ FileModelLoader::FileModelLoader(std::shared_ptr<std::ifstream> &fin) {
 std::shared_ptr<Object> FileModelLoader::load(std::shared_ptr<ModelBuilder> builder) {
     builder->build();
 
-    size_t points_count;
+    std::size_t points_count;
     *file >> points_count;
 
-    for (size_t i = 0; i < points_count; i++) {
+    for (std::size_t i = 0; i < points_count; i++) {
         double x, y, z;
         *file >> x >> y >> z;
         builder->build_point(x, y, z);
     }
 
-    size_t links_count;
+    std::size_t links_count;
     *file >> links_count;
 
-    for (size_t i = 0; i < links_count; i++) {
-        size_t pt1, pt2;
+    for (std::size_t i = 0; i < links_count; i++) {
+        std::size_t pt1, pt2;
         *file >> pt1 >> pt2;
         builder->build_edge(pt1, pt2);
     }

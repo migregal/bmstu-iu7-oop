@@ -24,25 +24,25 @@ private:
 class RemoveCamera : public CameraBaseCommand {
 public:
     RemoveCamera() = delete;
-    explicit RemoveCamera(const size_t &camera_numb);
+    explicit RemoveCamera(const std::size_t &camera_numb);
     ~RemoveCamera() override = default;
 
     void execute() override;
 
 private:
-    size_t camera_numb;
+    std::size_t camera_numb;
 };
 
 class MoveCamera : public CameraBaseCommand {
 public:
     MoveCamera() = delete;
-    MoveCamera(const size_t &cam_number, const double &shift_ox, const double &shift_oy);
+    MoveCamera(const std::size_t &cam_number, const double &shift_ox, const double &shift_oy);
     ~MoveCamera() override = default;
 
     void execute() override;
 
 private:
-    size_t cam_number;
+    std::size_t cam_number;
 
     double shift_ox;
     double shift_oy;
@@ -51,14 +51,14 @@ private:
 class SetCamera : public CameraBaseCommand {
 public:
     SetCamera() = delete;
-    explicit SetCamera(const size_t &cam_number);
+    explicit SetCamera(const std::size_t &cam_number);
     ~SetCamera() override = default;
 
     void execute() override;
 
 
 private:
-    size_t cam_number;
+    std::size_t cam_number;
 };
 
 class CameraCount : public CameraBaseCommand {

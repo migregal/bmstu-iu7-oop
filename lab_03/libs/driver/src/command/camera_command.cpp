@@ -19,13 +19,13 @@ void AddCamera::execute() {
     _scene_manager->set_cam(_scene_manager->get_scene()->get_cams().size() - 1);
 }
 
-RemoveCamera::RemoveCamera(const size_t &camera_numb) : camera_numb(camera_numb) {}
+RemoveCamera::RemoveCamera(const std::size_t &camera_numb) : camera_numb(camera_numb) {}
 
 void RemoveCamera::execute() {
     SceneManagerCreator().create_manager()->get_scene()->remove_camera(camera_numb);
 }
 
-MoveCamera::MoveCamera(const size_t &cam_number, cd &shift_ox, cd &shift_oy) : cam_number(cam_number), shift_ox(shift_ox), shift_oy(shift_oy) {}
+MoveCamera::MoveCamera(const std::size_t &cam_number, cd &shift_ox, cd &shift_oy) : cam_number(cam_number), shift_ox(shift_ox), shift_oy(shift_oy) {}
 
 void MoveCamera::execute() {
     Point shift(shift_ox, shift_oy, 0);
@@ -33,7 +33,7 @@ void MoveCamera::execute() {
     ReformManagerCreator().create_manager()->reform_object(camera, shift, shift, shift);
 }
 
-SetCamera::SetCamera(const size_t &cam_number) : cam_number(cam_number) {}
+SetCamera::SetCamera(const std::size_t &cam_number) : cam_number(cam_number) {}
 
 void SetCamera::execute() {
     SceneManagerCreator().create_manager()->set_cam(cam_number);

@@ -6,7 +6,7 @@ void Scene::add_model(const std::shared_ptr<Object> &model) {
     models->add(model);
 }
 
-void Scene::remove_model(const size_t index) {
+void Scene::remove_model(const std::size_t index) {
     auto it = models->begin();
     std::advance(it, index);
     models->remove(it);
@@ -16,7 +16,7 @@ void Scene::add_camera(const std::shared_ptr<Camera> &camera) {
     cams.push_back(camera);
 }
 
-void Scene::remove_camera(const size_t index) {
+void Scene::remove_camera(const std::size_t index) {
     auto it = cams.begin();
     std::advance(it, index);
     cams.erase(it);

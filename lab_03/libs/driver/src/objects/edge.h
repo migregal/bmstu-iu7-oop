@@ -17,6 +17,6 @@ public:
     void set_snd(const std::size_t &snd);
 
 private:
-    size_t pt1_idx;
-    size_t pt2_idx;
+    std::size_t pt1_idx;
+    std::size_t pt2_idx;
 };
