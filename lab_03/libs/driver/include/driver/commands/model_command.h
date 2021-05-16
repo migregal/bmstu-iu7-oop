@@ -12,13 +12,13 @@ class ModelBaseCommand : public BaseCommand {};
 class MoveModel : public ModelBaseCommand {
 public:
     MoveModel() = delete;
-    MoveModel(const double &dx, const double &dy, const double &dz, const size_t &mnumb);
+    MoveModel(const double &dx, const double &dy, const double &dz, const std::size_t &mnumb);
     ~MoveModel() override = default;
 
     void execute() override;
 
 private:
-    size_t model_numb;
+    std::size_t model_numb;
 
     double dx, dy, dz;
 };
@@ -32,7 +32,7 @@ public:
     void execute() override;
 
 private:
-    size_t model_numb;
+    std::size_t model_numb;
 
     double kx, ky, kz;
 };
@@ -46,7 +46,7 @@ public:
     void execute() override;
 
 private:
-    size_t model_numb;
+    std::size_t model_numb;
 
     double ox, oy, oz;
 };
@@ -54,13 +54,13 @@ private:
 class ReformModel : public ModelBaseCommand {
 public:
     ReformModel() = delete;
-    ReformModel(const size_t &numb, const Point &move, const Point &scale, const Point &turn);
+    ReformModel(const std::size_t &numb, const Point &move, const Point &scale, const Point &turn);
     ~ReformModel() override = default;
 
     void execute() override;
 
 private:
-    size_t model_numb;
+    std::size_t model_numb;
 
     Point move, scale, turn;
 };
@@ -92,13 +92,13 @@ private:
 class RemoveModel : public ModelBaseCommand {
 public:
     RemoveModel() = delete;
-    explicit RemoveModel(const size_t &model_numb);
+    explicit RemoveModel(const std::size_t &model_numb);
     ~RemoveModel() override = default;
 
     void execute() override;
 
 private:
-    size_t model_numb;
+    std::size_t model_numb;
 };
 
 class ModelCount : public ModelBaseCommand {

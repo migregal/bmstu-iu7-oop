@@ -18,6 +18,8 @@ public:
 
     AbstractConfiguration::frames get_frame() override;
 
+    AbstractConfiguration::sources get_load_source() override;
+
 private:
 
     std::shared_ptr<libconfig::Config> cfg;

@@ -1,10 +1,7 @@
 #include <commands/scene_command.h>
 
-#include <load_controller/scene/scene_load_controller.h>
-#include <loader/scene/file_scene_loader.h>
-#include <managers/draw/draw_manager.h>
+#include <load_controller/scene/scene_load_controller_creator.h>
 #include <managers/draw/draw_manager_creator.h>
-#include <managers/load/load_manager.h>
 #include <managers/load/load_manager_creator.h>
 #include <managers/scene/scene_manager.h>
 #include <managers/scene/scene_manager_creator.h>
@@ -26,8 +23,7 @@ void DrawScene::execute() {
 LoadScene::LoadScene(std::string fname) : _fname(std::move(fname)) {}
 
 void LoadScene::execute() {
-    auto floader = std::shared_ptr<BaseSceneLoader>(new FileSceneLoader);
-    auto controller = std::shared_ptr<AbstractLoadController>(new SceneLoadController(floader));
+    auto controller = SceneLoadControllerCreator().create_controller();
 
     auto manager = LoadManagerCreator().create_manager(controller);
 

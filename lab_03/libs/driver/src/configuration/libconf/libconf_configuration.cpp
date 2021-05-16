@@ -46,3 +46,26 @@ AbstractConfiguration::frames LibconfConfiguration::get_frame() {
         return QT;
     }
 }
+AbstractConfiguration::sources LibconfConfiguration::get_load_source() {
+    if (!cfg)
+        read_configuration(std::make_shared<std::string>(DEFAULT_FILE));
+
+    auto &root = cfg->getRoot();
+
+    std::string frame;
+    try {
+        const auto &ui = root["storage"];
+
+        if (!ui.lookupValue("load_source", frame))
+            frame = "file";
+
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        return FILE;
+    }
+
+    if ("file" == frame) {
+        return FILE;
+    } else {
+        return FILE;
+    }
+}

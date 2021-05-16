@@ -57,10 +57,16 @@ set(MANAGERS
 set(LOAD
         src/load_controller/abstract_load_controller.h
         src/load_controller/abstract_load_controller.cpp
+
         src/load_controller/model/model_load_controller.h
         src/load_controller/model/model_load_controller.cpp
+        src/load_controller/model/model_load_controller_creator.h
+        src/load_controller/model/model_load_controller_creator.cpp
+
         src/load_controller/scene/scene_load_controller.h
         src/load_controller/scene/scene_load_controller.cpp
+        src/load_controller/scene/scene_load_controller_creator.h
+        src/load_controller/scene/scene_load_controller_creator.cpp
 
         src/loader/base_loader.h
         src/loader/model/base_model_loader.h

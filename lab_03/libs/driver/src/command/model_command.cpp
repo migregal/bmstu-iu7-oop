@@ -1,7 +1,6 @@
 #include <commands/model_command.h>
 
-#include <load_controller/model/model_load_controller.h>
-#include <loader/model/file_model_loader.h>
+#include <load_controller/model/model_load_controller_creator.h>
 #include <managers/load/load_manager_creator.h>
 #include <managers/reform/reform_manager_creator.h>
 #include <managers/scene/scene_manager_creator.h>
@@ -9,7 +8,7 @@
 
 #define cd const double
 
-MoveModel::MoveModel(cd &dx, cd &dy, cd &dz, const size_t &mnumb) : dx(dx), dy(dy), dz(dz), model_numb(mnumb) {}
+MoveModel::MoveModel(cd &dx, cd &dy, cd &dz, const std::size_t &mnumb) : dx(dx), dy(dy), dz(dz), model_numb(mnumb) {}
 
 void MoveModel::execute() {
     Point move(dx, dy, dz);
@@ -42,7 +41,7 @@ void RotateModel::execute() {
     ReformManagerCreator().create_manager()->reform_object(model, move, scale, turn);
 }
 
-ReformModel::ReformModel(const size_t &numb, const Point &move, const Point &scale, const Point &turn) : model_numb(numb), move(move), scale(scale), turn(turn) {}
+ReformModel::ReformModel(const std::size_t &numb, const Point &move, const Point &scale, const Point &turn) : model_numb(numb), move(move), scale(scale), turn(turn) {}
 
 void ReformModel::execute() {
     std::shared_ptr<Object> model = SceneManagerCreator().create_manager()->get_scene()->get_models().at(model_numb);
@@ -52,8 +51,7 @@ void ReformModel::execute() {
 LoadModel::LoadModel(std::string fname) : fname(std::move(fname)) {}
 
 void LoadModel::execute() {
-    auto floader = std::shared_ptr<BaseModelLoader>(new FileModelLoader);
-    auto controller = std::shared_ptr<AbstractLoadController>(new ModelLoadController(floader));
+    auto controller = ModelLoadControllerCreator().create_controller();
     auto manager = LoadManagerCreator().create_manager(controller);
 
     auto model = manager->load(fname);
@@ -66,7 +64,7 @@ void AddModel::execute() {
     SceneManagerCreator().create_manager()->get_scene()->add_model(model);
 }
 
-RemoveModel::RemoveModel(const size_t &model_numb) : model_numb(model_numb) {}
+RemoveModel::RemoveModel(const std::size_t &model_numb) : model_numb(model_numb) {}
 
 void RemoveModel::execute() {
     SceneManagerCreator().create_manager()->get_scene()->remove_model(model_numb);
