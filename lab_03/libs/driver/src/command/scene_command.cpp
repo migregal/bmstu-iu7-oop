@@ -23,12 +23,14 @@ void DrawScene::execute() {
     _scene_manager->get_scene()->get_composite()->accept(_draw_manager);
 }
 
-LoadScene::LoadScene(std::string fname): _fname(std::move(fname)) {}
+LoadScene::LoadScene(std::string fname) : _fname(std::move(fname)) {}
 
 void LoadScene::execute() {
-    auto manager = LoadManagerCreator().create_manager();
-    std::shared_ptr<BaseSceneLoader> floader(new FileSceneLoader);
-    manager->set_loader(std::shared_ptr<AbstractLoadController>(new SceneLoadController(floader)));
+    auto floader = std::shared_ptr<BaseSceneLoader>(new FileSceneLoader);
+    auto controller = std::shared_ptr<AbstractLoadController>(new SceneLoadController(floader));
+
+    auto manager = LoadManagerCreator().create_manager(controller);
+
     auto scene = std::dynamic_pointer_cast<Scene>(manager->load(_fname));
     SceneManagerCreator().create_manager()->set_scene(scene);
 }

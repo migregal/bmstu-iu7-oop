@@ -1,5 +1,7 @@
 #include <commands/model_command.h>
 
+#include <load_controller/model/model_load_controller.h>
+#include <loader/model/file_model_loader.h>
 #include <managers/load/load_manager_creator.h>
 #include <managers/reform/reform_manager_creator.h>
 #include <managers/scene/scene_manager_creator.h>
@@ -50,7 +52,11 @@ void ReformModel::execute() {
 LoadModel::LoadModel(std::string fname) : fname(std::move(fname)) {}
 
 void LoadModel::execute() {
-    auto model = LoadManagerCreator().create_manager()->load(fname);
+    auto floader = std::shared_ptr<BaseModelLoader>(new FileModelLoader);
+    auto controller = std::shared_ptr<AbstractLoadController>(new ModelLoadController(floader));
+    auto manager = LoadManagerCreator().create_manager(controller);
+
+    auto model = manager->load(fname);
     SceneManagerCreator().create_manager()->get_scene()->add_model(model);
 }
 
