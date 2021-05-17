@@ -1,7 +1,7 @@
 #pragma once
 
 #include <builder/base_builder.h>
-#include <objects/model.h>
+#include <objects/model/model.h>
 
 class ModelBuilder : public BaseBuilder {
 public:

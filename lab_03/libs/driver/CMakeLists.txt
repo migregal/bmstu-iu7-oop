@@ -8,18 +8,18 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -lconfig++")
 
 set(OBJECTS
         src/objects/object.h
-        src/objects/point.h
-        src/objects/point.cpp
-        src/objects/edge.h
-        src/objects/edge.cpp
-        src/objects/details.h
-        src/objects/details.cpp
-        src/objects/model.h
-        src/objects/model.cpp
-        src/objects/camera.h
-        src/objects/camera.cpp
-        src/objects/composite.h
-        src/objects/composite.cpp
+        src/objects/model/details/point/point.h
+        src/objects/model/details/point/point.cpp
+        src/objects/model/details/edge/edge.h
+        src/objects/model/details/edge/edge.cpp
+        src/objects/model/details/details.h
+        src/objects/model/details/details.cpp
+        src/objects/model/model.h
+        src/objects/model/model.cpp
+        src/objects/camera/camera.h
+        src/objects/camera/camera.cpp
+        src/objects/composite/composite.h
+        src/objects/composite/composite.cpp
         src/scene/scene.h
         src/scene/scene.cpp
         )

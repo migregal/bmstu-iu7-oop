@@ -5,10 +5,10 @@
 
 #include <visitor.h>
 
-#include <objects/details.h>
-#include <objects/edge.h>
+#include <objects/model/details/details.h>
+#include <objects/model/details/edge/edge.h>
+#include <objects/model/details/point/point.h>
 #include <objects/object.h>
-#include <objects/point.h>
 
 class Model : public VisibleObject {
 public:

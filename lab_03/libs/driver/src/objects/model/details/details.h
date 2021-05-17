@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include <objects/edge.h>
-#include <objects/point.h>
+#include <objects/model/details/edge/edge.h>
+#include <objects/model/details/point/point.h>
 
 class ModelDetails {
 public:

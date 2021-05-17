@@ -1,7 +1,7 @@
 #pragma once
 
 #include <builder/base_builder.h>
-#include <objects/camera.h>
+#include <objects/camera/camera.h>
 
 class CameraBuilder : public BaseBuilder {
 public:

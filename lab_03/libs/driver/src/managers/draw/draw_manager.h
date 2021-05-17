@@ -4,9 +4,10 @@
 
 #include <drawer/abstract_drawer.h>
 #include <managers/base_manager.h>
-#include <objects/camera.h>
-#include <objects/composite.h>
-#include <objects/point.h>
+#include <objects/camera/camera.h>
+#include <objects/model/model.h>
+#include <objects/composite/composite.h>
+#include <objects/model/details/point/point.h>
 #include <visitor.h>
 
 class DrawManager : public Visitor, public BaseManager {

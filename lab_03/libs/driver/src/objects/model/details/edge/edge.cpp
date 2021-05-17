@@ -1,4 +1,4 @@
-#include <objects/edge.h>
+#include <objects/model/details/edge/edge.h>
 
 Edge::Edge(const std::size_t &pt1, const std::size_t &pt2) : pt1_idx(pt1), pt2_idx(pt2){};
 

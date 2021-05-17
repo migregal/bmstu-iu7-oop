@@ -1,4 +1,4 @@
-#include <objects/camera.h>
+#include <objects/camera/camera.h>
 
 #include <commands/camera_command.h>
 #include <managers/reform/reform_manager_creator.h>

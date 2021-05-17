@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include <objects/camera.h>
-#include <objects/composite.h>
+#include <objects/camera/camera.h>
+#include <objects/composite/composite.h>
 
 class Scene : public Object {
 public:

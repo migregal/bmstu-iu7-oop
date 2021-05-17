@@ -1,6 +1,5 @@
 #pragma once
 
-#include <objects/model.h>
 #include <objects/object.h>
 
 class Composite : public Object {

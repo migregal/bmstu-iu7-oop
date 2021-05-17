@@ -4,7 +4,7 @@
 
 #include <visitor.h>
 
-#include <objects/point.h>
+#include <objects/model/details/point/point.h>
 
 #include <vector>
 

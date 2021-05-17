@@ -1,4 +1,4 @@
-#include <objects/model.h>
+#include <objects/model/model.h>
 
 #include <memory>
 

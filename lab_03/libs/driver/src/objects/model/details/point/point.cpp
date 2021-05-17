@@ -1,4 +1,4 @@
-#include <objects/point.h>
+#include <objects/model/details/point/point.h>
 
 #include <cmath>
 
@@ -14,9 +14,9 @@ Point::Point(const Point &&p) noexcept : _x(p._x), _y(p._y), _z(p._z) {
 }
 
 Point &Point::operator=(Point &&p) noexcept {
-    _x = p._x;
-    _y = p._y;
-    _z = p._z;
+    set_x(p._x);
+    set_y(p._y);
+    set_z(p._z);
     p.~Point();
 
     return *this;
@@ -71,15 +71,15 @@ Point Point::relative_to(const Point &c) {
 }
 
 void Point::move(const double dx, const double dy, const double dz) {
-    _x += dx;
-    _y += dy;
-    _z += dz;
+    set_x(_x + dx);
+    set_y(_y + dy);
+    set_z(_z + dz);
 }
 
 void Point::scale(const double kx, const double ky, const double kz) {
-    _x *= kx;
-    _y *= ky;
-    _z *= kz;
+    set_x(_x * kx);
+    set_y(_y * ky);
+    set_z(_z * kz);
 }
 
 void Point::rotate(const double ox, const double oy, const double oz) {
@@ -93,8 +93,8 @@ void Point::rotate_x(const double &ox) {
     const double r_sin = sin(to_radians(ox));
     const double temp_y = _y;
 
-    _y = _y * r_cos + _z * r_sin;
-    _z = -temp_y * r_sin + _z * r_cos;
+    set_y(_y * r_cos + _z * r_sin);
+    set_z(-temp_y * r_sin + _z * r_cos);
 }
 
 void Point::rotate_y(const double &oy) {
@@ -102,8 +102,8 @@ void Point::rotate_y(const double &oy) {
     const double r_sin = sin(to_radians(oy));
     const double temp_x = _x;
 
-    _x = _x * r_cos + _z * r_sin;
-    _z = -temp_x * r_sin + _z * r_cos;
+    set_x(_x * r_cos + _z * r_sin);
+    set_z(-temp_x * r_sin + _z * r_cos);
 }
 
 void Point::rotate_z(const double &oz) {
@@ -111,8 +111,8 @@ void Point::rotate_z(const double &oz) {
     const double r_sin = sin(to_radians(oz));
     const double temp_x = _x;
 
-    _x = _x * r_cos + _y * r_sin;
-    _y = -temp_x * r_sin + _y * r_cos;
+    set_x(_x * r_cos + _y * r_sin);
+    set_y(-temp_x * r_sin + _y * r_cos);
 }
 
 bool Point::operator==(const Point &point) const noexcept {

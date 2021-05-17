@@ -1,4 +1,4 @@
-#include <objects/camera.h>
+#include <objects/camera/camera.h>
 
 void Camera::move_x(const double &shift) {
     current_pos.set_x(current_pos.get_x() + shift);

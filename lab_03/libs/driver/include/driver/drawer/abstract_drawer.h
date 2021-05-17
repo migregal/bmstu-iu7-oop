@@ -1,6 +1,6 @@
 #pragma once
 
-#include <objects/point.h>
+#include <objects/model/details/point/point.h>
 
 class AbstractDrawer {
 public:
