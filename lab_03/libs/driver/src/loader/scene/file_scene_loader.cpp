@@ -1,14 +1,14 @@
 #include <loader/scene/file_scene_loader.h>
 
-#include <builder/scene/scene_builder.h>
+#include <builder/load/scene/scene_builder.h>
 #include <error.h>
 #include <error/error.h>
 #include <loader/camera/file_camera_loader.h>
 #include <loader/model/file_model_loader.h>
 
-FileSceneLoader::FileSceneLoader() : file(std::make_shared<std::ifstream>()) {}
+Load::FileSceneLoader::FileSceneLoader() : file(std::make_shared<std::ifstream>()) {}
 
-std::shared_ptr<Object> FileSceneLoader::load(const std::shared_ptr<SceneBuilder> &builder) {
+std::shared_ptr<Object> Load::FileSceneLoader::load(const std::shared_ptr<SceneBuilder> &builder) {
     builder->build();
 
     load_models(builder);
@@ -18,7 +18,7 @@ std::shared_ptr<Object> FileSceneLoader::load(const std::shared_ptr<SceneBuilder
     return builder->get();
 }
 
-void FileSceneLoader::open(std::string &fname) {
+void Load::FileSceneLoader::open(std::string &fname) {
     if (!file) {
         std::string message = "Error while open file.";
         throw FileError(message);
@@ -31,7 +31,7 @@ void FileSceneLoader::open(std::string &fname) {
     }
 }
 
-void FileSceneLoader::close() {
+void Load::FileSceneLoader::close() {
     if (!file) {
         std::string message = "Error while open file.";
         throw FileError(message);
@@ -44,7 +44,7 @@ void FileSceneLoader::close() {
     }
 }
 
-void FileSceneLoader::load_models(std::shared_ptr<SceneBuilder> builder) {
+void Load::FileSceneLoader::load_models(std::shared_ptr<SceneBuilder> builder) {
     std::size_t models_count;
     *file >> models_count;
 
@@ -53,7 +53,7 @@ void FileSceneLoader::load_models(std::shared_ptr<SceneBuilder> builder) {
         builder->build_model(FileModelLoader(file).load(m_builder));
 }
 
-void FileSceneLoader::load_cameras(std::shared_ptr<SceneBuilder> builder) {
+void Load::FileSceneLoader::load_cameras(std::shared_ptr<SceneBuilder> builder) {
     std::size_t cameras_count;
     *file >> cameras_count;
 

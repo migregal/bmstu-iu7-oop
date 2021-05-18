@@ -23,10 +23,16 @@ void DrawScene::execute() {
 LoadScene::LoadScene(std::string fname) : _fname(std::move(fname)) {}
 
 void LoadScene::execute() {
-    auto controller = SceneLoadControllerCreator().create_controller();
+    auto controller = Load::SceneLoadControllerCreator().create_controller();
 
-    auto manager = LoadManagerCreator().create_manager(controller);
+    auto manager = Load::LoadManagerCreator().create_manager(controller);
 
     auto scene = std::dynamic_pointer_cast<Scene>(manager->load(_fname));
     SceneManagerCreator().create_manager()->set_scene(scene);
+}
+
+ExportScene::ExportScene(std::string fname) {
+}
+
+void ExportScene::execute() {
 }

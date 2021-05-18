@@ -77,6 +77,18 @@ private:
     std::string fname;
 };
 
+class ExportModel : public ModelBaseCommand {
+public:
+    ExportModel() = delete;
+    explicit ExportModel(std::string fname);
+    ~ExportModel() override = default;
+
+    void execute() override;
+
+private:
+    std::string fname;
+};
+
 class AddModel : public ModelBaseCommand {
 public:
     AddModel() = delete;

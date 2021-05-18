@@ -79,13 +79,13 @@ set(LOAD
         src/loader/scene/file_scene_loader.h
         src/loader/scene/file_scene_loader.cpp
 
-        src/builder/base_builder.h
-        src/builder/model/model_builder.h
-        src/builder/model/model_builder.cpp
-        src/builder/scene/scene_builder.h
-        src/builder/scene/scene_builder.cpp
-        src/builder/camera/camera_builder.h
-        src/builder/camera/camera_builder.cpp
+        src/builder/load/base_builder.h
+        src/builder/load/model/model_builder.h
+        src/builder/load/model/model_builder.cpp
+        src/builder/load/scene/scene_builder.h
+        src/builder/load/scene/scene_builder.cpp
+        src/builder/load/camera/camera_builder.h
+        src/builder/load/camera/camera_builder.cpp
         )
 
 set(FACADE

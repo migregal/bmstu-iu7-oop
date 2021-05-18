@@ -7,16 +7,18 @@
 #include <managers/base_manager.h>
 #include <objects/model/model.h>
 
-class LoadManager : public BaseManager {
-public:
-    LoadManager();
-    LoadManager(const LoadManager&) = delete;
-    LoadManager& operator=(const LoadManager&) = delete;
-    ~LoadManager() = default;
+namespace Load {
+    class LoadManager : public BaseManager {
+    public:
+        LoadManager();
+        LoadManager(const LoadManager &) = delete;
+        LoadManager &operator=(const LoadManager &) = delete;
+        ~LoadManager() = default;
 
-    virtual std::shared_ptr<Object> load(std::string &name);
-    virtual void set_loader(std::shared_ptr<AbstractLoadController> _loader);
+        virtual std::shared_ptr<Object> load(std::string &name);
+        virtual void set_loader(std::shared_ptr<AbstractLoadController> _loader);
 
-private:
-    std::shared_ptr<AbstractLoadController> loader;
-};
+    private:
+        std::shared_ptr<AbstractLoadController> loader;
+    };
+}// namespace Load

@@ -5,14 +5,14 @@
 #include <configuration/configuration_creator.h>
 #include <loader/scene/file_scene_loader.h>
 
-std::shared_ptr<SceneLoadController> SceneLoadControllerCreator::create_controller() {
+std::shared_ptr<Load::SceneLoadController> Load::SceneLoadControllerCreator::create_controller() {
     if (nullptr == _controller)
         create_instance();
 
     return _controller;
 }
 
-std::shared_ptr<SceneLoadController> SceneLoadControllerCreator::create_controller(const std::shared_ptr<BaseSceneLoader> &loader) {
+std::shared_ptr<Load::SceneLoadController> Load::SceneLoadControllerCreator::create_controller(const std::shared_ptr<BaseSceneLoader> &loader) {
     if (nullptr == _controller)
         create_instance();
 
@@ -21,7 +21,7 @@ std::shared_ptr<SceneLoadController> SceneLoadControllerCreator::create_controll
     return _controller;
 }
 
-void SceneLoadControllerCreator::create_instance() {
+void Load::SceneLoadControllerCreator::create_instance() {
     static std::shared_ptr<SceneLoadController> controller;
 
     if (!controller) {

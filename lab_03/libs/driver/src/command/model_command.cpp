@@ -51,11 +51,17 @@ void ReformModel::execute() {
 LoadModel::LoadModel(std::string fname) : fname(std::move(fname)) {}
 
 void LoadModel::execute() {
-    auto controller = ModelLoadControllerCreator().create_controller();
-    auto manager = LoadManagerCreator().create_manager(controller);
+    auto controller = Load::ModelLoadControllerCreator().create_controller();
+    auto manager = Load::LoadManagerCreator().create_manager(controller);
 
     auto model = manager->load(fname);
     SceneManagerCreator().create_manager()->get_scene()->add_model(model);
+}
+
+ExportModel::ExportModel(std::string fname) {
+}
+
+void ExportModel::execute() {
 }
 
 AddModel::AddModel(std::shared_ptr<Object> model) : model(std::move(model)) {}

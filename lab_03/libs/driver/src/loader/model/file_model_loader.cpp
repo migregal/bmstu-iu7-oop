@@ -1,15 +1,15 @@
-#include <builder/model/model_builder.h>
+#include <builder/load/model/model_builder.h>
 #include <error.h>
 #include <error/error.h>
 #include <loader/model/file_model_loader.h>
 
-FileModelLoader::FileModelLoader() : file(std::make_shared<std::ifstream>()) {}
+Load::FileModelLoader::FileModelLoader() : file(std::make_shared<std::ifstream>()) {}
 
-FileModelLoader::FileModelLoader(std::shared_ptr<std::ifstream> &fin) {
+Load::FileModelLoader::FileModelLoader(std::shared_ptr<std::ifstream> &fin) {
     file = fin;
 }
 
-std::shared_ptr<Object> FileModelLoader::load(std::shared_ptr<ModelBuilder> builder) {
+std::shared_ptr<Object> Load::FileModelLoader::load(std::shared_ptr<ModelBuilder> builder) {
     builder->build();
 
     std::size_t points_count;
@@ -33,7 +33,7 @@ std::shared_ptr<Object> FileModelLoader::load(std::shared_ptr<ModelBuilder> buil
     return builder->get();
 }
 
-void FileModelLoader::open(std::string &fname) {
+void Load::FileModelLoader::open(std::string &fname) {
     if (!file) {
         std::string message = "Error while open file.";
         throw FileError(message);
@@ -47,7 +47,7 @@ void FileModelLoader::open(std::string &fname) {
     }
 }
 
-void FileModelLoader::close() {
+void Load::FileModelLoader::close() {
     if (!file) {
         std::string message = "Error while open file.";
         throw FileError(message);

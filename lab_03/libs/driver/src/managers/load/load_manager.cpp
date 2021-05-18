@@ -5,12 +5,12 @@
 #include <loader/model/file_model_loader.h>
 #include <utility>
 
-LoadManager::LoadManager() {
+Load::LoadManager::LoadManager() {
     loader = SceneLoadControllerCreator().create_controller();
 }
 
-void LoadManager::set_loader(std::shared_ptr<AbstractLoadController> _loader) { loader = std::move(_loader); }
+void Load::LoadManager::set_loader(std::shared_ptr<AbstractLoadController> _loader) { loader = std::move(_loader); }
 
-std::shared_ptr<Object> LoadManager::load(std::string &name) {
+std::shared_ptr<Object> Load::LoadManager::load(std::string &name) {
     return loader->load(name);
 }

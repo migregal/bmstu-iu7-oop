@@ -2,7 +2,7 @@
 
 #include <error.h>
 
-std::shared_ptr<Object> ModelLoadController::load(std::string &fname) {
+std::shared_ptr<Object> Load::ModelLoadController::load(std::string &fname) {
     try {
         loader->open(fname);
     } catch (SourceError &error) {

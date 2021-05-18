@@ -1,17 +1,17 @@
 #include <loader/camera/file_camera_loader.h>
 
-#include <builder/scene/scene_builder.h>
+#include <builder/load/scene/scene_builder.h>
 #include <error.h>
 #include <error/error.h>
 
 
-FileCameraLoader::FileCameraLoader() : file(std::make_shared<std::ifstream>()) {}
+Load::FileCameraLoader::FileCameraLoader() : file(std::make_shared<std::ifstream>()) {}
 
-FileCameraLoader::FileCameraLoader(std::shared_ptr<std::ifstream> &fin) {
+Load::FileCameraLoader::FileCameraLoader(std::shared_ptr<std::ifstream> &fin) {
     file = fin;
 }
 
-std::shared_ptr<Object> FileCameraLoader::load(const std::shared_ptr<CameraBuilder> &builder) {
+std::shared_ptr<Object> Load::FileCameraLoader::load(const std::shared_ptr<CameraBuilder> &builder) {
     builder->build();
 
     double x, y, z;
@@ -22,7 +22,7 @@ std::shared_ptr<Object> FileCameraLoader::load(const std::shared_ptr<CameraBuild
     return builder->get();
 }
 
-void FileCameraLoader::open(std::string &fname) {
+void Load::FileCameraLoader::open(std::string &fname) {
     if (!file) {
         std::string message = "Error while open file.";
         throw FileError(message);
@@ -35,7 +35,7 @@ void FileCameraLoader::open(std::string &fname) {
     }
 }
 
-void FileCameraLoader::close() {
+void Load::FileCameraLoader::close() {
     if (!file) {
         std::string message = "Error while open file.";
         throw FileError(message);

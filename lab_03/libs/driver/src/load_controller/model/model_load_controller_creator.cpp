@@ -5,14 +5,14 @@
 #include <configuration/configuration_creator.h>
 #include <loader/model/file_model_loader.h>
 
-std::shared_ptr<ModelLoadController> ModelLoadControllerCreator::create_controller() {
+std::shared_ptr<Load::ModelLoadController> Load::ModelLoadControllerCreator::create_controller() {
     if (nullptr == _controller)
         create_instance();
 
     return _controller;
 }
 
-std::shared_ptr<ModelLoadController> ModelLoadControllerCreator::create_controller(const std::shared_ptr<BaseModelLoader> &loader) {
+std::shared_ptr<Load::ModelLoadController> Load::ModelLoadControllerCreator::create_controller(const std::shared_ptr<BaseModelLoader> &loader) {
     if (nullptr == _controller)
         create_instance();
 
@@ -21,7 +21,7 @@ std::shared_ptr<ModelLoadController> ModelLoadControllerCreator::create_controll
     return _controller;
 }
 
-void ModelLoadControllerCreator::create_instance() {
+void Load::ModelLoadControllerCreator::create_instance() {
     static std::shared_ptr<ModelLoadController> controller;
 
     if (!controller) {
