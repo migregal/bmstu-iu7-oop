@@ -5,7 +5,7 @@ bool Load::ModelBuilder::is_build() const {
 }
 
 void Load::ModelBuilder::build() {
-    model_ptr = std::make_shared<Model>();
+    model_ptr = std::make_shared<ModelDetails>();
 }
 
 void Load::ModelBuilder::build_point(const double &x, const double &y, const double &z) {
@@ -19,9 +19,9 @@ void Load::ModelBuilder::build_edge(const std::size_t &pt1, const std::size_t &p
     if (!is_build()) {}
 
     Edge edge_obj(pt1, pt2);
-    model_ptr->add_link(edge_obj);
+    model_ptr->add_edge(edge_obj);
 }
 
 std::shared_ptr<Object> Load::ModelBuilder::get() {
-    return model_ptr;
+    return std::make_shared<Model>(Model(model_ptr));
 }

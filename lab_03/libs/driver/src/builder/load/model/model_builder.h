@@ -1,6 +1,7 @@
 #pragma once
 
 #include <builder/load/base_builder.h>
+#include <objects/model/details/details.h>
 #include <objects/model/model.h>
 
 namespace Load {
@@ -17,6 +18,6 @@ namespace Load {
         std::shared_ptr<Object> get() override;
 
     private:
-        std::shared_ptr<Model> model_ptr;
+        std::shared_ptr<ModelDetails> model_ptr;
     };
 }// namespace Load
