@@ -33,15 +33,3 @@ public:
 private:
     std::string _fname;
 };
-
-class ExportScene : public SceneBaseCommand {
-public:
-    ExportScene() = delete;
-    explicit ExportScene(std::string fname);
-    ~ExportScene() override = default;
-
-    void execute() override;
-
-private:
-    std::string _fname;
-};

@@ -4,8 +4,6 @@ project(driver)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -lconfig++")
-
 set(OBJECTS
         src/objects/object.h
         src/objects/model/details/point/point.h

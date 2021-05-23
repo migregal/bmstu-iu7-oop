@@ -30,9 +30,3 @@ void LoadScene::execute() {
     auto scene = std::dynamic_pointer_cast<Scene>(manager->load(_fname));
     SceneManagerCreator().create_manager()->set_scene(scene);
 }
-
-ExportScene::ExportScene(std::string fname) {
-}
-
-void ExportScene::execute() {
-}
