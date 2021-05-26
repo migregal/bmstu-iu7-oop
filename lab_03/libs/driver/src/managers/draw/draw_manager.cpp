@@ -2,6 +2,9 @@
 
 #include <utility>
 
+#include <objects/model/model.h>
+#include <objects/camera/camera.h>
+
 void DrawManager::set_drawer(std::shared_ptr<AbstractDrawer> drawer) {
     _drawer = std::move(drawer);
 }
